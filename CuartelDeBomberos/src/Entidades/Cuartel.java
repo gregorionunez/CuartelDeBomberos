@@ -1,14 +1,14 @@
 
 package Entidades;
 
-//CLASE CUARTEL DE BOMBERO
+
 public class Cuartel {
     
     private int codCuartel;  //CODIGO DEL CUARTEL
-    private String nombre_cuartel; //NOMBRE DEL CUARTEL
+    private String nombreCuartel; //NOMBRE DEL CUARTEL
     private String direccion; // DIRECCION
-    private int coord_X; // COORDENA X DEL CUARTEL
-    private int coord_Y; // COORDENA Y DEL CUARTEL
+    private int coordX; // COORDENA X DEL CUARTEL
+    private int coordY; // COORDENA Y DEL CUARTEL
     private String telefono;  //TELEFONO DEL CUARTEL
     private String correo;  //CORREO ELECTRONICO DEL CUARTEL
     private boolean estado; //CORRESPONDE SI EL CUARTEL ESTA ACTIVO
@@ -16,23 +16,20 @@ public class Cuartel {
     public Cuartel() {
     }
 
-    public Cuartel(int codCuartel, String nombre_cuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo, boolean estado) {
+    public Cuartel(int codCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estado) {
         this.codCuartel = codCuartel;
-        this.nombre_cuartel = nombre_cuartel;
+        this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
-        this.coord_X = coord_X;
-        this.coord_Y = coord_Y;
+        this.coordX = coordX;
+        this.coordY = coordY;
         this.telefono = telefono;
         this.correo = correo;
         this.estado = estado;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    @Override
+    public String toString() {
+        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estado=" + estado + '}';
     }
 
     public int getCodCuartel() {
@@ -43,12 +40,12 @@ public class Cuartel {
         this.codCuartel = codCuartel;
     }
 
-    public String getNombre_cuartel() {
-        return nombre_cuartel;
+    public String getNombreCuartel() {
+        return nombreCuartel;
     }
 
-    public void setNombre_cuartel(String nombre_cuartel) {
-        this.nombre_cuartel = nombre_cuartel;
+    public void setNombreCuartel(String nombreCuartel) {
+        this.nombreCuartel = nombreCuartel;
     }
 
     public String getDireccion() {
@@ -59,20 +56,20 @@ public class Cuartel {
         this.direccion = direccion;
     }
 
-    public int getCoord_X() {
-        return coord_X;
+    public int getCoordX() {
+        return coordX;
     }
 
-    public void setCoord_X(int coord_X) {
-        this.coord_X = coord_X;
+    public void setCoordX(int coordX) {
+        this.coordX = coordX;
     }
 
-    public int getCoord_Y() {
-        return coord_Y;
+    public int getCoordY() {
+        return coordY;
     }
 
-    public void setCoord_Y(int coord_Y) {
-        this.coord_Y = coord_Y;
+    public void setCoordY(int coordY) {
+        this.coordY = coordY;
     }
 
     public String getTelefono() {
@@ -91,9 +88,12 @@ public class Cuartel {
         this.correo = correo;
     }
 
-    @Override
-    public String toString() {
-        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombre_cuartel=" + nombre_cuartel + ", direccion=" + direccion + ", coord_X=" + coord_X + ", coord_Y=" + coord_Y + ", telefono=" + telefono + ", correo=" + correo + '}';
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     
