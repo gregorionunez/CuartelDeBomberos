@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2023 a las 01:35:05
+-- Tiempo de generación: 04-10-2023 a las 00:16:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,10 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `bombero` (
   `id_bombero` int(11) NOT NULL,
   `dni` varchar(8) NOT NULL,
-  `nombre_ape` varchar(50) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
   `fecha_nac` date NOT NULL,
   `celular` varchar(15) NOT NULL,
-  `cod_brigada` int(11) NOT NULL
+  `cod_brigada` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -47,7 +49,8 @@ CREATE TABLE `brigada` (
   `nombre_br` varchar(20) NOT NULL,
   `especialidad` varchar(30) NOT NULL,
   `libre` tinyint(1) NOT NULL,
-  `nro_cuartel` int(11) NOT NULL
+  `nro_cuartel` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -69,6 +72,29 @@ CREATE TABLE `cuartel` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `emergencia`
+--
+
+CREATE TABLE `emergencia` (
+  `idEmergencia` int(11) NOT NULL,
+  `emergencia` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `emergencia`
+--
+
+INSERT INTO `emergencia` (`idEmergencia`, `emergencia`) VALUES
+(1, 'Incendios en vivienda e industria'),
+(2, 'Salvamentos de derrumbe'),
+(3, 'Rescate en ámbito de montaña'),
+(4, 'Rescate de personas atrapadas en accidentes de tráfico'),
+(5, 'Socorrer inundaciones'),
+(6, 'Operativos de prevención');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `siniestro`
 --
 
@@ -81,7 +107,8 @@ CREATE TABLE `siniestro` (
   `detalle` text NOT NULL,
   `fecha_resol` date NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  `cod_brigada` int(11) NOT NULL
+  `cod_brigada` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -93,6 +120,7 @@ CREATE TABLE `siniestro` (
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`id_bombero`),
+  ADD UNIQUE KEY `dni` (`dni`),
   ADD KEY `cod_brigada` (`cod_brigada`);
 
 --
@@ -107,6 +135,12 @@ ALTER TABLE `brigada`
 --
 ALTER TABLE `cuartel`
   ADD PRIMARY KEY (`cod_cuartel`);
+
+--
+-- Indices de la tabla `emergencia`
+--
+ALTER TABLE `emergencia`
+  ADD PRIMARY KEY (`idEmergencia`);
 
 --
 -- Indices de la tabla `siniestro`
@@ -136,6 +170,12 @@ ALTER TABLE `brigada`
 --
 ALTER TABLE `cuartel`
   MODIFY `cod_cuartel` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `emergencia`
+--
+ALTER TABLE `emergencia`
+  MODIFY `idEmergencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `siniestro`
