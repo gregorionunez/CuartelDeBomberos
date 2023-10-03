@@ -8,7 +8,7 @@
         <Field name="dni" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="apellido" type="String" visibility="private"/>
-        <Field name="fechaNacimiento" type="Date" visibility="private"/>
+        <Field name="fechaNacimiento" type="LocalDate" visibility="private"/>
         <Field name="celular" type="String" visibility="private"/>
         <Field name="codigoBrigada" type="int" visibility="private"/>
         <Field name="grupoSanguineo" type="String" visibility="private"/>
@@ -19,7 +19,7 @@
           <Argument type="int" name="dni"/>
           <Argument type="String" name="nombre"/>
           <Argument type="String" name="apelido"/>
-          <Argument type="Date" name="fechaNacimiento"/>
+          <Argument type="LocalDate" name="fechaNacimiento"/>
           <Argument type="String" name="celular"/>
           <Argument type="String" name="grupoSanguineo"/>
           <Argument type="boolean" name="estado"/>
@@ -28,7 +28,7 @@
           <Argument type="int" name="dni"/>
           <Argument type="String" name="nombre"/>
           <Argument type="String" name="apelido"/>
-          <Argument type="Date" name="fechaNacimiento"/>
+          <Argument type="LocalDate" name="fechaNacimiento"/>
           <Argument type="String" name="celular"/>
           <Argument type="int" name="codigoBrigada"/>
           <Argument type="String" name="grupoSanguineo"/>
@@ -39,7 +39,7 @@
           <Argument type="int" name="dni"/>
           <Argument type="String" name="nombre"/>
           <Argument type="String" name="apelido"/>
-          <Argument type="Date" name="fechaNacimiento"/>
+          <Argument type="LocalDate" name="fechaNacimiento"/>
           <Argument type="String" name="celular"/>
           <Argument type="int" name="codigoBrigada"/>
           <Argument type="String" name="grupoSanguineo"/>
@@ -64,8 +64,8 @@
         <Method name="setApellido" returnType="String" visibility="public">
           <Argument type="String" name="Apellido"/>
         </Method>
-        <Method name="getFechaNacimiento" returnType="Date" visibility="public"/>
-        <Method name="setFechaNacimiento" returnType="Date" visibility="public">
+        <Method name="getFechaNacimiento" returnType="LocalDate" visibility="public"/>
+        <Method name="setFechaNacimiento" returnType="LocalDate" visibility="public">
           <Argument type="Date" name="fechaNacimiento"/>
         </Method>
         <Method name="getCelular" returnType="String" visibility="public"/>
@@ -254,11 +254,11 @@
       <Fields>
         <Field name="codigo" type="int" visibility="private"/>
         <Field name="tipoEmergencia" type="Emergencia" visibility="private"/>
-        <Field name="fecha" type="Date" visibility="private"/>
+        <Field name="fecha" type="LocalDate" visibility="private"/>
         <Field name="coordX" type="int" visibility="private"/>
         <Field name="coordY" type="int" visibility="private"/>
         <Field name="detalles" type="String" visibility="private"/>
-        <Field name="fechaResolucion" type="Date" visibility="private"/>
+        <Field name="fechaResolucion" type="LocalDate" visibility="private"/>
         <Field name="puntuacion" type="int" visibility="private"/>
         <Field name="codBrigada" type="int" visibility="private"/>
         <Field name="estado" type="boolean" visibility="private"/>
@@ -266,7 +266,7 @@
       <Constructors>
         <Constructor visibility="public">
           <Argument type="Emergencia" name="tipoEmergencia"/>
-          <Argument type="Date" name="fecha"/>
+          <Argument type="LocalDate" name="fecha"/>
           <Argument type="int" name="coordX"/>
           <Argument type="int" name="coordY"/>
           <Argument type="String" name="detalles"/>
@@ -275,7 +275,7 @@
         <Constructor visibility="public">
           <Argument type="int" name="codigo"/>
           <Argument type="Emergencia" name="tipoEmergencia"/>
-          <Argument type="Date" name="fecha"/>
+          <Argument type="LocalDate" name="fecha"/>
           <Argument type="int" name="coordX"/>
           <Argument type="int" name="coordY"/>
           <Argument type="String" name="detalles"/>
@@ -292,9 +292,9 @@
         <Method name="setTipoEmergencia" returnType="void" visibility="public">
           <Argument type="Emergencia" name="tipoEmergencia"/>
         </Method>
-        <Method name="getFecha" returnType="Date" visibility="public"/>
+        <Method name="getFecha" returnType="LocalDate" visibility="public"/>
         <Method name="setFecha" returnType="void" visibility="public">
-          <Argument type="Date" name="fecha"/>
+          <Argument type="LocalDate" name="fecha"/>
         </Method>
         <Method name="getCoordX" returnType="int" visibility="public"/>
         <Method name="setCoordX" returnType="void" visibility="public">
@@ -308,9 +308,9 @@
         <Method name="setDetalles" returnType="void" visibility="public">
           <Argument type="String" name="detalles"/>
         </Method>
-        <Method name="getFechaResolucion" returnType="Date" visibility="public"/>
+        <Method name="getFechaResolucion" returnType="LocalDate" visibility="public"/>
         <Method name="setFechaResolucion" returnType="void" visibility="public">
-          <Argument type="Date" name="fechaResolucion"/>
+          <Argument type="LocalDate" name="fechaResolucion"/>
         </Method>
         <Method name="getPuntuacion" returnType="int" visibility="public"/>
         <Method name="setPuntuacion" returnType="void" visibility="public">
@@ -329,10 +329,10 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <HasRelation name="cubre" source="Brigada" target="Siniestro" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Brigada" target="Emergencia" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="tiene" source="Siniestro" target="Emergencia" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Brigada" target="Bombero" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Cuartel" target="Brigada" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="cubre" source="Brigada" target="Siniestro" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Siniestro" target="Emergencia" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

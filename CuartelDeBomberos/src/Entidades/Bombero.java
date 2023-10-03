@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- *
- * @author Usuario
- */
 public class Bombero {
     private int id;
     private int dni;
     private String nombre;
     private String apellido;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private String celular;
     private int codigoBrigada;
     private String grupoSanguineo;
@@ -25,7 +16,7 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(int dni, String nombre, String apellido, Date fechaNacimiento, String celular, String grupoSanguineo, boolean estado) {
+    public Bombero(int dni, String nombre, String apellido, LocalDate fechaNacimiento, String celular, String grupoSanguineo, boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,7 +26,7 @@ public class Bombero {
         this.estado = estado;
     }
 
-    public Bombero(int dni, String nombre, String apellido, Date fechaNacimiento, String celular, int codigoBrigada, String grupoSanguineo, boolean estado) {
+    public Bombero(int dni, String nombre, String apellido, LocalDate fechaNacimiento, String celular, int codigoBrigada, String grupoSanguineo, boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,7 +37,7 @@ public class Bombero {
         this.estado = estado;
     }
 
-    public Bombero(int id, int dni, String nombre, String apellido, Date fechaNacimiento, String celular, int codigoBrigada, String grupoSanguineo, boolean estado) {
+    public Bombero(int id, int dni, String nombre, String apellido, LocalDate fechaNacimiento, String celular, int codigoBrigada, String grupoSanguineo, boolean estado) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -90,11 +81,11 @@ public class Bombero {
         this.apellido = apellido;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
