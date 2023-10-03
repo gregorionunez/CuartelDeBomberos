@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 00:16:15
+-- Tiempo de generación: 04-10-2023 a las 00:25:40
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -47,7 +47,7 @@ CREATE TABLE `bombero` (
 CREATE TABLE `brigada` (
   `cod_brigada` int(11) NOT NULL,
   `nombre_br` varchar(20) NOT NULL,
-  `especialidad` varchar(30) NOT NULL,
+  `especialidad` int(11) NOT NULL,
   `libre` tinyint(1) NOT NULL,
   `nro_cuartel` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
@@ -128,7 +128,8 @@ ALTER TABLE `bombero`
 --
 ALTER TABLE `brigada`
   ADD PRIMARY KEY (`cod_brigada`),
-  ADD KEY `nro_cuartel` (`nro_cuartel`);
+  ADD KEY `nro_cuartel` (`nro_cuartel`),
+  ADD KEY `especialidad` (`especialidad`);
 
 --
 -- Indices de la tabla `cuartel`
@@ -197,7 +198,8 @@ ALTER TABLE `bombero`
 -- Filtros para la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`nro_cuartel`) REFERENCES `cuartel` (`cod_cuartel`);
+  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`nro_cuartel`) REFERENCES `cuartel` (`cod_cuartel`),
+  ADD CONSTRAINT `brigada_ibfk_2` FOREIGN KEY (`especialidad`) REFERENCES `emergencia` (`idEmergencia`);
 
 --
 -- Filtros para la tabla `siniestro`
