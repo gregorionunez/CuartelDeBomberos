@@ -1,16 +1,16 @@
 package Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Siniestro {
     
     private int codigo;
     private Emergencia tipoEmergencia;
-    private Date fecha;
+    private LocalDate fecha;
     private int coordX;
     private int coordY;
     private String detalles;
-    private Date fechaResolucion;
+    private LocalDate fechaResolucion;
     private int puntuacion;
     private int codBrigada;
     private boolean estado;
@@ -18,7 +18,7 @@ public class Siniestro {
     public Siniestro() {
     }
 
-    public Siniestro(Emergencia tipoEmergencia, Date fecha, int coordX, int coordY, String detalles, Date fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
+    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
         this.coordX = coordX;
@@ -30,7 +30,7 @@ public class Siniestro {
         this.estado = estado;
     }
 
-    public Siniestro(Emergencia tipoEmergencia, Date fecha, int coordX, int coordY, String detalles, int codBrigada, boolean estado) {
+    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, int codBrigada, boolean estado) {
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
         this.coordX = coordX;
@@ -56,11 +56,11 @@ public class Siniestro {
         this.tipoEmergencia = tipoEmergencia;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -88,11 +88,11 @@ public class Siniestro {
         this.detalles = detalles;
     }
 
-    public Date getFechaResolucion() {
+    public LocalDate getFechaResolucion() {
         return fechaResolucion;
     }
 
-    public void setFechaResolucion(Date fechaResolucion) {
+    public void setFechaResolucion(LocalDate fechaResolucion) {
         this.fechaResolucion = fechaResolucion;
     }
 
