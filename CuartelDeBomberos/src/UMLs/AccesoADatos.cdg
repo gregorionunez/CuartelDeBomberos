@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Conexion">
+  <ClassDiagramComponents>
+    <Class name="Conexion" package="AccesoADatos" visibility="public" xPosition="580.0" yPosition="50.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="DB" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="USUARIO" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="PASSWORD" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="conexion" type="Conexion" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getConexion" returnType="Connection" visibility="public" isStatic="true"/>
+        <Method name="cerrarConexion" returnType="Connection" visibility="public" isStatic="true">
+          <Argument type="Connection" name="mico"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="BomberoData" package="" visibility="public" xPosition="65.0" yPosition="50.0">
+      <Fields>
+        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="especialidad" type="Emergencia" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="agregarBombero" returnType="void" visibility="public">
+          <Argument type="Bombero" name="bombero"/>
+        </Method>
+        <Method name="modificarBombero" returnType="void" visibility="public">
+          <Argument type="Bombero" name="bombero"/>
+        </Method>
+        <Method name="eliminarBombero" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="listarBomberos" returnType="ArrayList&lt;Bombero&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CuartelData" package="" visibility="public" xPosition="83.0" yPosition="401.0">
+      <Fields>
+        <Field name="cnn" type="Conexion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="agregarCuartel" returnType="void" visibility="public">
+          <Argument type="Cuartel" name="cuartel"/>
+        </Method>
+        <Method name="modificarCuartel" returnType="void" visibility="public">
+          <Argument type="Cuartel" name="cuartel"/>
+        </Method>
+        <Method name="eliminarCuartel" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="cuartelesCercanos" returnType="ArrayList&lt;Cuartel&gt;" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+        <Method name="listarCuarteles" returnType="ArrayList&lt;Cuartel&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="SiniestroData" package="" visibility="public" xPosition="548.0" yPosition="452.0">
+      <Fields>
+        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="emergencia" type="Emergencia" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="agregarSiniestro" returnType="void" visibility="public">
+          <Argument type="Siniestro" name="siniestro"/>
+        </Method>
+        <Method name="modificarSiniestro" returnType="void" visibility="public">
+          <Argument type="Siniestro" name="siniestro"/>
+        </Method>
+        <Method name="eliminarSiniestro" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="mostrarPorFecha" returnType="ArrayList&lt;Siniestro&gt;" visibility="public">
+          <Argument type="LocalDate" name="fecha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EmergenciaData" package="" visibility="public" xPosition="1091.0" yPosition="515.0">
+      <Fields>
+        <Field name="cnn" type="Conexion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="listarEmergencia" returnType="ArrayList&lt;Emergencia&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="BrigadaData" package="" visibility="public" xPosition="1064.0" yPosition="93.0">
+      <Fields>
+        <Field name="cnn" type="Conexion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="agregarBrigada" returnType="void" visibility="public">
+          <Argument type="Brigada" name="brigada"/>
+        </Method>
+        <Method name="modificarBrigada" returnType="void" visibility="public">
+          <Argument type="Brigada" name="brigada"/>
+        </Method>
+        <Method name="eliminarBrigada" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="brigadasOcupadas" returnType="ArrayList&lt;Brigada&gt;" visibility="public"/>
+        <Method name="brigadasLibres" returnType="ArrayList&lt;Brigada&gt;" visibility="public"/>
+        <Method name="listarBrigadas" returnType="ArrayList&lt;Brigada&gt;" visibility="public"/>
+        <Method name="brigadaPorCuartel" returnType="ArrayList&lt;Brigada&gt;" visibility="public">
+          <Argument type="int" name="idCuartel"/>
+        </Method>
+        <Method name="bomberosPorBrigada" returnType="ArrayList&lt;Brigada&gt;" visibility="public">
+          <Argument type="int" name="idBrigada"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="Usa" source="BomberoData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="Usa" source="SiniestroData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Tiene" source="SiniestroData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="Tiene" source="BrigadaData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="Usa" source="EmergenciaData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="Usa" source="CuartelData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="Usa" source="BrigadaData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
