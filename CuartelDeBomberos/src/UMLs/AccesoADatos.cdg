@@ -22,8 +22,7 @@
     </Class>
     <Class name="BomberoData" package="" visibility="public" xPosition="65.0" yPosition="50.0">
       <Fields>
-        <Field name="cnn" type="Conexion" visibility="private"/>
-        <Field name="especialidad" type="Emergencia" visibility="private"/>
+        <Field name="con" type="Connection" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -43,7 +42,7 @@
     </Class>
     <Class name="CuartelData" package="" visibility="public" xPosition="83.0" yPosition="401.0">
       <Fields>
-        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="con" type="Connection" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -67,7 +66,7 @@
     </Class>
     <Class name="SiniestroData" package="" visibility="public" xPosition="548.0" yPosition="452.0">
       <Fields>
-        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="con" type="Connection" visibility="private"/>
         <Field name="emergencia" type="Emergencia" visibility="private"/>
       </Fields>
       <Constructors>
@@ -88,20 +87,21 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="EmergenciaData" package="" visibility="public" xPosition="1091.0" yPosition="515.0">
+    <Class name="EmergenciaData" package="" visibility="public" xPosition="1099.0" yPosition="515.0">
       <Fields>
-        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="con" type="Connection" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
         <Method name="listarEmergencia" returnType="ArrayList&lt;Emergencia&gt;" visibility="public"/>
+        <Method name="buscarEmergencia" returnType="Emergencia" visibility="public"/>
       </Methods>
     </Class>
     <Class name="BrigadaData" package="" visibility="public" xPosition="1064.0" yPosition="93.0">
       <Fields>
-        <Field name="cnn" type="Conexion" visibility="private"/>
+        <Field name="con" type="Connection" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -129,12 +129,12 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <UseRelation name="Usa" source="CuartelData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="Usa" source="EmergenciaData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Tiene" source="BrigadaData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
     <UseRelation name="Usa" source="BomberoData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation name="Usa" source="SiniestroData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="Tiene" source="SiniestroData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="Tiene" source="BrigadaData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="Usa" source="EmergenciaData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation name="Usa" source="CuartelData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation name="Usa" source="BrigadaData" target="AccesoADatos.Conexion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Tiene" source="SiniestroData" target="EmergenciaData" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

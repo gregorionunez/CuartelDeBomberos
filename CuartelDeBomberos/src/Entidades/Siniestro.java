@@ -18,6 +18,19 @@ public class Siniestro {
     public Siniestro() {
     }
 
+    public Siniestro(int codigo, Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
+        this.codigo = codigo;
+        this.tipoEmergencia = tipoEmergencia;
+        this.fecha = fecha;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.detalles = detalles;
+        this.fechaResolucion = fechaResolucion;
+        this.puntuacion = puntuacion;
+        this.codBrigada = codBrigada;
+        this.estado = estado;
+    }
+    
     public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
