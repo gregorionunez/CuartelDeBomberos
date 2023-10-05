@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -44,7 +43,7 @@ public class BomberoData {
     }
 
     // MODIFICO UN BOMBERO
-    public void modificarMateria(Bombero bombero) {
+    public void modificarBombero(Bombero bombero) {
         String sql = "UPDATE bombero SET dni=?,nombre=?,apellido=?,fecha_nac=?,celular=?,cod_brigada=?,estado=? WHERE id_bombero=?";
         try {
             //CREO UNA CONEXION CON MI BASE DE DATOS
