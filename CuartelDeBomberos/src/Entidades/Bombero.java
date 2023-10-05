@@ -123,6 +123,8 @@ public class Bombero {
 
     @Override
     public String toString() {
-        return "Bombero{" + "dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", codigoBrigada=" + codigoBrigada + ", estado=" + estado + '}';
-    }  
+        return "Bombero{" + "id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", codigoBrigada=" + codigoBrigada + ", grupoSanguineo=" + grupoSanguineo + ", estado=" + estado + '}';
+    }
+
+   
 }
