@@ -36,7 +36,7 @@ public class BomberoData {
             JOptionPane.showMessageDialog(null, "Bombero añadido con éxito.", "Información", 1);
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error Al Insertar Bombero" + ex.getMessage(), "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al insertar Bombero" + ex.getMessage(), "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
@@ -59,10 +59,10 @@ public class BomberoData {
             ps.setString(8, bombero.getGrupoSanguineo()); //Asignacion de valores
             ps.setInt(9, bombero.getId());
             ps.executeUpdate(); // Ejecutar PreparedStatement
-            JOptionPane.showMessageDialog(null, "Bombero modificada con exito", "Información", 1);
+            JOptionPane.showMessageDialog(null, "Bombero modificada con éxito", "Información", 1);
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Modificar al Bombero", "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al modificar el Bombero", "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
@@ -92,13 +92,13 @@ public class BomberoData {
     }
 
     //RETORNO UNA LISTA DE BOMBEROS  
-    public ArrayList<Bombero> listarBomberos() {
+    public ArrayList<Bombero> listarBomberosSegunEstado(boolean estado) {
         //CREO MI LISTA DE BOMBEROS
         ArrayList<Bombero> bomberos = new ArrayList<>();
         try {
             //CREO LA CONEXION
             con = Conexion.getConexion();
-            String sql = "SELECT * FROM bombero WHERE estado = 1 "; //EJECUTO EL SELECT
+            String sql = "SELECT * FROM bombero WHERE estado =" + estado; //EJECUTO EL SELECT
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

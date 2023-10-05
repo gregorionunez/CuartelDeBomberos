@@ -35,7 +35,7 @@ public class CuartelDeBomberos {
 
         ArrayList<Bombero> listaBomberos = new ArrayList();
 
-        listaBomberos = bomberoData.listarBomberos();
+        listaBomberos = bomberoData.listarBomberosSegunEstado(true);
 
         for (Bombero listaBombero : listaBomberos) {
             System.out.println(listaBombero.toString());
