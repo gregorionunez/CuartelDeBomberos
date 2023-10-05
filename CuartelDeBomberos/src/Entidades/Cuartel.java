@@ -6,8 +6,8 @@ public class Cuartel {
     private int codCuartel;  //CODIGO DEL CUARTEL
     private String nombreCuartel; //NOMBRE DEL CUARTEL
     private String direccion; // DIRECCION
-    private int coordX; // COORDENA X DEL CUARTEL
-    private int coordY; // COORDENA Y DEL CUARTEL
+    private double coordX; // COORDENA X DEL CUARTEL
+    private double coordY; // COORDENA Y DEL CUARTEL
     private String telefono;  //TELEFONO DEL CUARTEL
     private String correo;  //CORREO ELECTRONICO DEL CUARTEL
     private boolean estado; //CORRESPONDE SI EL CUARTEL ESTA ACTIVO
@@ -15,7 +15,7 @@ public class Cuartel {
     public Cuartel() {
     }
 
-    public Cuartel(int codCuartel, String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estado) {
+    public Cuartel(int codCuartel, String nombreCuartel, String direccion, double coordX, double coordY, String telefono, String correo, boolean estado) {
         this.codCuartel = codCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
@@ -55,19 +55,19 @@ public class Cuartel {
         this.direccion = direccion;
     }
 
-    public int getCoordX() {
+    public double getCoordX() {
         return coordX;
     }
 
-    public void setCoordX(int coordX) {
+    public void setCoordX(double coordX) {
         this.coordX = coordX;
     }
 
-    public int getCoordY() {
+    public double getCoordY() {
         return coordY;
     }
 
-    public void setCoordY(int coordY) {
+    public void setCoordY(double coordY) {
         this.coordY = coordY;
     }
 
