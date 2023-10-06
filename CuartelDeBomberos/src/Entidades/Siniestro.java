@@ -7,8 +7,8 @@ public class Siniestro {
     private int codigo;
     private Emergencia tipoEmergencia;
     private LocalDate fecha;
-    private double coordX;
-    private double coordY;
+    private int coordX;
+    private int coordY;
     private String detalles;
     private LocalDate fechaResolucion;
     private int puntuacion;
@@ -18,7 +18,7 @@ public class Siniestro {
     public Siniestro() {
     }
 
-    public Siniestro(int codigo, Emergencia tipoEmergencia, LocalDate fecha, double coordX, double coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
+    public Siniestro(int codigo, Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
         this.codigo = codigo;
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
@@ -31,7 +31,7 @@ public class Siniestro {
         this.estado = estado;
     }
     
-    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, double coordX, double coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
+    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, LocalDate fechaResolucion, int puntuacion, int codBrigada, boolean estado) {
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
         this.coordX = coordX;
@@ -43,7 +43,7 @@ public class Siniestro {
         this.estado = estado;
     }
 
-    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, double coordX, double coordY, String detalles, int codBrigada, boolean estado) {
+    public Siniestro(Emergencia tipoEmergencia, LocalDate fecha, int coordX, int coordY, String detalles, int codBrigada, boolean estado) {
         this.tipoEmergencia = tipoEmergencia;
         this.fecha = fecha;
         this.coordX = coordX;
@@ -77,19 +77,19 @@ public class Siniestro {
         this.fecha = fecha;
     }
 
-    public double getCoordX() {
+    public int getCoordX() {
         return coordX;
     }
 
-    public void setCoordX(double coordX) {
+    public void setCoordX(int coordX) {
         this.coordX = coordX;
     }
 
-    public double getCoordY() {
+    public int getCoordY() {
         return coordY;
     }
 
-    public void setCoordY(double coordY) {
+    public void setCoordY(int coordY) {
         this.coordY = coordY;
     }
 

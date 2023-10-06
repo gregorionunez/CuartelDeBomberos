@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 01:39:57
+-- Tiempo de generación: 05-10-2023 a las 00:59:38
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -64,8 +64,8 @@ CREATE TABLE `cuartel` (
   `cod_cuartel` int(11) NOT NULL,
   `nombre_cuartel` varchar(20) NOT NULL,
   `direccion` varchar(30) NOT NULL,
-  `cod_x` double NOT NULL,
-  `cod_y` double NOT NULL,
+  `cod_x` int(11) NOT NULL,
+  `cod_y` int(11) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(30) NOT NULL,
   `estado` tinyint(1) NOT NULL
@@ -104,8 +104,8 @@ CREATE TABLE `siniestro` (
   `codigo` int(11) NOT NULL,
   `tipo` varchar(20) NOT NULL,
   `fecha_siniestro` date NOT NULL,
-  `cod_x` double NOT NULL,
-  `cod_y` double NOT NULL,
+  `cod_x` int(11) NOT NULL,
+  `cod_y` int(11) NOT NULL,
   `detalle` text NOT NULL,
   `fecha_resol` date DEFAULT NULL,
   `puntuacion` int(11) DEFAULT NULL,

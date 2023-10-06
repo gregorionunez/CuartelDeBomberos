@@ -33,8 +33,8 @@ public class SiniestroData {
 
             ps.setInt(1, emergencia.getId());
             ps.setDate(2, java.sql.Date.valueOf(siniestro.getFecha()));
-            ps.setDouble(3, siniestro.getCoordX());
-            ps.setDouble(4, siniestro.getCoordY());
+            ps.setInt(3, siniestro.getCoordX());
+            ps.setInt(4, siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
             ps.setInt(6, siniestro.getCodBrigada());
             ps.setBoolean(7, true);
@@ -96,8 +96,8 @@ public class SiniestroData {
 
             ps.setInt(1, emergencia.getId());
             ps.setDate(2, java.sql.Date.valueOf(siniestro.getFecha()));
-            ps.setDouble(3, siniestro.getCoordX());
-            ps.setDouble(4, siniestro.getCoordY());
+            ps.setInt(3, siniestro.getCoordX());
+            ps.setInt(4, siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
             ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
             ps.setInt(7, siniestro.getPuntuacion());            
@@ -151,8 +151,8 @@ public class SiniestroData {
                         rs.getInt("codigo"),
                         emergencia,
                         rs.getDate("fecha_siniestro").toLocalDate(),
-                        rs.getDouble("cod_x"),
-                        rs.getDouble("cod_y"),
+                        rs.getInt("cod_x"),
+                        rs.getInt("cod_y"),
                         rs.getString("detalle"),
                         rs.getDate("fecha_resol").toLocalDate(),
                         rs.getInt("puntuacion"),
