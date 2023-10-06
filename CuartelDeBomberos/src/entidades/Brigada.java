@@ -15,31 +15,31 @@ import java.util.List;
 public class Brigada {
     private int codigoBrigada;
     private String nombreBrigada;
-    private Emergencia especialiad;
+    private Emergencia especialidad;
     private boolean estado;
     private int numeroCuartel;
     private boolean libre ;
-    private  List <Bombero> bomberos;
+    private List<Bombero> bomberos;
 
-    public Brigada(String nombreBrigada, Emergencia especialiad, boolean estado, boolean libre) {
+    public Brigada(String nombreBrigada, Emergencia especialidad, boolean estado, boolean libre) {
         this.nombreBrigada = nombreBrigada;
-        this.especialiad = especialiad;
+        this.especialidad = especialidad;
         this.estado = estado;
         this.libre = libre;
     }
 
-    public Brigada(String nombreBrigada, Emergencia especialiad, boolean estado, int numeroCuartel, boolean libre) {
+    public Brigada(String nombreBrigada, Emergencia especialidad, boolean estado, int numeroCuartel, boolean libre) {
         this.nombreBrigada = nombreBrigada;
-        this.especialiad = especialiad;
+        this.especialidad = especialidad;
         this.estado = estado;
         this.numeroCuartel = numeroCuartel;
         this.libre = libre;
     }
 
-    public Brigada(int codigoBrigada, String nombreBrigada, Emergencia especialiad, boolean estado, boolean libre) {
+    public Brigada(int codigoBrigada, String nombreBrigada, Emergencia especialidad, boolean estado, boolean libre) {
         this.codigoBrigada = codigoBrigada;
         this.nombreBrigada = nombreBrigada;
-        this.especialiad = especialiad;
+        this.especialidad = especialidad;
         this.estado = estado;
         this.libre = libre;
     }
@@ -63,12 +63,12 @@ public class Brigada {
         this.nombreBrigada = nombreBrigada;
     }
 
-    public Emergencia getEspecialiad() {
-        return especialiad;
+    public Emergencia getEspecialidad() {
+        return especialidad;
     }
 
-    public void setEspecialiad(Emergencia especialiad) {
-        this.especialiad = especialiad;
+    public void setEspecialidad(Emergencia especialidad) {
+        this.especialidad = especialidad;
     }
 
     public boolean isEstado() {
@@ -105,7 +105,7 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return "Brigada{" + "codigoBrigada=" + codigoBrigada + ", nombreBrigada=" + nombreBrigada + ", especialiad=" + especialiad + ", estado=" + estado + ", numeroCuartel=" + numeroCuartel + ", libre=" + libre + ", bomberos=" + bomberos + '}';
+        return "Brigada{" + "codigoBrigada=" + codigoBrigada + ", nombreBrigada=" + nombreBrigada + ", especialiad=" + especialidad + ", estado=" + estado + ", numeroCuartel=" + numeroCuartel + ", libre=" + libre + ", bomberos=" + bomberos + '}';
     }
    
 }
