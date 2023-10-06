@@ -23,19 +23,19 @@ public class CuartelDeBomberos {
         // TODO code application logic here
 
         LocalDate fecha = LocalDate.now();
-        Bombero bombero1 = new Bombero(10, "Marcelo", "Pepe", fecha, "1150505050", 3, "ORH+", true);
+        Bombero bombero1 = new Bombero(10, "Marcelo", "Pepe", fecha, "1150505050", 1, "ORH+", true);
         Bombero bombero2 = new Bombero(11, "Fabian", "Pipo", fecha, "1150505050", 3, "ORH-", true);
         Bombero bombero3 = new Bombero();
         System.out.println(bombero1.toString());
         System.out.println(bombero2.toString());
         BomberoData bomberoData = new BomberoData();
-        //bomberoData.agregarBombero(bombero1);
+        bomberoData.agregarBombero(bombero1);
         //bomberoData.agregarBombero(bombero2);
         //bomberoData.eliminarBombero(3);
 
         ArrayList<Bombero> listaBomberos = new ArrayList();
 
-        listaBomberos = bomberoData.listarBomberosSegunEstado(true);
+//        listaBomberos = bomberoData.listarBomberosSegunEstado(true);
 
         for (Bombero listaBombero : listaBomberos) {
             System.out.println(listaBombero.toString());
