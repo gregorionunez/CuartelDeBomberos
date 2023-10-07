@@ -26,6 +26,18 @@ public class Cuartel {
         this.estado = estado;
     }
 
+    public Cuartel(String nombreCuartel, String direccion, int coordX, int coordY, String telefono, String correo, boolean estado) {
+        this.nombreCuartel = nombreCuartel;
+        this.direccion = direccion;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.estado = estado;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Cuartel{" + "codCuartel=" + codCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estado=" + estado + '}';
