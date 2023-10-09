@@ -21,7 +21,7 @@ public class BomberoData {
         //ESTA VARIBLE REPRESENTA MI SENTENCIA SQL
         String sql = "INSERT INTO bombero(dni, nombre, apellido, fecha_nac, celular, cod_brigada, estado, grupoSanguineo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            if (!getBomberoPorDni(bombero.getDni())) {
+            if (!existeBomberoPorDni(bombero.getDni())) {
                 //CREO UNA CONEXION CON MI BASE DE DATOS
                 con = Conexion.getConexion();
                 PreparedStatement ps = con.prepareStatement(sql); //PreparedStatement con la consulta sql
@@ -41,12 +41,13 @@ public class BomberoData {
                 JOptionPane.showMessageDialog(null, "El Bombero ya existe en la base de datos", "Error", 0);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar Bombero", "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al insertar Bombero " + ex.getMessage() , "Error", 0);
         }
         finally{
             //CUANDO TERMINA TODO CIERRO MI CONEXION
             Conexion.cerrarConexion(con);
-        }        
+        }
+        return;        
     }
 
     // MODIFICO UN BOMBERO
@@ -66,7 +67,7 @@ public class BomberoData {
             ps.setString(8, bombero.getGrupoSanguineo()); //Asignacion de valores
             ps.setInt(9, bombero.getId());
             ps.executeUpdate(); // Ejecutar PreparedStatement
-            JOptionPane.showMessageDialog(null, "Bombero modificada con éxito", "Información", 1);
+            JOptionPane.showMessageDialog(null, "Bombero modificado con éxito", "Información", 1);
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el Bombero", "Error", 0);
@@ -82,7 +83,7 @@ public class BomberoData {
         //ESTA VARIBLE REPRESENTA MI SENTENCIA SQL
         String sql = "UPDATE bombero SET estado=false WHERE id_bombero=" + id;
         try {
-            if(getBomberoPorId(id)){
+            if(existeBomberoPorId(id)){
                 //CREO UNA CONEXION CON MI BASE DE DATOS
             con = Conexion.getConexion();
             //ENVIO LA SENTENCIA SQL Y LA EJECUTO
@@ -143,7 +144,7 @@ public class BomberoData {
         return bomberos;
     }
     
-    public boolean getBomberoPorDni(int dni) {
+    public boolean existeBomberoPorDni(int dni) {
         boolean existe = false;
         try {
             //CREO LA CONEXION
@@ -166,12 +167,12 @@ public class BomberoData {
         return existe;
     }
     
-    public boolean getBomberoPorId(int id) {
+    public boolean existeBomberoPorId(int id) {
         boolean existe = false;
         try {
             //CREO LA CONEXION
             con = Conexion.getConexion();
-            String sql = "SELECT * FROM bombero WHERE id =" + id; //EJECUTO EL SELECT
+            String sql = "SELECT * FROM bombero WHERE id_bombero =" + id; //EJECUTO EL SELECT
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -187,5 +188,73 @@ public class BomberoData {
         } 
         //RETORNO LA LISTA DE BOMBEROS 
         return existe;
+    }
+    
+    public ArrayList<Bombero> listarTodosLosBomberos() {
+        //CREO MI LISTA DE BOMBEROS
+        ArrayList<Bombero> bomberos = new ArrayList<>();
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM bombero;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //CREO UN BOMBERO Y LO VOY CARGANDO
+                Bombero bombero = new Bombero();
+                bombero.setId(rs.getInt("id_bombero"));
+                bombero.setDni(rs.getInt("dni"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
+                bombero.setFechaNacimiento(rs.getDate("fecha_nac").toLocalDate());
+                bombero.setCelular(rs.getString("celular"));
+                bombero.setCodigoBrigada(rs.getInt("cod_brigada"));
+                bombero.setEstado(rs.getBoolean("estado"));
+                bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
+                //AGREGO EL BOMBERO A LA LISTA
+                bomberos.add(bombero);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero ", "Error", 0);
+        }
+        finally{
+            //CUANDO TERMINA TODO CIERRO MI CONEXION
+            Conexion.cerrarConexion(con);
+        } 
+        //RETORNO LA LISTA DE BOMBEROS 
+        return bomberos;
+    }
+    
+    public Bombero getBomberoPorId(int id) {
+        Bombero bombero = null;
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM bombero WHERE id_bombero =" + id; //EJECUTO EL SELECT
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                bombero = new Bombero();
+                bombero.setId(id);
+                bombero.setDni(rs.getInt("dni"));
+                bombero.setApellido(rs.getString("apellido"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setFechaNacimiento(rs.getDate("fecha_nac").toLocalDate());
+                bombero.setEstado(rs.getBoolean("estado"));
+                bombero.setCelular(rs.getString("celular"));
+                bombero.setCodigoBrigada(rs.getInt("cod_brigada"));
+                bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero ", "Error", 0);
+        }
+        finally{
+            //CUANDO TERMINA TODO CIERRO MI CONEXION
+            Conexion.cerrarConexion(con);
+        } 
+        //RETORNO BOMBEROS
+        return bombero;
     }
 }
