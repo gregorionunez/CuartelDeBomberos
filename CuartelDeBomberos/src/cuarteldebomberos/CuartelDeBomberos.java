@@ -6,9 +6,12 @@
 package cuarteldebomberos;
 
 import AccesoADatos.BomberoData;
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
 import Entidades.Bombero;
+import Entidades.Brigada;
 import Entidades.Cuartel;
+import Entidades.Emergencia;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,18 +50,18 @@ public class CuartelDeBomberos {
         }
          */
         //PRUEBAS PARA CUARTEL DATA
-        Cuartel bomberosDeQuilmes = new Cuartel("Bomberos De Quilmes", "Quilmes", 42, 25, "1515", "quilmes@gmail", true);
+        /*Cuartel bomberosDeQuilmes = new Cuartel("Bomberos De Quilmes", "Quilmes", 42, 25, "1515", "quilmes@gmail", true);
         Cuartel bomberosDeMDP = new Cuartel("Bomberos De Mar Del Plata", "MDP", 12, 35, "1515", "mdl@gmail", true);
         Cuartel bomberosDeRosario = new Cuartel("Bomberos De Rosario", "Rosario", 12, 95, "1515", "rosario@gmail", true);
         Cuartel bomberosDeAdrogue = new Cuartel("Bomberos De Adrogue", "Adrogue", 8, 17, "1515", "adrogue@gmail", true);
         System.out.println(bomberosDeQuilmes.toString());
         System.out.println(bomberosDeAdrogue.toString());
-        CuartelData cuartelData = new CuartelData();
+        CuartelData cuartelData = new CuartelData();*/
         //cuartelData.agregarCuartel(bomberosDeMDP);
         //cuartelData.agregarCuartel(bomberosDeQuilmes);
         //cuartelData.agregarCuartel(bomberosDeRosario);
         //cuartelData.agregarCuartel(bomberosDeAdrogue);
-        ArrayList<Cuartel> listaDeCuarteles = new ArrayList<>();
+      /*  ArrayList<Cuartel> listaDeCuarteles = new ArrayList<>();
         listaDeCuarteles = cuartelData.listarCuarteles();
         for (Cuartel listaDeCuartele : listaDeCuarteles) {
             System.out.println(listaDeCuartele.toString());
@@ -74,9 +77,7 @@ public class CuartelDeBomberos {
             System.out.println("Posicion: "+key);
             System.out.println(value.toString());
             
-        }
-        
-        
+        }*/
 
     }
 

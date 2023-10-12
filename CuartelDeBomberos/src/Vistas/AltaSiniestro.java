@@ -5,8 +5,10 @@
  */
 package Vistas;
 
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
 import AccesoADatos.EmergenciaData;
+import Entidades.Brigada;
 import Entidades.Cuartel;
 import Entidades.Emergencia;
 import Entidades.Siniestro;
@@ -26,10 +28,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
     CuartelData cuartelData = new CuartelData();
     EmergenciaData emergenciaData = new EmergenciaData();
+    BrigadaData brigadaData = new BrigadaData();
 
     public AltaSiniestro() {
         initComponents();
-        rellenarComboBox();
+        rellenarComboBoxEmergencia();
         configDocumentListener();
         jLFecha.setText(LocalDate.now().toString());
     }
@@ -54,7 +57,6 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jBGuardar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
         jCBEmergencia = new javax.swing.JComboBox<>();
-        jCBBrigada = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTFX = new javax.swing.JTextField();
@@ -64,7 +66,9 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
+        jCBBrigada = new javax.swing.JComboBox<>();
 
+        setTitle("Alta siniestro");
         setPreferredSize(new java.awt.Dimension(600, 645));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -127,11 +131,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jCBEmergenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(jCBEmergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 380, 30));
-
-        jCBBrigada.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jCBBrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jCBBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 380, 30));
+        getContentPane().add(jCBEmergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 370, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Cuartel:");
@@ -139,7 +139,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel11.setText("X");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 30, 30));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 30, 30));
 
         jTFX.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jTFX.addActionListener(new java.awt.event.ActionListener() {
@@ -152,11 +152,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jTFXKeyTyped(evt);
             }
         });
-        getContentPane().add(jTFX, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 90, 30));
+        getContentPane().add(jTFX, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 90, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel12.setText("Y");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 20, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 20, 30));
 
         jTFY.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jTFY.addActionListener(new java.awt.event.ActionListener() {
@@ -169,11 +169,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jTFYKeyTyped(evt);
             }
         });
-        getContentPane().add(jTFY, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 90, 30));
+        getContentPane().add(jTFY, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 90, 30));
 
         jLCuartel.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLCuartel.setText("Cuartel de mar del plata");
-        getContentPane().add(jLCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 380, 50));
+        getContentPane().add(jLCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 380, 50));
 
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -186,7 +186,10 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("-");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
+
+        jCBBrigada.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        getContentPane().add(jCBBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 370, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -196,7 +199,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 null,
                 "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
                 + "\nCoordenadas: " + jTFX.getText() + "-" + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
-                + "\nBrigada: " + jCBBrigada.getSelectedItem().toString()+"\nDetalle:\n"+jTADetalle.getText(),
+                + "\nBrigada: " + jCBEmergencia.getSelectedItem().toString()+"\nDetalle:\n"+jTADetalle.getText(),
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.ERROR_MESSAGE
@@ -246,7 +249,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFYKeyTyped
 
-    private void rellenarComboBox() {
+    private void rellenarComboBoxEmergencia() {
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
 
@@ -261,17 +264,32 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jTFY.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
+
                 if (!jTFX.getText().isEmpty()) {
+                    //----------CUARTEL-------------//
                     int x = Integer.parseInt(jTFX.getText());
                     int y = Integer.parseInt(jTFY.getText());
-
+                    Cuartel cuartel = new Cuartel();
+                    
                     HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
-                        Cuartel value = entry.getValue();
-                        jLCuartel.setText(value.getNombreCuartel());
+                        cuartel = entry.getValue();
+                        jLCuartel.setText(cuartel.getNombreCuartel());
                         break;
+                    }
+                    
+                    //----------BRIGADA-------------//
+                    if(!jLCuartel.equals("Cuartel no definido.")){
+                        int idCuartel = cuartel.getCodCuartel();
+
+                        ArrayList<Brigada> listarBrigadas = new ArrayList<>();
+                        listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
+
+                        for (Brigada listarBrigada : listarBrigadas) {
+                            jCBBrigada.addItem(listarBrigada);
+                        }
                     }
                 }
             }
@@ -349,7 +367,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBGuardar;
-    private javax.swing.JComboBox<String> jCBBrigada;
+    private javax.swing.JComboBox<Brigada> jCBBrigada;
     private javax.swing.JComboBox<Emergencia> jCBEmergencia;
     private javax.swing.JLabel jLCuartel;
     private javax.swing.JLabel jLFecha;
