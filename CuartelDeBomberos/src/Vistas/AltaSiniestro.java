@@ -172,7 +172,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         getContentPane().add(jTFY, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 90, 30));
 
         jLCuartel.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLCuartel.setText("Cuartel de mar del plata");
+        jLCuartel.setText("Cuartel no definido.");
         getContentPane().add(jLCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 380, 50));
 
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
@@ -283,12 +283,21 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                     //----------BRIGADA-------------//
                     if(!jLCuartel.equals("Cuartel no definido.")){
                         int idCuartel = cuartel.getCodCuartel();
+                        
+                        jCBBrigada.removeAllItems();
 
                         ArrayList<Brigada> listarBrigadas = new ArrayList<>();
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
+                            if(jCBEmergencia.getSelectedItem().toString().equals(listarBrigada.getEspecialidad().toString())){
+                                System.out.println("son iguales");
+                                jCBBrigada.addItem(listarBrigada);
+                                jCBBrigada.setEnabled(false);
+                                break;
+                            }else{
                             jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }

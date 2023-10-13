@@ -6,7 +6,7 @@ public class Emergencia {
 
     public Emergencia() {
     }
-
+  
     public Emergencia(String emergencia) {
         this.emergencia = emergencia;
     }
