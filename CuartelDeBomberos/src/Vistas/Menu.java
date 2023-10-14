@@ -22,11 +22,11 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        jbAltaSiniestro.setIcon(setIcono("/Imagenes/fuego.png",jbAltaSiniestro));
+        jbAltaSiniestro.setIcon(setIcono("/Imagenes/fuego.png", jbAltaSiniestro));
         jbAltaSiniestro.setPressedIcon(setIconoPresionado("/Imagenes/fuego.png", jbAltaSiniestro, 30, 15));
-        jbModificarSiniestro.setIcon(setIcono("/Imagenes/lapiz.png",jbModificarSiniestro));
+        jbModificarSiniestro.setIcon(setIcono("/Imagenes/lapiz.png", jbModificarSiniestro));
         jbModificarSiniestro.setPressedIcon(setIconoPresionado("/Imagenes/lapiz.png", jbModificarSiniestro, 30, 15));
-        jbCerrarSiniestro.setIcon(setIcono("/Imagenes/cerca.png",jbCerrarSiniestro));
+        jbCerrarSiniestro.setIcon(setIcono("/Imagenes/cerca.png", jbCerrarSiniestro));
         jbCerrarSiniestro.setPressedIcon(setIconoPresionado("/Imagenes/cerca.png", jbCerrarSiniestro, 30, 15));
     }
 
@@ -134,9 +134,9 @@ public class Menu extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,6 +162,11 @@ public class Menu extends javax.swing.JFrame {
         jMGestionDeRecursos.add(jMIBrigada);
 
         jMICuartel.setText("Cuartel");
+        jMICuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMICuartelActionPerformed(evt);
+            }
+        });
         jMGestionDeRecursos.add(jMICuartel);
 
         jMenuBar1.add(jMGestionDeRecursos);
@@ -241,6 +246,17 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCerrarSiniestroActionPerformed
 
+    //CARGO ABM DE CUARTEL
+    private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
+
+ 
+        CuartelUI ventana = new CuartelUI();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+
+    }//GEN-LAST:event_jMICuartelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,16 +291,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    
-    public Icon setIcono(String url, JButton boton){
+
+    public Icon setIcono(String url, JButton boton) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
         int ancho = boton.getWidth();
         int alto = boton.getHeight();
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(alto, alto, Image.SCALE_DEFAULT));
         return icono;
     }
-    
-    public Icon setIconoPresionado(String url, JButton boton, int ancho, int altura){
+
+    public Icon setIconoPresionado(String url, JButton boton, int ancho, int altura) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
         int width = boton.getWidth() - ancho;
         int height = boton.getHeight() - altura;
