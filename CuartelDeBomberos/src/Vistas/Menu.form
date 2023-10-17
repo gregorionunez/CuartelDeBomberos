@@ -217,6 +217,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbAltaSiniestro">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAltaSiniestroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
