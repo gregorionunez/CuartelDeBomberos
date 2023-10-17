@@ -232,8 +232,6 @@ public class Menu extends javax.swing.JFrame {
     private void jMIBomberosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosActionPerformed
         // TODO add your handling code here:
         ListaDeBomberos ventana = new ListaDeBomberos();
-        escritorio.removeAll();
-        escritorio.repaint();
         escritorio.add(ventana);
         ventana.setVisible(true);
 
@@ -263,7 +261,9 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(ventana);
         ventana.setVisible(true);
 
-
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMICuartelActionPerformed
 
     /**

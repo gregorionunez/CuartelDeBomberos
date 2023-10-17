@@ -6,8 +6,11 @@
 package Vistas.Bombero;
 
 import AccesoADatos.BomberoData;
+import AccesoADatos.BrigadaData;
 import Entidades.Bombero;
+import Entidades.Brigada;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -24,6 +27,7 @@ public class Alta extends javax.swing.JFrame {
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
+        cargarComboBoxBrigada();
         this.IniciarControles();
     }
     
@@ -117,8 +121,6 @@ public class Alta extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Brigada");
-
-        jcbBrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "1", "1" }));
 
         jbGuardar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-50.png"))); // NOI18N
@@ -318,6 +320,15 @@ public class Alta extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarComboBoxBrigada(){
+        ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
+        BrigadaData brigadaData = new BrigadaData();
+        listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
+        for (Brigada brigada : listaBrigadas) {
+            jcbBrigada.addItem(brigada);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -329,7 +340,7 @@ public class Alta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JComboBox<String> jcbBrigada;
+    private javax.swing.JComboBox<Brigada> jcbBrigada;
     private com.toedter.calendar.JDateChooser jdcFechaNacimiento;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfCelular;

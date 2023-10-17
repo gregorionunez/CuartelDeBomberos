@@ -225,4 +225,37 @@ public class BrigadaData {
         }
         return bomberos;
     }
+    
+    public ArrayList<Brigada> brigadasPorEstadoYDisponibilidad(boolean estado, boolean disponibilidad) {
+        //CREO MI LISTA DE BRIGADAS
+        EmergenciaData emergenciaData = new EmergenciaData();
+        ArrayList<Brigada> brigadas = new ArrayList<>();
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM brigada WHERE estado =" + estado + " AND libre =" + disponibilidad; //EJECUTO EL SELECT
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //CREO UN BOMBERO Y LO VOY CARGANDO
+                Brigada brigada = new Brigada();
+                brigada.setCodigoBrigada(rs.getInt("cod_brigada"));
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                emergencia = emergenciaData.buscarEmergencia(rs.getInt("especialidad"));
+                brigada.setEspecialidad(emergencia);
+                brigada.setLibre(rs.getBoolean("libre"));
+                brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
+                //AGREGO EL BOMBERO A LA LISTA
+                brigadas.add(brigada);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
+        } finally {            
+        //CUANDO TERMINA TODO CIERRO MI CONEXION
+        Conexion.cerrarConexion(con);
+        }
+        return brigadas;
+    }
 }

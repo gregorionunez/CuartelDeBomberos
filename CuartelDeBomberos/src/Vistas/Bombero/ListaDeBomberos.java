@@ -177,6 +177,24 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al Bombero seleccionado? ", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (respuesta == 0) {
+            //BORRO EL CUARTEL
+            BomberoData bomberoData = new BomberoData();
+            ArrayList<Bombero> listaBomberos = new ArrayList<Bombero>();
+            bomberoData.eliminarBombero(idBombero);
+            listaBomberos = bomberoData.listarTodosLosBomberos();
+            limpiarTabla();
+            if (listaBomberos.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No existen bomberos en la base de datos", "MENSAJE", 1);
+            } else {
+                for (Bombero bombero : listaBomberos) {
+                    cargarDatosEnLaTabla(bombero);
+                }
+            }
+            jbModificar.setEnabled(false);
+            jbEliminar.setEnabled(false);
+        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSalirMousePressed
