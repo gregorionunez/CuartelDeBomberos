@@ -168,6 +168,11 @@ public class Menu extends javax.swing.JFrame {
         jMGestionDeRecursos.add(jMIBrigada);
 
         jMICuartel.setText("Cuartel");
+        jMICuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMICuartelActionPerformed(evt);
+            }
+        });
         jMGestionDeRecursos.add(jMICuartel);
 
         jMenuBar1.add(jMGestionDeRecursos);
@@ -249,11 +254,20 @@ public class Menu extends javax.swing.JFrame {
 
     private void jbAltaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaSiniestroActionPerformed
         AltaSiniestro ventana = new AltaSiniestro();
-        escritorio.removeAll();
-        escritorio.repaint();
         escritorio.add(ventana);
         ventana.setVisible(true);
     }//GEN-LAST:event_jbAltaSiniestroActionPerformed
+
+    //CARGO ABM DE CUARTEL
+    private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
+
+ 
+        CuartelUI ventana = new CuartelUI();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+
+    }//GEN-LAST:event_jMICuartelActionPerformed
 
     /**
      * @param args the command line arguments
