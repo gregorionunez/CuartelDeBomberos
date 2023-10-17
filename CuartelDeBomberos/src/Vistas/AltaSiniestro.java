@@ -8,6 +8,7 @@ package Vistas;
 import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
 import AccesoADatos.EmergenciaData;
+import AccesoADatos.SiniestroData;
 import Entidades.Brigada;
 import Entidades.Cuartel;
 import Entidades.Emergencia;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -69,7 +71,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jCBBrigada = new javax.swing.JComboBox<>();
 
         setTitle("Alta siniestro");
-        setPreferredSize(new java.awt.Dimension(600, 645));
+        setPreferredSize(new java.awt.Dimension(730, 645));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -103,7 +105,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jTADetalle.setRows(5);
         jScrollPane1.setViewportView(jTADetalle);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 520, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 650, 120));
 
         jBGuardar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-50.png"))); // NOI18N
@@ -113,7 +115,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, -1, -1));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, -1, -1));
 
         jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
@@ -123,7 +125,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jBCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 560, -1, -1));
+        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 560, -1, -1));
 
         jCBEmergencia.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBEmergencia.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +133,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jCBEmergenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(jCBEmergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 370, 30));
+        getContentPane().add(jCBEmergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 490, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Cuartel:");
@@ -179,8 +181,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Alta siniestro");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 260, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 530, 10));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 260, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 650, 10));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -189,24 +191,85 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         jCBBrigada.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        getContentPane().add(jCBBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 370, 30));
+        getContentPane().add(jCBBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 500, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(
-                null,
-                "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
-                + "\nCoordenadas: " + jTFX.getText() + "-" + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
-                + "\nBrigada: " + jCBEmergencia.getSelectedItem().toString()+"\nDetalle:\n"+jTADetalle.getText(),
-                "Confirmación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.ERROR_MESSAGE
-        );
+
+        Brigada brigadaGuardar = new Brigada();
+        brigadaGuardar = (Brigada) jCBBrigada.getSelectedItem();
+
+        if (jTFX.getText().isEmpty() || jTFY.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar coordenadas correctas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (jLCuartel.getText().equals("Cuartel no definido.")) {
+            JOptionPane.showMessageDialog(this, "No se puede dar de alta un siniestro sin un Cuartel.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (brigadaGuardar == null) {
+            JOptionPane.showMessageDialog(this, "No se puede dar de alta un siniestro sin una Brigada.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int respuestaBrigada;
+        
+        if (!brigadaGuardar.getEspecialidad().toString().equals(jCBEmergencia.getSelectedItem().toString())) {
+            respuestaBrigada = JOptionPane.showConfirmDialog(
+                    null,"La brigada "+brigadaGuardar.getNombreBrigada()+" no tiene la especialidad del Siniestro. ¿Desea continuar?",
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }else{
+            respuestaBrigada = 0;
+        }
+
+        if (respuestaBrigada == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        int respuesta;
+
+        if (jTADetalle.getText().isEmpty()) {
+            respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
+                    + "\nCoordenadas: " + jTFX.getText() + " - " + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
+                    + "\nBrigada: " + brigadaGuardar.getNombreBrigada() + "\nDetalle:\nSin detalle.",
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE
+            );
+        } else {
+            respuesta = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
+                    + "\nCoordenadas: " + jTFX.getText() + " - " + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
+                    + "\nBrigada: " + brigadaGuardar.getNombreBrigada() + "\nDetalle:\n" + jTADetalle.getText(),
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
 
         if (respuesta == JOptionPane.YES_OPTION) {
             Siniestro siniestro = new Siniestro();
+            siniestro.setTipoEmergencia((Emergencia)jCBEmergencia.getSelectedItem());
+            siniestro.setFecha(LocalDate.now());
+            siniestro.setCoordX(Integer.parseInt(jTFX.getText()));
+            siniestro.setCoordY(Integer.parseInt(jTFY.getText()));
+            if(!jTADetalle.getText().isEmpty()){
+                siniestro.setDetalles(jTADetalle.getText());
+            }else{
+                siniestro.setDetalles("Sin detalle.");
+            }
+            siniestro.setCodBrigada(brigadaGuardar.getCodigoBrigada());
+            siniestro.setEstado(true);
+            
+            SiniestroData siniestroData = new SiniestroData();
+            
+            siniestroData.agregarSiniestro(siniestro);
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -236,6 +299,10 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBEmergenciaActionPerformed
 
     private void jTFXKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFXKeyTyped
+        if (jTFX.getText().length() >= 6) {
+            evt.consume(); // Esto evita que se ingrese más caracteres
+        }
+
         int key = evt.getKeyChar();
         if (key > 57 || key < 48) {
             evt.consume();
@@ -243,6 +310,10 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFXKeyTyped
 
     private void jTFYKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFYKeyTyped
+        if (jTFY.getText().length() >= 6) {
+            evt.consume(); // Esto evita que se ingrese más caracteres
+        }
+
         int key = evt.getKeyChar();
         if (key > 57 || key < 48) {
             evt.consume();
@@ -270,7 +341,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                     int x = Integer.parseInt(jTFX.getText());
                     int y = Integer.parseInt(jTFY.getText());
                     Cuartel cuartel = new Cuartel();
-                    
+
                     HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
 
@@ -279,25 +350,18 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(cuartel.getNombreCuartel());
                         break;
                     }
-                    
+
                     //----------BRIGADA-------------//
-                    if(!jLCuartel.equals("Cuartel no definido.")){
+                    if (!jLCuartel.equals("Cuartel no definido.")) {
                         int idCuartel = cuartel.getCodCuartel();
-                        
+
                         jCBBrigada.removeAllItems();
 
                         ArrayList<Brigada> listarBrigadas = new ArrayList<>();
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            if(jCBEmergencia.getSelectedItem().toString().equals(listarBrigada.getEspecialidad().toString())){
-                                System.out.println("son iguales");
-                                jCBBrigada.addItem(listarBrigada);
-                                jCBBrigada.setEnabled(false);
-                                break;
-                            }else{
                             jCBBrigada.addItem(listarBrigada);
-                            }
                         }
                     }
                 }
@@ -310,6 +374,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 } else {
                     int x = Integer.parseInt(jTFX.getText());
                     int y = Integer.parseInt(jTFY.getText());
+                    Cuartel cuartel = new Cuartel();
 
                     HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
@@ -318,6 +383,21 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         Cuartel value = entry.getValue();
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
+                    }
+                    
+                    //----------BRIGADA-------------//
+
+                    if (!jLCuartel.equals("Cuartel no definido.")) {
+                        int idCuartel = cuartel.getCodCuartel();
+
+                        jCBBrigada.removeAllItems();
+
+                        ArrayList<Brigada> listarBrigadas = new ArrayList<>();
+                        listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
+
+                        for (Brigada listarBrigada : listarBrigadas) {
+                            jCBBrigada.addItem(listarBrigada);
+                        }
                     }
                 }
             }
@@ -331,9 +411,46 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jTFX.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
+
                 if (!jTFY.getText().isEmpty()) {
+                    //----------CUARTEL-------------//
                     int x = Integer.parseInt(jTFX.getText());
                     int y = Integer.parseInt(jTFY.getText());
+                    Cuartel cuartel = new Cuartel();
+
+                    HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
+                    listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
+
+                    for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
+                        cuartel = entry.getValue();
+                        jLCuartel.setText(cuartel.getNombreCuartel());
+                        break;
+                    }
+
+                    //----------BRIGADA-------------//
+                    if (!jLCuartel.equals("Cuartel no definido.")) {
+                        int idCuartel = cuartel.getCodCuartel();
+
+                        jCBBrigada.removeAllItems();
+
+                        ArrayList<Brigada> listarBrigadas = new ArrayList<>();
+                        listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
+
+                        for (Brigada listarBrigada : listarBrigadas) {
+                            jCBBrigada.addItem(listarBrigada);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                if (jTFY.getText().isEmpty() || jTFX.getText().isEmpty()) {
+                    jLCuartel.setText("Cuartel no definido.");
+                } else {
+                    int x = Integer.parseInt(jTFX.getText());
+                    int y = Integer.parseInt(jTFY.getText());
+                    Cuartel cuartel = new Cuartel();
 
                     HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
@@ -343,25 +460,20 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
                     }
-                }
+                    
+                    //----------BRIGADA-------------//
 
-            }
+                    if (!jLCuartel.equals("Cuartel no definido.")) {
+                        int idCuartel = cuartel.getCodCuartel();
 
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                if (jTFX.getText().isEmpty() || jTFY.getText().isEmpty()) {
-                    jLCuartel.setText("Cuartel no definido.");
-                } else {
-                    int x = Integer.parseInt(jTFX.getText());
-                    int y = Integer.parseInt(jTFY.getText());
+                        jCBBrigada.removeAllItems();
 
-                    HashMap<Integer, Cuartel> listarCuarteles = new HashMap<>();
-                    listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
+                        ArrayList<Brigada> listarBrigadas = new ArrayList<>();
+                        listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
-                    for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
-                        Cuartel value = entry.getValue();
-                        jLCuartel.setText(value.getNombreCuartel());
-                        break;
+                        for (Brigada listarBrigada : listarBrigadas) {
+                            jCBBrigada.addItem(listarBrigada);
+                        }
                     }
                 }
             }
