@@ -25,7 +25,7 @@ public class BrigadaData {
     
     public void agregarBrigada(Brigada brigada) {
         // sentencia sql
-        String sql = "INSET INTO brigada (nombre_br,especialidad,libre,nro_cuartel,estado)VALUE(?,?,?,? )";
+        String sql = "INSERT INTO brigada(nombre_br,especialidad,libre,nro_cuartel,estado) VALUE (?,?,?,?,?)";
         // creo una conexion con mi base de dato
         try {
             con = Conexion.getConexion();

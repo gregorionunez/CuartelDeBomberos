@@ -44,12 +44,12 @@ public class SiniestroData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Siniestro agregado con el ID: " + rs.getInt(1), "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro agregado con el ID: " + rs.getInt(1), "Información", 1);
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
@@ -71,11 +71,11 @@ public class SiniestroData {
             int fm = ps.executeUpdate();
 
             if (fm > 0) {
-                JOptionPane.showMessageDialog(null, "Siniestro eliminado.", "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro eliminado.", "Información", 1);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
@@ -108,18 +108,18 @@ public class SiniestroData {
             int fm = ps.executeUpdate();
             
             if(siniestro.getPuntuacion()>0){
-                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se cerro con éxito.", "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se cerro con éxito.", "Información", 1);
                 return;
             }
             
             if(fm > 0){
-                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se modificó con éxito.", "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se modificó con éxito.", "Información", 1);
             }
             
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
@@ -160,7 +160,7 @@ public class SiniestroData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }

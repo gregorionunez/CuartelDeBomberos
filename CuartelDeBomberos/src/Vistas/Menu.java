@@ -82,6 +82,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jbAltaSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaSiniestroActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alta de Siniestro");
@@ -252,6 +258,12 @@ public class Menu extends javax.swing.JFrame {
     private void jbCerrarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarSiniestroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCerrarSiniestroActionPerformed
+
+    private void jbAltaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaSiniestroActionPerformed
+        AltaSiniestro ventana = new AltaSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jbAltaSiniestroActionPerformed
 
     //CARGO ABM DE CUARTEL
     private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
