@@ -28,10 +28,10 @@ public class Brigada extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLBrigada = new javax.swing.JLabel();
+        JLListas = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTabla = new javax.swing.JTable();
+        jTablaDeBrigada = new javax.swing.JTable();
         jBAgregar = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
@@ -39,13 +39,13 @@ public class Brigada extends javax.swing.JInternalFrame {
 
         jMenu1.setText("jMenu1");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Brigada");
+        jLBrigada.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLBrigada.setText("Brigada");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("LISTA DE BRIGADAS");
+        JLListas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        JLListas.setText("LISTA DE BRIGADAS");
 
-        jTabla.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaDeBrigada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,7 +56,7 @@ public class Brigada extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTabla);
+        jScrollPane1.setViewportView(jTablaDeBrigada);
 
         jBAgregar.setText("Agregar");
 
@@ -91,8 +91,8 @@ public class Brigada extends javax.swing.JInternalFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JLListas)
+                            .addComponent(jLBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jBAgregar)
@@ -107,9 +107,9 @@ public class Brigada extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jLBrigada)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(JLListas)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
@@ -138,14 +138,14 @@ public class Brigada extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLListas;
     private javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLBrigada;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTabla;
+    private javax.swing.JTable jTablaDeBrigada;
     // End of variables declaration//GEN-END:variables
 }
