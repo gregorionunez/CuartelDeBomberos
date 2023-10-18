@@ -218,15 +218,15 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         }
 
         int respuestaBrigada;
-        
+
         if (!brigadaGuardar.getEspecialidad().toString().equals(jCBEmergencia.getSelectedItem().toString())) {
             respuestaBrigada = JOptionPane.showConfirmDialog(
-                    null,"La brigada '"+brigadaGuardar.getNombreBrigada()+"' no tiene la especialidad del Siniestro. ¿Desea continuar?",
+                    null, "La brigada '" + brigadaGuardar.getNombreBrigada() + "' no tiene la especialidad del Siniestro. ¿Desea continuar?",
                     "Confirmación",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.ERROR_MESSAGE
             );
-        }else{
+        } else {
             respuestaBrigada = 0;
         }
 
@@ -260,20 +260,20 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             Siniestro siniestro = new Siniestro();
-            siniestro.setTipoEmergencia((Emergencia)jCBEmergencia.getSelectedItem());
+            siniestro.setTipoEmergencia((Emergencia) jCBEmergencia.getSelectedItem());
             siniestro.setFecha(LocalDate.now());
             siniestro.setCoordX(Integer.parseInt(jTFX.getText()));
             siniestro.setCoordY(Integer.parseInt(jTFY.getText()));
-            if(!jTADetalle.getText().isEmpty()){
+            if (!jTADetalle.getText().isEmpty()) {
                 siniestro.setDetalles(jTADetalle.getText());
-            }else{
+            } else {
                 siniestro.setDetalles("Sin detalle.");
             }
             siniestro.setCodBrigada(brigadaGuardar.getCodigoBrigada());
             siniestro.setEstado(true);
-            
+
             SiniestroData siniestroData = new SiniestroData();
-            
+
             siniestroData.agregarSiniestro(siniestro);
             jCBEmergencia.setSelectedIndex(0);
             jTFX.setText("");
@@ -375,7 +375,9 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -398,9 +400,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
                     }
-                    
-                    //----------BRIGADA-------------//
 
+                    //----------BRIGADA-------------//
                     if (!jLCuartel.equals("Cuartel no definido.")) {
                         int idCuartel = cuartel.getCodCuartel();
 
@@ -410,7 +411,9 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -451,7 +454,9 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -474,9 +479,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
                     }
-                    
-                    //----------BRIGADA-------------//
 
+                    //----------BRIGADA-------------//
                     if (!jLCuartel.equals("Cuartel no definido.")) {
                         int idCuartel = cuartel.getCodCuartel();
 
@@ -486,7 +490,9 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }

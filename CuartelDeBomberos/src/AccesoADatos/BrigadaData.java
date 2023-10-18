@@ -181,6 +181,7 @@ public class BrigadaData {
                 brigada.setEspecialidad(emergencia);
                 brigada.setLibre(rs.getBoolean("libre"));
                 brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
                 //agrego brigada a la lista 
                 brigadas.add(brigada);
             }

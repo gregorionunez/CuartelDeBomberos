@@ -39,8 +39,8 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         rellenarComboBoxSiniestro();
         configDocumentListener();
         jLFecha.setText(LocalDate.now().toString());
-        
-        if(jCBSiniestro.getItemCount() > 0){
+
+        if (jCBSiniestro.getItemCount() > 0) {
             jCBSiniestro.setSelectedIndex(0);
         }
 
@@ -276,9 +276,9 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             Siniestro siniestro = new Siniestro();
-            
-            Siniestro siniestro1 = (Siniestro)jCBSiniestro.getSelectedItem();
-            
+
+            Siniestro siniestro1 = (Siniestro) jCBSiniestro.getSelectedItem();
+
             siniestro.setCodigo(siniestro1.getCodigo());
             siniestro.setTipoEmergencia((Emergencia) jCBEmergencia.getSelectedItem());
             siniestro.setFecha(LocalDate.now());
@@ -344,24 +344,24 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFYKeyTyped
 
     private void jCBSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSiniestroActionPerformed
-        
+
         DefaultComboBoxModel<Brigada> model = (DefaultComboBoxModel<Brigada>) jCBBrigada.getModel();
 
         Siniestro siniestro = (Siniestro) jCBSiniestro.getSelectedItem();
-        
-        jCBEmergencia.setSelectedIndex(siniestro.getTipoEmergencia().getId()-1);
+
+        jCBEmergencia.setSelectedIndex(siniestro.getTipoEmergencia().getId() - 1);
         jTFX.setText(siniestro.getCoordX() + "");
         jTFY.setText(siniestro.getCoordY() + "");
         jTADetalle.setText(siniestro.getDetalles());
-        
+
         for (int i = 0; i < model.getSize(); i++) {
             Brigada item = model.getElementAt(i);
-            
-            if(siniestro.getCodBrigada() == item.getCodigoBrigada()){
+
+            if (siniestro.getCodBrigada() == item.getCodigoBrigada()) {
                 jCBBrigada.setSelectedIndex(i);
                 break;
             }
-            
+
         }
 
 
@@ -420,7 +420,9 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -454,7 +456,9 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -495,7 +499,9 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
@@ -529,7 +535,9 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         listarBrigadas = brigadaData.listarBrigadasPorCuartel(idCuartel);
 
                         for (Brigada listarBrigada : listarBrigadas) {
-                            jCBBrigada.addItem(listarBrigada);
+                            if (listarBrigada.isEstado() == true) {
+                                jCBBrigada.addItem(listarBrigada);
+                            }
                         }
                     }
                 }
