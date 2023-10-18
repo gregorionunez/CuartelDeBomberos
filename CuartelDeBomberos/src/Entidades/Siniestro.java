@@ -135,10 +135,8 @@ public class Siniestro {
 
     @Override
     public String toString() {
-        return "Siniestro{" + "codigo=" + codigo + ", tipoEmergencia=" + tipoEmergencia + ", fecha=" + fecha + ", coordX=" + coordX + ", coordY=" + coordY + ", detalles=" + detalles + ", fechaResolucion=" + fechaResolucion + ", puntuacion=" + puntuacion + ", codBrigada=" + codBrigada + ", estado=" + estado + '}';
+        return "Cod: "+codigo+" - Fecha: "+fecha.toString()+" - "+"X: "+coordX+"- Y:"+coordY+" - Detalle: "+detalles;
     }
-    
-    
-    
+       
     
 }

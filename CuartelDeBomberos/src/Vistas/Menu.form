@@ -210,6 +210,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JButton" name="jbModificarSiniestro">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbModificarSiniestroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbCerrarSiniestro">
           <Events>

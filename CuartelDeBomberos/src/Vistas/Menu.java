@@ -75,6 +75,12 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jbModificarSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarSiniestroActionPerformed(evt);
+            }
+        });
+
         jbCerrarSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCerrarSiniestroActionPerformed(evt);
@@ -261,13 +267,18 @@ public class Menu extends javax.swing.JFrame {
     //CARGO ABM DE CUARTEL
     private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
 
- 
         CuartelUI ventana = new CuartelUI();
         escritorio.add(ventana);
         ventana.setVisible(true);
 
 
     }//GEN-LAST:event_jMICuartelActionPerformed
+
+    private void jbModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarSiniestroActionPerformed
+        ModifSiniestro ventana = new ModifSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jbModificarSiniestroActionPerformed
 
     /**
      * @param args the command line arguments

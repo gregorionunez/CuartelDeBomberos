@@ -191,6 +191,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         jCBBrigada.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jCBBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBBrigadaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jCBBrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 500, 30));
 
         pack();
@@ -319,6 +324,10 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTFYKeyTyped
+
+    private void jCBBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBBrigadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBBrigadaActionPerformed
 
     private void rellenarComboBoxEmergencia() {
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();

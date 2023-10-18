@@ -31,10 +31,12 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
     CuartelData cuartelData = new CuartelData();
     EmergenciaData emergenciaData = new EmergenciaData();
     BrigadaData brigadaData = new BrigadaData();
+    SiniestroData siniestroData = new SiniestroData();
 
     public ModifSiniestro() {
         initComponents();
         rellenarComboBoxEmergencia();
+        rellenarComboBoxSiniestro();
         configDocumentListener();
         jLFecha.setText(LocalDate.now().toString());
     }
@@ -70,10 +72,10 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jCBBrigada = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBSiniestro = new javax.swing.JComboBox<>();
 
         setTitle("Alta siniestro");
-        setPreferredSize(new java.awt.Dimension(730, 645));
+        setPreferredSize(new java.awt.Dimension(730, 715));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -199,8 +201,12 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccionar Siniestro:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 490, 30));
+        jCBSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBSiniestroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCBSiniestro, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 490, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,15 +228,15 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         }
 
         int respuestaBrigada;
-        
+
         if (!brigadaGuardar.getEspecialidad().toString().equals(jCBEmergencia.getSelectedItem().toString())) {
             respuestaBrigada = JOptionPane.showConfirmDialog(
-                    null,"La brigada "+brigadaGuardar.getNombreBrigada()+" no tiene la especialidad del Siniestro. ¿Desea continuar?",
+                    null, "La brigada " + brigadaGuardar.getNombreBrigada() + " no tiene la especialidad del Siniestro. ¿Desea continuar?",
                     "Confirmación",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.ERROR_MESSAGE
             );
-        }else{
+        } else {
             respuestaBrigada = 0;
         }
 
@@ -264,20 +270,18 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             Siniestro siniestro = new Siniestro();
-            siniestro.setTipoEmergencia((Emergencia)jCBEmergencia.getSelectedItem());
+            siniestro.setTipoEmergencia((Emergencia) jCBEmergencia.getSelectedItem());
             siniestro.setFecha(LocalDate.now());
             siniestro.setCoordX(Integer.parseInt(jTFX.getText()));
             siniestro.setCoordY(Integer.parseInt(jTFY.getText()));
-            if(!jTADetalle.getText().isEmpty()){
+            if (!jTADetalle.getText().isEmpty()) {
                 siniestro.setDetalles(jTADetalle.getText());
-            }else{
+            } else {
                 siniestro.setDetalles("Sin detalle.");
             }
             siniestro.setCodBrigada(brigadaGuardar.getCodigoBrigada());
             siniestro.setEstado(true);
-            
-            SiniestroData siniestroData = new SiniestroData();
-            
+
             siniestroData.agregarSiniestro(siniestro);
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -329,12 +333,48 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFYKeyTyped
 
+    private void jCBSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSiniestroActionPerformed
+        
+        DefaultComboBoxModel<Brigada> model = (DefaultComboBoxModel<Brigada>) jCBBrigada.getModel();
+
+        Siniestro siniestro = (Siniestro) jCBSiniestro.getSelectedItem();
+        
+        jCBEmergencia.setSelectedIndex(siniestro.getTipoEmergencia().getId()-1);
+        jTFX.setText(siniestro.getCoordX() + "");
+        jTFY.setText(siniestro.getCoordY() + "");
+        jTADetalle.setText(siniestro.getDetalles());
+        
+        for (int i = 0; i < model.getSize(); i++) {
+            Brigada item = model.getElementAt(i);
+            
+            if(siniestro.getCodBrigada() == item.getCodigoBrigada()){
+                jCBBrigada.setSelectedIndex(i);
+                break;
+            }
+            
+        }
+
+
+    }//GEN-LAST:event_jCBSiniestroActionPerformed
+
     private void rellenarComboBoxEmergencia() {
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
 
         for (Emergencia eme : listaEmergencia) {
             jCBEmergencia.addItem(eme);
+        }
+
+    }
+
+    public void rellenarComboBoxSiniestro() {
+        ArrayList<Siniestro> listaSiniestro = new ArrayList<>();
+        listaSiniestro = siniestroData.listarSiniestro();
+
+        for (Siniestro sin : listaSiniestro) {
+            if (sin.isEstado()) {
+                jCBSiniestro.addItem(sin);
+            }
         }
 
     }
@@ -393,9 +433,8 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
                     }
-                    
-                    //----------BRIGADA-------------//
 
+                    //----------BRIGADA-------------//
                     if (!jLCuartel.equals("Cuartel no definido.")) {
                         int idCuartel = cuartel.getCodCuartel();
 
@@ -469,9 +508,8 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                         jLCuartel.setText(value.getNombreCuartel());
                         break;
                     }
-                    
-                    //----------BRIGADA-------------//
 
+                    //----------BRIGADA-------------//
                     if (!jLCuartel.equals("Cuartel no definido.")) {
                         int idCuartel = cuartel.getCodCuartel();
 
@@ -494,12 +532,13 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JComboBox<Brigada> jCBBrigada;
     private javax.swing.JComboBox<Emergencia> jCBEmergencia;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Siniestro> jCBSiniestro;
     private javax.swing.JLabel jLCuartel;
     private javax.swing.JLabel jLFecha;
     private javax.swing.JLabel jLabel1;
