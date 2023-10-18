@@ -39,6 +39,11 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         rellenarComboBoxSiniestro();
         configDocumentListener();
         jLFecha.setText(LocalDate.now().toString());
+        
+        if(jCBSiniestro.getItemCount() > 0){
+            jCBSiniestro.setSelectedIndex(0);
+        }
+
     }
 
     /**
@@ -201,6 +206,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccionar Siniestro:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jCBSiniestro.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBSiniestroActionPerformed(evt);
@@ -231,7 +237,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
 
         if (!brigadaGuardar.getEspecialidad().toString().equals(jCBEmergencia.getSelectedItem().toString())) {
             respuestaBrigada = JOptionPane.showConfirmDialog(
-                    null, "La brigada " + brigadaGuardar.getNombreBrigada() + " no tiene la especialidad del Siniestro. ¿Desea continuar?",
+                    null, "La brigada '" + brigadaGuardar.getNombreBrigada() + "' no tiene la especialidad del Siniestro. ¿Desea continuar?",
                     "Confirmación",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.ERROR_MESSAGE
@@ -249,7 +255,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         if (jTADetalle.getText().isEmpty()) {
             respuesta = JOptionPane.showConfirmDialog(
                     null,
-                    "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
+                    "¿Desea confirmar la modificacion del siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
                     + "\nCoordenadas: " + jTFX.getText() + " - " + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
                     + "\nBrigada: " + brigadaGuardar.getNombreBrigada() + "\nDetalle:\nSin detalle.",
                     "Confirmación",
@@ -259,7 +265,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         } else {
             respuesta = JOptionPane.showConfirmDialog(
                     null,
-                    "¿Desea confirmar el siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
+                    "¿Desea confirmar la modificacion del siniestro?\nTipo de emergencia: " + jCBEmergencia.getSelectedItem().toString()
                     + "\nCoordenadas: " + jTFX.getText() + " - " + jTFY.getText() + "\nCuartel: " + jLCuartel.getText()
                     + "\nBrigada: " + brigadaGuardar.getNombreBrigada() + "\nDetalle:\n" + jTADetalle.getText(),
                     "Confirmación",
@@ -270,6 +276,10 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             Siniestro siniestro = new Siniestro();
+            
+            Siniestro siniestro1 = (Siniestro)jCBSiniestro.getSelectedItem();
+            
+            siniestro.setCodigo(siniestro1.getCodigo());
             siniestro.setTipoEmergencia((Emergencia) jCBEmergencia.getSelectedItem());
             siniestro.setFecha(LocalDate.now());
             siniestro.setCoordX(Integer.parseInt(jTFX.getText()));
@@ -282,7 +292,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
             siniestro.setCodBrigada(brigadaGuardar.getCodigoBrigada());
             siniestro.setEstado(true);
 
-            siniestroData.agregarSiniestro(siniestro);
+            siniestroData.modificarSiniestro(siniestro);
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -297,7 +307,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(
                 null,
-                "¿Desea cancelar el siniestro?",
+                "¿Desea cancelar la modificacion del siniestro?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
         );

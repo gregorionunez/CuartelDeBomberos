@@ -221,7 +221,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         
         if (!brigadaGuardar.getEspecialidad().toString().equals(jCBEmergencia.getSelectedItem().toString())) {
             respuestaBrigada = JOptionPane.showConfirmDialog(
-                    null,"La brigada "+brigadaGuardar.getNombreBrigada()+" no tiene la especialidad del Siniestro. ¿Desea continuar?",
+                    null,"La brigada '"+brigadaGuardar.getNombreBrigada()+"' no tiene la especialidad del Siniestro. ¿Desea continuar?",
                     "Confirmación",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.ERROR_MESSAGE
@@ -275,6 +275,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
             SiniestroData siniestroData = new SiniestroData();
             
             siniestroData.agregarSiniestro(siniestro);
+            jCBEmergencia.setSelectedIndex(0);
+            jTFX.setText("");
+            jTFY.setText("");
+            jTADetalle.setText("");
+            jCBBrigada.removeAllItems();
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 

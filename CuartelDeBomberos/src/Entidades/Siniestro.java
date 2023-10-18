@@ -135,7 +135,7 @@ public class Siniestro {
 
     @Override
     public String toString() {
-        return "Cod: "+codigo+" - Fecha: "+fecha.toString()+" - "+"X: "+coordX+"- Y:"+coordY+" - Detalle: "+detalles;
+        return "Cod: "+codigo+" - Fecha: "+fecha.toString()+" - "+"X: "+coordX+"- Y: "+coordY+" - Detalle: "+detalles;
     }
        
     

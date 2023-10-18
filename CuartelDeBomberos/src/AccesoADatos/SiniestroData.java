@@ -99,10 +99,15 @@ public class SiniestroData {
             ps.setInt(3, siniestro.getCoordX());
             ps.setInt(4, siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
-            ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
+            
+            if (siniestro.getFechaResolucion() != null) {
+                ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
+            } else {
+                ps.setDate(6, null);
+            }
             ps.setInt(7, siniestro.getPuntuacion());
             ps.setInt(8, siniestro.getCodBrigada());
-            ps.setBoolean(9, false);
+            ps.setBoolean(9, siniestro.isEstado());
             ps.setInt(10, siniestro.getCodigo());
 
             int fm = ps.executeUpdate();
