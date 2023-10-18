@@ -74,6 +74,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Alta de Siniestro");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bomberos");
+
+        jbModificarSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarSiniestroActionPerformed(evt);
+            }
+        });
 
         jbCerrarSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +125,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,13 +133,12 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(64, 64, 64))))
-            .addGroup(escritorioLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(325, 325, 325)
-                        .addComponent(jLabel4))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(363, 363, 363)
+                        .addGap(38, 38, 38)
                         .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,11 +153,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGap(136, 136, 136))
         );
 
         jMGestionDeRecursos.setText("Gestión de Recursos");
@@ -233,6 +239,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMIBomberosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosActionPerformed
@@ -256,18 +263,31 @@ public class Menu extends javax.swing.JFrame {
         AltaSiniestro ventana = new AltaSiniestro();
         escritorio.add(ventana);
         ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jbAltaSiniestroActionPerformed
 
     //CARGO ABM DE CUARTEL
     private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
 
- 
         CuartelUI ventana = new CuartelUI();
         escritorio.add(ventana);
         ventana.setVisible(true);
 
 
     }//GEN-LAST:event_jMICuartelActionPerformed
+
+    private void jbModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarSiniestroActionPerformed
+        ModifSiniestro ventana = new ModifSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jbModificarSiniestroActionPerformed
 
     /**
      * @param args the command line arguments
