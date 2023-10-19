@@ -44,12 +44,12 @@ public class SiniestroData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Siniestro agregado con el ID: " + rs.getInt(1), "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro agregado con el ID: " + rs.getInt(1), "Información", 1);
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
@@ -71,11 +71,11 @@ public class SiniestroData {
             int fm = ps.executeUpdate();
 
             if (fm > 0) {
-                JOptionPane.showMessageDialog(null, "Siniestro eliminado.", "INFORMACIÓN", 1);
+                JOptionPane.showMessageDialog(null, "Siniestro eliminado.", "Información", 1);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
@@ -99,39 +99,44 @@ public class SiniestroData {
             ps.setInt(3, siniestro.getCoordX());
             ps.setInt(4, siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
-            ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
-            ps.setInt(7, siniestro.getPuntuacion());            
+            
+            if (siniestro.getFechaResolucion() != null) {
+                ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
+            } else {
+                ps.setDate(6, null);
+            }
+            ps.setInt(7, siniestro.getPuntuacion());
             ps.setInt(8, siniestro.getCodBrigada());
-            ps.setBoolean(9, false);
+            ps.setBoolean(9, siniestro.isEstado());
             ps.setInt(10, siniestro.getCodigo());
 
             int fm = ps.executeUpdate();
-            
-            if(siniestro.getPuntuacion()>0){
-                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se cerro con éxito.", "INFORMACIÓN", 1);
+
+            if (siniestro.getPuntuacion() > 0) {
+                JOptionPane.showMessageDialog(null, "Siniestro ID: " + siniestro.getCodigo() + ". Se cerro con éxito.", "Información", 1);
                 return;
             }
-            
-            if(fm > 0){
-                JOptionPane.showMessageDialog(null, "Siniestro ID: "+siniestro.getCodigo()+". Se modificó con éxito.", "INFORMACIÓN", 1);
+
+            if (fm > 0) {
+                JOptionPane.showMessageDialog(null, "Siniestro ID: " + siniestro.getCodigo() + ". Se modificó con éxito.", "Información", 1);
             }
-            
+
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
     }
-    
-    public ArrayList<Siniestro> mostrarPorFecha(LocalDate fecha){
-     
+
+    public ArrayList<Siniestro> mostrarPorFecha(LocalDate fecha) {
+
         emergencia = null;
         EmergenciaData emergData = new EmergenciaData();
-        
+
         ArrayList<Siniestro> listadoPorFecha = new ArrayList<>();
-        
+
         String sql = "SELECT * FROM siniestro WHERE fecha_siniestro = ?";
 
         try {
@@ -144,9 +149,15 @@ public class SiniestroData {
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 emergencia = emergData.buscarEmergencia(rs.getInt("tipo"));
-                
+
+                LocalDate fecha_resol = null;
+
+                if (rs.getDate("fecha_resol") != null) {
+                    fecha_resol = rs.getDate("fecha_resol").toLocalDate();
+                }
+
                 listadoPorFecha.add(new Siniestro(
                         rs.getInt("codigo"),
                         emergencia,
@@ -154,19 +165,63 @@ public class SiniestroData {
                         rs.getInt("cod_x"),
                         rs.getInt("cod_y"),
                         rs.getString("detalle"),
-                        rs.getDate("fecha_resol").toLocalDate(),
+                        fecha_resol,
                         rs.getInt("puntuacion"),
                         rs.getInt("cod_brigada"), rs.getBoolean("estado")));
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "ERROR", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
         } finally {
             Conexion.cerrarConexion(con);
         }
-        
-        
+
         return listadoPorFecha;
+    }
+
+    public ArrayList<Siniestro> listarSiniestro() {
+        emergencia = null;
+        EmergenciaData emergData = new EmergenciaData();
+
+        ArrayList<Siniestro> listadoSiniestros = new ArrayList<>();
+
+        String sql = "SELECT * FROM siniestro";
+
+        try {
+            con = Conexion.getConexion();
+
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                emergencia = emergData.buscarEmergencia(rs.getInt("tipo"));
+
+                LocalDate fecha_resol = null;
+
+                if (rs.getDate("fecha_resol") != null) {
+                    fecha_resol = rs.getDate("fecha_resol").toLocalDate();
+                }
+
+                listadoSiniestros.add(new Siniestro(
+                        rs.getInt("codigo"),
+                        emergencia,
+                        rs.getDate("fecha_siniestro").toLocalDate(),
+                        rs.getInt("cod_x"),
+                        rs.getInt("cod_y"),
+                        rs.getString("detalle"),
+                        fecha_resol,
+                        rs.getInt("puntuacion"),
+                        rs.getInt("cod_brigada"), rs.getBoolean("estado")));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
+        } finally {
+            Conexion.cerrarConexion(con);
+        }
+        return listadoSiniestros;
     }
 
 }

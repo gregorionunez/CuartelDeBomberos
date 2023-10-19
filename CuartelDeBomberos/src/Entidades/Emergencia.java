@@ -6,7 +6,7 @@ public class Emergencia {
 
     public Emergencia() {
     }
-
+  
     public Emergencia(String emergencia) {
         this.emergencia = emergencia;
     }
@@ -34,6 +34,6 @@ public class Emergencia {
 
     @Override
     public String toString() {
-        return "Emergencia{" + "id=" + id + ", emergencia=" + emergencia + '}';
+        return emergencia;
     }
 }

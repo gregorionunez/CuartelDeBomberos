@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
 public class EmergenciaData {
 
     private Connection con = null;
-    private Emergencia emergencia;
+    
 
     public EmergenciaData() {
     }
     
     public Emergencia buscarEmergencia(int id){
         
-        emergencia = null;
+        Emergencia emergencia = new Emergencia();
         
         String sql = "SELECT * FROM emergencia WHERE idEmergencia = ?";
 
@@ -48,7 +48,8 @@ public class EmergenciaData {
     
     public ArrayList<Emergencia> listarEmergencia(){
         
-        emergencia = null;
+        Emergencia emergencia = new Emergencia();
+        
         ArrayList<Emergencia> emergencias = new ArrayList<>();
         
          String sql = "SELECT * FROM emergencia";

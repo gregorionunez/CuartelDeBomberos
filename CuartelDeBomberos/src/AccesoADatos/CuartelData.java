@@ -63,8 +63,13 @@ public class CuartelData {
             ps.setString(6, cuartel.getCorreo()); //Asignacion de valores
             ps.setBoolean(7, cuartel.isEstado()); //Asignacion de valores
             ps.setInt(8, cuartel.getCodCuartel());
-            ps.executeUpdate(); // Ejecutar PreparedStatement      
-            JOptionPane.showMessageDialog(null, "Cuartel modificado con éxito.", "Información", 1);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente", "Información", 1);
+            } else {
+                JOptionPane.showMessageDialog(null, "El cuartel no pudo modificarse ", "Información", 1);
+            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el Cuartel", "Error", 0);
@@ -86,11 +91,11 @@ public class CuartelData {
             if (res == 1) {
                 JOptionPane.showMessageDialog(null, "Cuartel eliminado", "Información", 1);
             } else {
-                JOptionPane.showMessageDialog(null, "Imposible eliminar el Cuartel", "Información", 1);
+                JOptionPane.showMessageDialog(null, "Imposible eliminar el cuartel", "Información", 1);
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el Cuartel", "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al eliminar el cuartel", "Error", 0);
         } finally {
             //CUANDO TERMINA TODO CIERRO MI CONEXION
             Conexion.cerrarConexion(con);
@@ -110,7 +115,7 @@ public class CuartelData {
             }
             ps.close(); // CIERRO EL PREPARESTATEMENT
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al verificar Cuartel", "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al verificar cuartel", "Error", 0);
         } finally {
             //CUANDO TERMINA TODO CIERRO MI CONEXION
             Conexion.cerrarConexion(con);
@@ -153,28 +158,56 @@ public class CuartelData {
     public HashMap<Integer, Cuartel> listarCuartelesCercanos(int x, int y) {
         HashMap<Integer, Cuartel> cuartelesCercanos = new HashMap();
 
-        Coordenada puntoABuscar=new Coordenada(x, y);
+        Coordenada puntoABuscar = new Coordenada(x, y);
         ArrayList<Cuartel> cuartelesList = new ArrayList();
         cuartelesList = listarCuarteles();
 
         // Ordenar por la coordenada x,y
         Collections.sort(cuartelesList, new Comparator<Cuartel>() {
-         public int compare(Cuartel cuartelPri, Cuartel cuartelSeg) {
-                Coordenada c1=new Coordenada(cuartelPri.getCoordX(), cuartelPri.getCoordY());
-                Coordenada c2=new Coordenada(cuartelSeg.getCoordX(),cuartelSeg.getCoordY());
+            public int compare(Cuartel cuartelPri, Cuartel cuartelSeg) {
+                Coordenada c1 = new Coordenada(cuartelPri.getCoordX(), cuartelPri.getCoordY());
+                Coordenada c2 = new Coordenada(cuartelSeg.getCoordX(), cuartelSeg.getCoordY());
                 double distanciaC1 = calcularDistancia(c1, puntoABuscar);
                 double distanciaC2 = calcularDistancia(c2, puntoABuscar);
                 return Double.compare(distanciaC1, distanciaC2);
             }
         });
-        int contador=0;
+        int contador = 0;
         for (Cuartel cuartel : cuartelesList) {
             cuartelesCercanos.put(contador, cuartel);
             contador++;
         }
-          
-    return cuartelesCercanos ;
-}
+
+        return cuartelesCercanos;
+    }
+
+    public Cuartel buscarCuartel(int id) {
+        String sql = "SELECT * FROM cuartel WHERE cod_cuartel=" + id;  //SENTENCIA SQL
+        Cuartel unCuartel = new Cuartel();
+        try {
+            //CREO UNA CONEXION CON MI BASE DE DATOS
+            con = Conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql); // INICIO LA CONSULTA
+            ResultSet rs = ps.executeQuery(); //EJECUTO LA SENTENCIA SQL
+            if (rs.next()) { //SI DEVUELVE UNA TABLA EXITE EL ID Y RETORNO TRUE
+                unCuartel.setCodCuartel(rs.getInt("cod_cuartel"));
+                unCuartel.setNombreCuartel(rs.getString("nombre_cuartel"));
+                unCuartel.setDireccion(rs.getString("direccion"));
+                unCuartel.setCoordX(rs.getInt("cod_x"));
+                unCuartel.setCoordY(rs.getInt("cod_y"));
+                unCuartel.setTelefono(rs.getString("telefono"));
+                unCuartel.setCorreo(rs.getString("correo"));
+                unCuartel.setEstado(rs.getBoolean("estado"));
+            }
+            ps.close(); // CIERRO EL PREPARESTATEMENT
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al verificar cuartel", "Error", 0);
+        } finally {
+            //CUANDO TERMINA TODO CIERRO MI CONEXION
+            Conexion.cerrarConexion(con);
+        }
+        return unCuartel;
+    }
 
     // Método para calcular la distancia entre dos coordenadas
     public static double calcularDistancia(Coordenada c1, Coordenada c2) {
@@ -182,6 +215,5 @@ public class CuartelData {
         double dy = c1.getY() - c2.getY();
         return Math.sqrt(dx * dx + dy * dy);
     }
-    
-    
+
 }
