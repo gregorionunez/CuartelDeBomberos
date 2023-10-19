@@ -14,15 +14,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+
 /**
  *
  * @author Natasha
  */
 public class BrigadaData {
+
     // se creo la variable de tipo conexion
     private Connection con = null;
     Emergencia emergencia = new Emergencia();
-    
+
     public void agregarBrigada(Brigada brigada) {
         // sentencia sql
         String sql = "INSERT INTO brigada(nombre_br,especialidad,libre,nro_cuartel,estado) VALUE (?,?,?,?,?)";
@@ -41,7 +43,7 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "brigada agregada exitosamente.", "Información", 1);
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar brigada ","Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al insertar brigada ", "Error", 0);
         } finally {
             // cierro mi conexion
             Conexion.cerrarConexion(con);
@@ -58,9 +60,9 @@ public class BrigadaData {
             // le asigno los valores 
             ps.setString(1, brigada.getNombreBrigada());
             ps.setInt(2, brigada.getEspecialidad().getId());
-            ps.setBoolean(3,brigada.isLibre() );
+            ps.setBoolean(3, brigada.isLibre());
             ps.setInt(4, brigada.getNumeroCuartel());
-            ps.setBoolean(5,brigada.isEstado());
+            ps.setBoolean(5, brigada.isEstado());
             ps.executeUpdate(); // Ejecutar PreparedStatement
             JOptionPane.showMessageDialog(null, "brigada modificada con éxito", "Información", 1);
             ps.close();
@@ -88,13 +90,12 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Eliminar " , "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al Eliminar ", "Error", 0);
         }
         //cierro conexion 
         Conexion.cerrarConexion(con);
     }
-    
-    
+
     //RETORNO UNA LISTA DE BRIGADAS
     public ArrayList<Brigada> listarBrigadasSegunEstado(boolean estado) {
         //CREO MI LISTA DE BRIGADAS
@@ -121,7 +122,7 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ", "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
@@ -152,7 +153,7 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " , "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ", "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
@@ -180,12 +181,13 @@ public class BrigadaData {
                 brigada.setEspecialidad(emergencia);
                 brigada.setLibre(rs.getBoolean("libre"));
                 brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
                 //agrego brigada a la lista 
                 brigadas.add(brigada);
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Brigada " , "Error", 0);
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Brigada ", "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
@@ -218,7 +220,7 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero " , "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero ", "Error", 0);
         } //CUANDO TERMINA TODO CIERRO MI CONEXION
         finally {
             Conexion.cerrarConexion(con);
@@ -257,5 +259,34 @@ public class BrigadaData {
         Conexion.cerrarConexion(con);
         }
         return brigadas;
+    }
+
+    public Brigada brigadaPorId(int id) {
+
+        Brigada brigada = new Brigada();
+        EmergenciaData emergenciaData = new EmergenciaData();
+
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM brigada WHERE cod_brigada = " + id; //EJECUTO EL SELECT
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                brigada.setCodigoBrigada(id);
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                brigada.setEspecialidad(emergenciaData.buscarEmergencia(rs.getInt("especialidad")));
+                brigada.setLibre(rs.getBoolean("libre"));
+                brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero ", "Error", 0);
+        } //CUANDO TERMINA TODO CIERRO MI CONEXION
+        finally {
+            Conexion.cerrarConexion(con);
+        }
+        return brigada;
     }
 }
