@@ -18,12 +18,13 @@ import javax.swing.JTextField;
  *
  * @author Usuario
  */
-public class Alta extends javax.swing.JFrame {
+public class Alta extends javax.swing.JDialog {
 
     /**
      * Creates new form prueba
      */
-    public Alta() {
+    public Alta(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
@@ -165,7 +166,7 @@ public class Alta extends javax.swing.JFrame {
                     .addComponent(jcbBrigada, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,8 +228,7 @@ public class Alta extends javax.swing.JFrame {
                 bombero.setNombre(jtfNombre.getText());
                 bombero.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 bombero.setCelular(jtfCelular.getText());
-//                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex());
-                bombero.setCodigoBrigada(1);
+                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex()+1);
                 bombero.setGrupoSanguineo(jtfGrupoSanguineo.getText());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información",1);
@@ -236,8 +236,9 @@ public class Alta extends javax.swing.JFrame {
 
             //SI INGRESO TODO LOS DATOS VERIFICO SI EL BOMBERO YA EXISTE
             if (!bomberoData.existeBomberoPorDni(bombero.getDni())) {
+                System.out.println(bombero);
                 bomberoData.agregarBombero(bombero);
-                IniciarControles();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "El Bombero ya se encuentra en la Base de Datos","Información",1);
             }
@@ -316,7 +317,14 @@ public class Alta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Alta().setVisible(true);
+                Alta dialog = new Alta(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

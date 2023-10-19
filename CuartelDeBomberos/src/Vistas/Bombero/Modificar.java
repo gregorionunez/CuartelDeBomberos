@@ -6,9 +6,12 @@
 package Vistas.Bombero;
 
 import AccesoADatos.BomberoData;
+import AccesoADatos.BrigadaData;
 import Entidades.Bombero;
+import Entidades.Brigada;
 import java.sql.Date;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -16,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author Usuario
  */
-public class Modificar extends javax.swing.JFrame {
+public class Modificar extends javax.swing.JDialog {
 
     /**
      * Creates new form Modificar
@@ -27,7 +30,8 @@ public class Modificar extends javax.swing.JFrame {
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
     }
     
-    public Modificar(int idBombero) {
+    public Modificar(java.awt.Frame parent, boolean modal, int idBombero) {
+        super(parent, modal);
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
@@ -36,8 +40,10 @@ public class Modificar extends javax.swing.JFrame {
     
     private void IniciarControles(int idBombero) {
         //LIMPIO LOS TEXTBOX
+        cargarComboBoxBrigada();
         BomberoData bomberoData = new BomberoData();
         Bombero bombero = new Bombero();
+        BrigadaData brigadaData = new BrigadaData();
         bombero = bomberoData.getBomberoPorId(idBombero);
         jtfId.setText(bombero.getId()+"");
         jtfDni.setText(bombero.getDni()+"");
@@ -45,9 +51,9 @@ public class Modificar extends javax.swing.JFrame {
         jtfApellido.setText(bombero.getApellido());
         jtfCelular.setText(bombero.getCelular());
         jtfGrupoSanguineo.setText(bombero.getGrupoSanguineo());
-        jcbBrigada.setSelectedIndex(0);
+        jcbBrigada.setSelectedIndex(bombero.getCodigoBrigada()-1);
         jcbBrigada.setEnabled(true);
-        jtfEstado.setText(bombero.isEstado()?"Activo":"Inactivo");
+        jrbEstado.setSelected(bombero.isEstado());
         //INICIO LOS BOTONES
         jtfId.setEnabled(false);
         jbGuardar.setEnabled(true);
@@ -85,9 +91,9 @@ public class Modificar extends javax.swing.JFrame {
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jtfApellido = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jtfEstado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jtfId = new javax.swing.JTextField();
+        jrbEstado = new javax.swing.JRadioButton();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("DNI");
@@ -152,7 +158,11 @@ public class Modificar extends javax.swing.JFrame {
             }
         });
 
-        jcbBrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "1", "1" }));
+        jcbBrigada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbBrigadaMouseClicked(evt);
+            }
+        });
 
         jtfCelular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -168,12 +178,6 @@ public class Modificar extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Estado");
-
-        jtfEstado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtfEstadoKeyTyped(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("ID");
@@ -202,18 +206,19 @@ public class Modificar extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jtfId)
-                    .addComponent(jtfGrupoSanguineo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfApellido, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfDni, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbBrigada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbCancelar)
-                    .addComponent(jtfEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jtfId)
+                        .addComponent(jtfGrupoSanguineo, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfCelular, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfDni, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jcbBrigada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                        .addComponent(jbCancelar))
+                    .addComponent(jrbEstado))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +249,7 @@ public class Modificar extends javax.swing.JFrame {
                     .addComponent(jtfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel6))
+                    .addComponent(jLabel6)
                     .addComponent(jtfGrupoSanguineo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -255,12 +258,12 @@ public class Modificar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(jrbEstado))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,26 +300,20 @@ public class Modificar extends javax.swing.JFrame {
         } else {
             //CARGO EL BOMBERO
             try {
+                bombero.setId(Integer.parseInt(jtfId.getText()));
                 bombero.setDni(Integer.parseInt(jtfDni.getText()));
                 bombero.setApellido(jtfApellido.getText());
                 bombero.setNombre(jtfNombre.getText());
                 bombero.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 bombero.setCelular(jtfCelular.getText());
-                //                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex());
-                bombero.setCodigoBrigada(1);
-                bombero.setEstado((jtfEstado.getText().equalsIgnoreCase("Activo"))?true:false);
+                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex()+1);
+                bombero.setEstado(jrbEstado.isSelected());
                 bombero.setGrupoSanguineo(jtfGrupoSanguineo.getText());
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información",1);
+                JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información", 1);
             }
-
-            //SI INGRESO TODO LOS DATOS VERIFICO SI EL BOMBERO YA EXISTE
-            if (!bomberoData.existeBomberoPorDni(bombero.getDni())) {
-                bomberoData.modificarBombero(bombero);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "El Bombero ya se encuentra en la Base de Datos","Información",1);
-            }
+            bomberoData.modificarBombero(bombero);
+            this.dispose();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -347,13 +344,14 @@ public class Modificar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfDni1KeyTyped
 
-    private void jtfEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEstadoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEstadoKeyTyped
-
     private void jtfIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfIdKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIdKeyTyped
+
+    private void jcbBrigadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbBrigadaMouseClicked
+        // TODO add your handling code here:
+        cargarComboBoxBrigada();
+    }//GEN-LAST:event_jcbBrigadaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -389,6 +387,15 @@ public class Modificar extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarComboBoxBrigada(){
+        ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
+        BrigadaData brigadaData = new BrigadaData();
+        listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
+        for (Brigada brigada : listaBrigadas) {
+            jcbBrigada.addItem(brigada);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -403,13 +410,13 @@ public class Modificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JComboBox<String> jcbBrigada;
+    private javax.swing.JComboBox<Brigada> jcbBrigada;
     private com.toedter.calendar.JDateChooser jdcFechaNacimiento;
+    private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfCelular;
     private javax.swing.JTextField jtfDni;
     private javax.swing.JTextField jtfDni1;
-    private javax.swing.JTextField jtfEstado;
     private javax.swing.JTextField jtfGrupoSanguineo;
     private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfNombre;

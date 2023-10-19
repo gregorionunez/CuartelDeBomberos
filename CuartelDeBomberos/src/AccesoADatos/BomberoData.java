@@ -52,7 +52,7 @@ public class BomberoData {
 
     // MODIFICO UN BOMBERO
     public void modificarBombero(Bombero bombero) {
-        String sql = "UPDATE bombero SET dni=?,nombre=?,apellido=?,fecha_nac=?,celular=?,cod_brigada=?,estado=? WHERE id_bombero=?";
+        String sql = "UPDATE bombero SET dni=?,nombre=?,apellido=?,fecha_nac=?,celular=?,cod_brigada=?,estado=?,grupoSanguineo=? WHERE id_bombero=?";
         try {
             //CREO UNA CONEXION CON MI BASE DE DATOS
             con = Conexion.getConexion();
@@ -63,16 +63,19 @@ public class BomberoData {
             ps.setDate(4, Date.valueOf(bombero.getFechaNacimiento()));
             ps.setString(5, bombero.getCelular()); //Asignacion de valores
             ps.setInt(6, bombero.getCodigoBrigada()); //Asignacion de valores
-            ps.setBoolean(7, true); //Asignacion de valores
+            ps.setBoolean(7, bombero.isEstado()); //Asignacion de valores
             ps.setString(8, bombero.getGrupoSanguineo()); //Asignacion de valores
             ps.setInt(9, bombero.getId());
-            ps.executeUpdate(); // Ejecutar PreparedStatement
-            JOptionPane.showMessageDialog(null, "Bombero modificado con éxito", "Información", 1);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Bombero modificado con éxito", "Información", 1);
+            } else {
+                JOptionPane.showMessageDialog(null, "El Bombero no pudo modificarse ", "Información", 1);
+            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el Bombero", "Error", 0);
-        }
-        finally{
+        } finally {
             //CUANDO TERMINA TODO CIERRO MI CONEXION
             Conexion.cerrarConexion(con);
         } 

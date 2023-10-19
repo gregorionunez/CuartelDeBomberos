@@ -7,6 +7,7 @@ package Vistas.Bombero;
 
 import AccesoADatos.BomberoData;
 import Entidades.Bombero;
+import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,17 +32,8 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
     public ListaDeBomberos() {
         initComponents();
         cabeceraDeTabla();
-        ArrayList<Bombero> listaBomberos = new ArrayList<Bombero>();
-        BomberoData bomberoData = new BomberoData();
-        listaBomberos = bomberoData.listarTodosLosBomberos();
         limpiarTabla();
-        if (listaBomberos.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No existen bomberos en la base de datos", "MENSAJE", 1);
-        } else {
-            for (Bombero bombero : listaBomberos) {
-                cargarDatosEnLaTabla(bombero);
-            }
-        }
+        cargarTabla();
         jbModificar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
@@ -181,17 +173,9 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         if (respuesta == 0) {
             //BORRO EL CUARTEL
             BomberoData bomberoData = new BomberoData();
-            ArrayList<Bombero> listaBomberos = new ArrayList<Bombero>();
             bomberoData.eliminarBombero(idBombero);
-            listaBomberos = bomberoData.listarTodosLosBomberos();
-            limpiarTabla();
-            if (listaBomberos.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No existen bomberos en la base de datos", "MENSAJE", 1);
-            } else {
-                for (Bombero bombero : listaBomberos) {
-                    cargarDatosEnLaTabla(bombero);
-                }
-            }
+            limpiarTabla();            
+            cargarTabla();
             jbModificar.setEnabled(false);
             jbEliminar.setEnabled(false);
         }
@@ -204,13 +188,16 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
 
     private void jbAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAgregarMousePressed
         // TODO add your handling code here:
-        Alta ventana = new Alta();
+        Frame f = JOptionPane.getFrameForComponent(this);
+        Alta ventana = new Alta(f, true);
         ventana.setVisible(true);
         this.setVisible(true);
         //Centro el popup
         int x = (this.getWidth() - ventana.getWidth()) / 2;
         int y = (this.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
+        limpiarTabla();
+        cargarTabla();
     }//GEN-LAST:event_jbAgregarMousePressed
 
     private void jTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMousePressed
@@ -226,13 +213,16 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
 
     private void jbModificarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbModificarMousePressed
         // TODO add your handling code here:
-        Modificar ventana = new Modificar(idBombero);
+        Frame f = JOptionPane.getFrameForComponent(this);
+        Modificar ventana = new Modificar(f, true, idBombero);
         ventana.setVisible(true);
         this.setVisible(true);
         //Centro el popup
         int x = (this.getWidth() - ventana.getWidth()) / 2;
         int y = (this.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
+        limpiarTabla();
+        cargarTabla();
     }//GEN-LAST:event_jbModificarMousePressed
 
     private void cabeceraDeTabla(){
@@ -268,6 +258,19 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         int filas = jTable.getRowCount()-1;
         for (int i = filas; i >= 0; i--) {          
             model.removeRow(model.getRowCount()-1);
+        }
+    }
+    
+    public void cargarTabla(){
+        ArrayList<Bombero> listaBomberos = new ArrayList<Bombero>();
+        BomberoData bomberoData = new BomberoData();
+        listaBomberos = bomberoData.listarTodosLosBomberos();
+        if (listaBomberos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No existen bomberos en la base de datos", "MENSAJE", 1);
+        } else {
+            for (Bombero bombero : listaBomberos) {
+                cargarDatosEnLaTabla(bombero);
+            }
         }
     }
 

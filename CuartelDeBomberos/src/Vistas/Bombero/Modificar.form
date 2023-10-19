@@ -54,19 +54,21 @@
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jtfId" max="32767" attributes="0"/>
-                  <Component id="jtfGrupoSanguineo" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jtfCelular" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jtfApellido" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jtfDni" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jtfNombre" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jcbBrigada" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jdcFechaNacimiento" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jbCancelar" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfEstado" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jtfId" max="32767" attributes="0"/>
+                      <Component id="jtfGrupoSanguineo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfCelular" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfApellido" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfDni" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfNombre" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jcbBrigada" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jdcFechaNacimiento" alignment="0" pref="164" max="32767" attributes="0"/>
+                      <Component id="jbCancelar" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jrbEstado" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="108" max="32767" attributes="0"/>
+              <EmptySpace pref="169" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,10 +107,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfGrupoSanguineo" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -119,14 +118,14 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jrbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbGuardar" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="jbCancelar" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -229,15 +228,14 @@
     <Component class="javax.swing.JComboBox" name="jcbBrigada">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="1"/>
-            <StringItem index="1" value="1"/>
-            <StringItem index="2" value="1"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jcbBrigadaMouseClicked"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Brigada&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfGrupoSanguineo">
@@ -262,11 +260,6 @@
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfEstado">
-      <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfEstadoKeyTyped"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -279,6 +272,8 @@
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfIdKeyTyped"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jrbEstado">
     </Component>
   </SubComponents>
 </Form>
