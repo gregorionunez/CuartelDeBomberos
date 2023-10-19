@@ -81,6 +81,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jbAltaSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaSiniestroActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alta de Siniestro");
@@ -134,9 +140,9 @@ public class Menu extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,6 +165,11 @@ public class Menu extends javax.swing.JFrame {
         jMGestionDeRecursos.add(jMIBomberos);
 
         jMIBrigada.setText("Brigada");
+        jMIBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBrigadaActionPerformed(evt);
+            }
+        });
         jMGestionDeRecursos.add(jMIBrigada);
 
         jMICuartel.setText("Cuartel");
@@ -240,6 +251,20 @@ public class Menu extends javax.swing.JFrame {
     private void jbCerrarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarSiniestroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCerrarSiniestroActionPerformed
+
+    private void jMIBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadaActionPerformed
+       ListaBrigada ventana = new ListaBrigada();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jMIBrigadaActionPerformed
+
+    private void jbAltaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaSiniestroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbAltaSiniestroActionPerformed
 
     /**
      * @param args the command line arguments
