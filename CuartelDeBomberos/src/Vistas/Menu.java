@@ -206,12 +206,22 @@ public class Menu extends javax.swing.JFrame {
         jMEstadisticas.setText("Estadísticas");
 
         jMIInformacionBrigadas.setText("Información de Brigadas");
+        jMIInformacionBrigadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIInformacionBrigadasActionPerformed(evt);
+            }
+        });
         jMEstadisticas.add(jMIInformacionBrigadas);
 
         jMIBomberosPorBrigadas.setText("Bomberos por Brigadas");
         jMEstadisticas.add(jMIBomberosPorBrigadas);
 
         jMIBrigadasPorCuartel.setText("Brigadas por Cuartel");
+        jMIBrigadasPorCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBrigadasPorCuartelActionPerformed(evt);
+            }
+        });
         jMEstadisticas.add(jMIBrigadasPorCuartel);
 
         jMIInformacionDeSiniestros.setText("Información de Siniestros");
@@ -289,6 +299,22 @@ public class Menu extends javax.swing.JFrame {
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jMICuartelActionPerformed
+
+    //CARGO LA VISTA INFO BRIGADA
+    private void jMIInformacionBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIInformacionBrigadasActionPerformed
+      
+        EstadisticasUIInfoBrigada ventana=new EstadisticasUIInfoBrigada();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMIInformacionBrigadasActionPerformed
+
+    //CARGO BRIGADAS POR CUARTEL
+    private void jMIBrigadasPorCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadasPorCuartelActionPerformed
+     
+        EstadisticasUIBrigadasPorCuartel ventana= new EstadisticasUIBrigadasPorCuartel();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMIBrigadasPorCuartelActionPerformed
 
     private void jbModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarSiniestroActionPerformed
         ModifSiniestro ventana = new ModifSiniestro();
