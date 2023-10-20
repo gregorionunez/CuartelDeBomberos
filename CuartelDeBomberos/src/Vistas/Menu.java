@@ -137,7 +137,6 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,6 +172,11 @@ public class Menu extends javax.swing.JFrame {
         jMGestionDeRecursos.add(jMIBomberos);
 
         jMIBrigada.setText("Brigada");
+        jMIBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBrigadaActionPerformed(evt);
+            }
+        });
         jMGestionDeRecursos.add(jMIBrigada);
 
         jMICuartel.setText("Cuartel");
@@ -299,6 +303,16 @@ public class Menu extends javax.swing.JFrame {
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jbModificarSiniestroActionPerformed
+
+    private void jMIBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadaActionPerformed
+         ListaBrigada ventana = new ListaBrigada();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jMIBrigadaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -63,6 +65,11 @@ private DefaultTableModel modelo=new DefaultTableModel();
         jScrollPane1.setViewportView(jTablaDeBrigada);
 
         jBAgregar.setText("Agregar");
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
 
         jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +148,15 @@ private DefaultTableModel modelo=new DefaultTableModel();
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        Frame f = JOptionPane.getFrameForComponent(this); 
+        AgregarBrigada ventaAgregar = new AgregarBrigada (f,true);
+        ventaAgregar.setVisible (true);
+        
+      
+        
+    }//GEN-LAST:event_jBAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
