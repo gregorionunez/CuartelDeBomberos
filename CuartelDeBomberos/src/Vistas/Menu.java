@@ -137,7 +137,6 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,6 +213,11 @@ public class Menu extends javax.swing.JFrame {
         jMEstadisticas.add(jMIInformacionBrigadas);
 
         jMIBomberosPorBrigadas.setText("Bomberos por Brigadas");
+        jMIBomberosPorBrigadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBomberosPorBrigadasActionPerformed(evt);
+            }
+        });
         jMEstadisticas.add(jMIBomberosPorBrigadas);
 
         jMIBrigadasPorCuartel.setText("Brigadas por Cuartel");
@@ -325,6 +329,14 @@ public class Menu extends javax.swing.JFrame {
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jbModificarSiniestroActionPerformed
+
+    //CARGO BOMBEROS POR BRIGADA
+    private void jMIBomberosPorBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosPorBrigadasActionPerformed
+   
+        EstadisticasUIBomberosPorBrigadas ventana= new EstadisticasUIBomberosPorBrigadas();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMIBomberosPorBrigadasActionPerformed
 
     /**
      * @param args the command line arguments
