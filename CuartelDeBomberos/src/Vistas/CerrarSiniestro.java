@@ -13,8 +13,13 @@ import Entidades.Emergencia;
 import Entidades.Siniestro;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Frame;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -59,6 +64,7 @@ public class CerrarSiniestro extends javax.swing.JInternalFrame {
         jLFecha.setText(LocalDate.now().toString());
         cargarCabecera();
         cargarTabla();
+        jBCerrarSiniestro.setEnabled(false);
     }
 
     // METODO PARA CENTRAR LOS ENCABEZADOS DE LAS COLUMNAS
@@ -119,9 +125,10 @@ public class CerrarSiniestro extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTSiniestro = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jBCerrarSiniestro = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setTitle("Cerrar Siniestro");
         setPreferredSize(new java.awt.Dimension(1200, 635));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -151,35 +158,78 @@ public class CerrarSiniestro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTSiniestro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTSiniestroMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTSiniestro);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1150, -1));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-más-50.png"))); // NOI18N
-        jButton1.setText("Cerrar Siniestro");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBCerrarSiniestro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBCerrarSiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-más-50.png"))); // NOI18N
+        jBCerrarSiniestro.setText("Cerrar Siniestro");
+        jBCerrarSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBCerrarSiniestroActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, -1, -1));
+        getContentPane().add(jBCerrarSiniestro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 560, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBCerrarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSiniestroActionPerformed
+        int idSiniestro;
+        int filaSeleccionada = -1;
+        filaSeleccionada = jTSiniestro.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            idSiniestro = (Integer) jTSiniestro.getValueAt(filaSeleccionada, 0);
+        } else {
+            idSiniestro = -1;
+        }
+        Frame f = JOptionPane.getFrameForComponent(this);
+        CerrarSiniestroPuntuacion ventanaModificar = new CerrarSiniestroPuntuacion(f, true, idSiniestro);
+        ventanaModificar.setVisible(true);
+        borrarFilas();
+        cargarTabla();
+    }//GEN-LAST:event_jBCerrarSiniestroActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTSiniestroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTSiniestroMouseClicked
+        int filaSeleccionada = -1;
+        filaSeleccionada = jTSiniestro.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            jBCerrarSiniestro.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTSiniestroMouseClicked
+
+    private void borrarFilas() {
+
+        int filas = jTSiniestro.getRowCount() - 1;
+        for (int f = filas; f >= 0; f--) {
+            tabla.removeRow(f);
+
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBCerrarSiniestro;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLFecha;
     private javax.swing.JLabel jLabel1;
