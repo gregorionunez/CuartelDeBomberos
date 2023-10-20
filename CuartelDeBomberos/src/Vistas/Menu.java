@@ -299,7 +299,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICierreSiniestroActionPerformed
 
     private void jbCerrarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarSiniestroActionPerformed
-        // TODO add your handling code here:
+        CerrarSiniestro ventana = new CerrarSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jbCerrarSiniestroActionPerformed
 
     private void jbAltaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaSiniestroActionPerformed
@@ -330,6 +336,10 @@ public class Menu extends javax.swing.JFrame {
         EstadisticasUIInfoBrigada ventana=new EstadisticasUIInfoBrigada();
         escritorio.add(ventana);
         ventana.setVisible(true);
+        
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIInformacionBrigadasActionPerformed
 
     //CARGO BRIGADAS POR CUARTEL
@@ -338,6 +348,10 @@ public class Menu extends javax.swing.JFrame {
         EstadisticasUIBrigadasPorCuartel ventana= new EstadisticasUIBrigadasPorCuartel();
         escritorio.add(ventana);
         ventana.setVisible(true);
+        
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIBrigadasPorCuartelActionPerformed
 
     private void jbModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarSiniestroActionPerformed
