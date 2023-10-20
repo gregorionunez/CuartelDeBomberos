@@ -105,8 +105,9 @@ public class CerrarSiniestro extends javax.swing.JInternalFrame {
         for (Siniestro siniestro : listadoSiniestro) {
             Brigada brigada = brigadaData.brigadaPorId(siniestro.getCodBrigada());
             Emergencia emergencia = siniestro.getTipoEmergencia();
-
-            tabla.addRow(new Object[]{siniestro.getCodigo(), siniestro.getFecha().toString(), emergencia.getEmergencia(), siniestro.getCoordX(), siniestro.getCoordY(), siniestro.getDetalles(), brigada.getNombreBrigada()});
+            if (siniestro.isEstado()) {
+                tabla.addRow(new Object[]{siniestro.getCodigo(), siniestro.getFecha().toString(), emergencia.getEmergencia(), siniestro.getCoordX(), siniestro.getCoordY(), siniestro.getDetalles(), brigada.getNombreBrigada()});
+            }
         }
     }
 

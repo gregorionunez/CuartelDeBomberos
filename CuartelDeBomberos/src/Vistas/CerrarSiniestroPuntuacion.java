@@ -6,11 +6,17 @@
 package Vistas;
 
 import AccesoADatos.BrigadaData;
-import AccesoADatos.EmergenciaData;
 import AccesoADatos.SiniestroData;
 import Entidades.Brigada;
+import Entidades.Emergencia;
 import Entidades.Siniestro;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +25,8 @@ import javax.swing.JFrame;
 public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
 
     private int idSiniestro;
+    BrigadaData brigadaData = new BrigadaData();
+    SiniestroData siniestroData = new SiniestroData();
 
     /**
      * Creates new form CerrarSiniestroPuntiacion
@@ -26,44 +34,40 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     public CerrarSiniestroPuntuacion(java.awt.Frame parent, boolean modal, int idSiniestro) {
         super(parent, modal);
         initComponents();
-        botones.add(jRadioButton2);
-        botones.add(jRadioButton3);
-        botones.add(jRadioButton12);
-        botones.add(jRadioButton13);
-        botones.add(jRadioButton14);
-        botones.add(jRadioButton15);
-        botones.add(jRadioButton16);
-        botones.add(jRadioButton17);
-        botones.add(jRadioButton18);
-        botones.add(jRadioButton19);
+        botones.add(jRB1);
+        botones.add(jRB10);
+        botones.add(jRB2);
+        botones.add(jRB3);
+        botones.add(jRB4);
+        botones.add(jRB5);
+        botones.add(jRB6);
+        botones.add(jRB7);
+        botones.add(jRB8);
+        botones.add(jRB9);
         this.idSiniestro = idSiniestro;
         cargarSiniestro();
     }
-    
-    public void cargarSiniestro(){
-        
-        if(idSiniestro != -1){
-            SiniestroData siniestroData = new SiniestroData();            
+
+    public void cargarSiniestro() {
+
+        if (idSiniestro != -1) {
             Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
-            BrigadaData brigadaData = new BrigadaData();
-            
-            
+
             jLFecha.setText(siniestro.getFecha().toString());
-            jLID.setText(siniestro.getCodigo()+"");
+            jLID.setText(siniestro.getCodigo() + "");
             jLEmergencia.setText(siniestro.getTipoEmergencia().getEmergencia());
-            jLX.setText(siniestro.getCoordX()+"");
-            jLY.setText(siniestro.getCoordY()+"");
-            
+            jLX.setText(siniestro.getCoordX() + "");
+            jLY.setText(siniestro.getCoordY() + "");
+
             Brigada brigada = brigadaData.brigadaPorId(siniestro.getCodBrigada());
             jLBrigada.setText(brigada.getNombreBrigada());
-            
+
             jLDetalle.setText(siniestro.getDetalles());
         }
-        
+
     }
 
     private CerrarSiniestroPuntuacion(JFrame jFrame, boolean b) {
-
     }
 
     /**
@@ -74,6 +78,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         botones = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
@@ -92,21 +97,21 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         jLBrigada = new javax.swing.JLabel();
         jLDetalle = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRB1 = new javax.swing.JRadioButton();
+        jRB10 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jRadioButton12 = new javax.swing.JRadioButton();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jRadioButton15 = new javax.swing.JRadioButton();
-        jRadioButton16 = new javax.swing.JRadioButton();
-        jRadioButton17 = new javax.swing.JRadioButton();
-        jRadioButton18 = new javax.swing.JRadioButton();
-        jRadioButton19 = new javax.swing.JRadioButton();
+        jRB2 = new javax.swing.JRadioButton();
+        jRB3 = new javax.swing.JRadioButton();
+        jRB4 = new javax.swing.JRadioButton();
+        jRB5 = new javax.swing.JRadioButton();
+        jRB6 = new javax.swing.JRadioButton();
+        jRB7 = new javax.swing.JRadioButton();
+        jRB8 = new javax.swing.JRadioButton();
+        jRB9 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jDCFecha_resol = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Finalizar Siniestro");
@@ -155,7 +160,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
         jLFecha.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLFecha.setForeground(new java.awt.Color(102, 102, 102));
+        jLFecha.setForeground(new java.awt.Color(51, 51, 51));
         getContentPane().add(jLFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 294, -1));
 
         jLID.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
@@ -185,17 +190,24 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Fecha resolucion: ");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 244, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Calificacion de exito:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 437, -1, 30));
 
-        jRadioButton2.setText("1");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+        jRB1.setText("1");
 
-        jRadioButton3.setText("10");
-        getContentPane().add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB1, org.jdesktop.beansbinding.ELProperty.create("1"), jRB1, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+
+        jRB10.setText("10");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB10, org.jdesktop.beansbinding.ELProperty.create("10"), jRB10, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
@@ -203,38 +215,124 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 590, 20));
 
-        jRadioButton12.setText("2");
-        getContentPane().add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, -1));
+        jRB2.setText("2");
 
-        jRadioButton13.setText("3");
-        getContentPane().add(jRadioButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB2, org.jdesktop.beansbinding.ELProperty.create("2"), jRB2, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
 
-        jRadioButton14.setText("4");
-        getContentPane().add(jRadioButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+        getContentPane().add(jRB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, -1));
 
-        jRadioButton15.setText("5");
-        getContentPane().add(jRadioButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
+        jRB3.setText("3");
 
-        jRadioButton16.setText("6");
-        getContentPane().add(jRadioButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, -1, -1));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB3, org.jdesktop.beansbinding.ELProperty.create("3"), jRB3, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
 
-        jRadioButton17.setText("7");
-        getContentPane().add(jRadioButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, -1, -1));
+        getContentPane().add(jRB3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
 
-        jRadioButton18.setText("8");
-        getContentPane().add(jRadioButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, -1, -1));
+        jRB4.setText("4");
 
-        jRadioButton19.setText("9");
-        getContentPane().add(jRadioButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, -1, -1));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB4, org.jdesktop.beansbinding.ELProperty.create("4"), jRB4, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+
+        jRB5.setText("5");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB5, org.jdesktop.beansbinding.ELProperty.create("5"), jRB5, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
+
+        jRB6.setText("6");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB6, org.jdesktop.beansbinding.ELProperty.create("6"), jRB6, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, -1, -1));
+
+        jRB7.setText("7");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB7, org.jdesktop.beansbinding.ELProperty.create("7"), jRB7, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, -1, -1));
+
+        jRB8.setText("8");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB8, org.jdesktop.beansbinding.ELProperty.create("8"), jRB8, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, -1, -1));
+
+        jRB9.setText("9");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jRB9, org.jdesktop.beansbinding.ELProperty.create("9"), jRB9, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        getContentPane().add(jRB9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-más-50.png"))); // NOI18N
         jButton1.setText("Cerrar Siniestro");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
+
+        jDCFecha_resol.setDateFormatString("dd-MM-yyyy");
+        getContentPane().add(jDCFecha_resol, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 260, -1));
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int calificacion = -1;
+
+        LocalDate fecha_resol;
+
+        if (jDCFecha_resol.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No se puede finalizar un siniestro sin fecha de resolución.", "Error", 0);
+            return;
+        } else {
+            fecha_resol = jDCFecha_resol.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+
+        if (botones.getSelection() == null) {
+            JOptionPane.showMessageDialog(null, "No se puede finalizar un siniestro sin calificación de éxito.", "Error", 0);
+            return;
+        }
+
+        calificacion = Integer.parseInt(botones.getSelection().getActionCommand());
+
+        int respuesta;
+
+        respuesta = JOptionPane.showConfirmDialog(
+                null,
+                "¿Desea finalizar el siniestro ID: " + jLID.getText() + "?\nFecha: " + fecha_resol + "\nCalificacion: " + calificacion,
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE
+        );
+        
+        
+        if (respuesta == JOptionPane.YES_OPTION){
+            SiniestroData siniestroData = new SiniestroData();
+            Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
+            siniestro.setPuntuacion(calificacion);
+            siniestro.setFechaResolucion(fecha_resol);
+            siniestro.setEstado(false);
+            
+            siniestroData.modificarSiniestro(siniestro);
+        }
+        
+        this.dispose();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,7 +380,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup botones;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDCFecha_resol;
     private javax.swing.JLabel jLBrigada;
     private javax.swing.JLabel jLDetalle;
     private javax.swing.JLabel jLEmergencia;
@@ -301,16 +399,17 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton19;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRB1;
+    private javax.swing.JRadioButton jRB10;
+    private javax.swing.JRadioButton jRB2;
+    private javax.swing.JRadioButton jRB3;
+    private javax.swing.JRadioButton jRB4;
+    private javax.swing.JRadioButton jRB5;
+    private javax.swing.JRadioButton jRB6;
+    private javax.swing.JRadioButton jRB7;
+    private javax.swing.JRadioButton jRB8;
+    private javax.swing.JRadioButton jRB9;
     private javax.swing.JSeparator jSeparator1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
