@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import Vistas.Bombero.ListaDeBomberos;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -74,6 +75,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Alta de Siniestro");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bomberos");
+
+        jbModificarSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarSiniestroActionPerformed(evt);
+            }
+        });
 
         jbCerrarSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,44 +122,44 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
-                        .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(74, 74, 74)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                        .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(186, 186, 186))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(64, 64, 64))))
+                        .addGap(64, 64, 64))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                        .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152))))
             .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(325, 325, 325)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(325, 325, 325)
-                        .addComponent(jLabel4))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(363, 363, 363)
-                        .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jMGestionDeRecursos.setText("Gestión de Recursos");
@@ -243,10 +251,18 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMIBomberosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosActionPerformed
         // TODO add your handling code here:
+        ListaDeBomberos ventana = new ListaDeBomberos();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIBomberosActionPerformed
 
     private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
@@ -266,17 +282,22 @@ public class Menu extends javax.swing.JFrame {
         AltaSiniestro ventana = new AltaSiniestro();
         escritorio.add(ventana);
         ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jbAltaSiniestroActionPerformed
 
     //CARGO ABM DE CUARTEL
     private void jMICuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICuartelActionPerformed
 
- 
         CuartelUI ventana = new CuartelUI();
         escritorio.add(ventana);
         ventana.setVisible(true);
 
-
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMICuartelActionPerformed
 
     //CARGO LA VISTA INFO BRIGADA
@@ -294,6 +315,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(ventana);
         ventana.setVisible(true);
     }//GEN-LAST:event_jMIBrigadasPorCuartelActionPerformed
+
+    private void jbModificarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarSiniestroActionPerformed
+        ModifSiniestro ventana = new ModifSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jbModificarSiniestroActionPerformed
 
     /**
      * @param args the command line arguments
