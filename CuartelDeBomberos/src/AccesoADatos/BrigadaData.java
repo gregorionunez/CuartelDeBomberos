@@ -117,7 +117,7 @@ public class BrigadaData {
                 brigada.setLibre(rs.getBoolean("libre"));
                 brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
                 brigada.setEstado(rs.getBoolean("estado"));
-                //AGREGO EL BOMBERO A LA LISTA
+                //AGREGO LA BRIGADA A LA LISTA
                 brigadas.add(brigada);
             }
             ps.close();
@@ -180,6 +180,7 @@ public class BrigadaData {
                 emergencia = emergenciaData.buscarEmergencia(rs.getInt("especialidad"));
                 brigada.setEspecialidad(emergencia);
                 brigada.setLibre(rs.getBoolean("libre"));
+                brigada.setEstado(rs.getBoolean("estado"));
                 brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
                 brigada.setEstado(rs.getBoolean("estado"));
                 //agrego brigada a la lista 
@@ -226,6 +227,74 @@ public class BrigadaData {
             Conexion.cerrarConexion(con);
         }
         return bomberos;
+    }
+    
+     //RETORNO UNA LISTA DE BRIGADAS
+    public ArrayList<Brigada> listarBrigadasSegunDisponibilidad(boolean estado) {
+        //CREO MI LISTA DE BRIGADAS
+        EmergenciaData emergenciaData = new EmergenciaData();
+        ArrayList<Brigada> brigadas = new ArrayList<>();
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM brigada WHERE libre =" + estado; //EJECUTO EL SELECT
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //CREO UN BOMBERO Y LO VOY CARGANDO
+                Brigada brigada = new Brigada();
+                brigada.setCodigoBrigada(rs.getInt("cod_brigada"));
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                emergencia = emergenciaData.buscarEmergencia(rs.getInt("especialidad"));
+                brigada.setEspecialidad(emergencia);
+                brigada.setLibre(rs.getBoolean("libre"));
+                brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
+                //AGREGO LA BRIGADA A LA LISTA
+                brigadas.add(brigada);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
+        }
+        //CUANDO TERMINA TODO CIERRO MI CONEXION
+        Conexion.cerrarConexion(con);
+        return brigadas;
+    }
+    
+    
+    
+    public ArrayList<Brigada> brigadasPorEstadoYDisponibilidad(boolean estado, boolean disponibilidad) {
+        //CREO MI LISTA DE BRIGADAS
+        EmergenciaData emergenciaData = new EmergenciaData();
+        ArrayList<Brigada> brigadas = new ArrayList<>();
+        try {
+            //CREO LA CONEXION
+            con = Conexion.getConexion();
+            String sql = "SELECT * FROM brigada WHERE estado =" + estado + " AND libre =" + disponibilidad; //EJECUTO EL SELECT
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //CREO UN BOMBERO Y LO VOY CARGANDO
+                Brigada brigada = new Brigada();
+                brigada.setCodigoBrigada(rs.getInt("cod_brigada"));
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                emergencia = emergenciaData.buscarEmergencia(rs.getInt("especialidad"));
+                brigada.setEspecialidad(emergencia);
+                brigada.setLibre(rs.getBoolean("libre"));
+                brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
+                brigada.setEstado(rs.getBoolean("estado"));
+                //AGREGO EL BOMBERO A LA LISTA
+                brigadas.add(brigada);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
+        } finally {            
+        //CUANDO TERMINA TODO CIERRO MI CONEXION
+        Conexion.cerrarConexion(con);
+        }
+        return brigadas;
     }
 
     public Brigada brigadaPorId(int id) {
