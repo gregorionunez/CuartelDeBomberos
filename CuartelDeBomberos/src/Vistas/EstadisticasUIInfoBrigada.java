@@ -64,7 +64,7 @@ public class EstadisticasUIInfoBrigada extends javax.swing.JInternalFrame {
             Emergencia emergencia = new Emergencia();
             EmergenciaData emergenciaData = new EmergenciaData();
             ArrayList<Brigada> listaBrigadas = new ArrayList();
-            listaBrigadas = brigadaData.listarBrigadasSegunDisponibilidad(estado);
+            listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true,estado);
             Cuartel cuartel = new Cuartel();
             CuartelData cuartelData = new CuartelData();
             for (Brigada brigada : listaBrigadas) {
@@ -77,7 +77,7 @@ public class EstadisticasUIInfoBrigada extends javax.swing.JInternalFrame {
             Emergencia emergencia = new Emergencia();
             EmergenciaData emergenciaData = new EmergenciaData();
             ArrayList<Brigada> listaBrigadas = new ArrayList();
-            listaBrigadas = brigadaData.listarBrigadasSegunDisponibilidad(estado);
+            listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true,estado);
             Cuartel cuartel = new Cuartel();
             CuartelData cuartelData = new CuartelData();
             for (Brigada brigada : listaBrigadas) {
