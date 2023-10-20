@@ -38,7 +38,7 @@ public class EstadisticasUIBomberosPorBrigadas extends javax.swing.JInternalFram
         tablaModelo.addColumn("Apellido"); //Creo columna
         tablaModelo.addColumn("Fecha de Nac."); //Creo columna
         tablaModelo.addColumn("Celular"); //Creo columna
-        tablaModelo.addColumn("Grupo Sanguinio"); //Creo columna
+        tablaModelo.addColumn("Grupo Sanguíneo"); //Creo columna
         tablaModelo.addColumn("Estado"); //Creo columna
         jTablaBomberos.setModel(tablaModelo); //CARGO LAS COLUMNAS A LA TABLA
         centrarEncabezado(jTablaBomberos); //Centro los encabezados
