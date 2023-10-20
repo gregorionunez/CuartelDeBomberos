@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="botones">
     </Component>
@@ -280,7 +280,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    <Component class="com.toedter.calendar.JDateChooser" name="jDCFecha_resol">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="280" y="380" width="244" height="-1"/>
@@ -300,20 +300,26 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="jRB1">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB1" sourcePath="1" target="jRB1" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="200" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="jRB10">
       <Properties>
         <Property name="text" type="java.lang.String" value="10"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB10" sourcePath="10" target="jRB10" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="560" y="440" width="-1" height="-1"/>
@@ -343,80 +349,104 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton12">
+    <Component class="javax.swing.JRadioButton" name="jRB2">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB2" sourcePath="2" target="jRB2" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="240" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton13">
+    <Component class="javax.swing.JRadioButton" name="jRB3">
       <Properties>
         <Property name="text" type="java.lang.String" value="3"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB3" sourcePath="3" target="jRB3" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="280" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton14">
+    <Component class="javax.swing.JRadioButton" name="jRB4">
       <Properties>
         <Property name="text" type="java.lang.String" value="4"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB4" sourcePath="4" target="jRB4" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="320" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton15">
+    <Component class="javax.swing.JRadioButton" name="jRB5">
       <Properties>
         <Property name="text" type="java.lang.String" value="5"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB5" sourcePath="5" target="jRB5" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="360" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton16">
+    <Component class="javax.swing.JRadioButton" name="jRB6">
       <Properties>
         <Property name="text" type="java.lang.String" value="6"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB6" sourcePath="6" target="jRB6" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="400" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton17">
+    <Component class="javax.swing.JRadioButton" name="jRB7">
       <Properties>
         <Property name="text" type="java.lang.String" value="7"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB7" sourcePath="7" target="jRB7" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="440" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton18">
+    <Component class="javax.swing.JRadioButton" name="jRB8">
       <Properties>
         <Property name="text" type="java.lang.String" value="8"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB8" sourcePath="8" target="jRB8" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="480" y="440" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton19">
+    <Component class="javax.swing.JRadioButton" name="jRB9">
       <Properties>
         <Property name="text" type="java.lang.String" value="9"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="actionCommand" source="jRB9" sourcePath="9" target="jRB9" targetPath="actionCommand" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="520" y="440" width="-1" height="-1"/>
@@ -433,6 +463,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cerrar Siniestro"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="220" y="490" width="-1" height="-1"/>
