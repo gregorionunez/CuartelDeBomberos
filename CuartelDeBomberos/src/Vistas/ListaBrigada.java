@@ -5,9 +5,13 @@
  */
 package Vistas;
 
+import AccesoADatos.BrigadaData;
+import Entidades.Brigada;
+import com.sun.javafx.collections.ArrayListenerHelper;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,7 +26,19 @@ private DefaultTableModel modelo=new DefaultTableModel();
         initComponents();
         armarCabecera();
     }
-
+// cargo info en la tabla 
+    public void cargoTabla(){
+         BrigadaData brigadaData = new BrigadaData();
+         ArrayList<Brigada> listaBrigada = new ArrayList();
+         listaBrigada= brigadaData.listarBrigadas();
+        for (Brigada brigada : listaBrigada) {
+          modelo.addRow(new Object[]{brigada.});
+        }
+        
+    
+                
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,7 +154,11 @@ private DefaultTableModel modelo=new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
+         Frame f = JOptionPane.getFrameForComponent(this); 
+        ModificarBrigada ventaAgregar = new ModificarBrigada(f,true);
+        ventaAgregar.setVisible (true);
+        
+                
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
