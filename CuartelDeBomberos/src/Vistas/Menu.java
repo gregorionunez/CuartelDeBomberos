@@ -161,6 +161,16 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(142, 142, 142))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                        .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152))))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(325, 325, 325)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jLabel5)
                         .addGap(314, 314, 314))))
         );
@@ -238,6 +248,11 @@ public class Menu extends javax.swing.JFrame {
         jMEstadisticas.add(jMIInformacionBrigadas);
 
         jMIBomberosPorBrigadas.setText("Bomberos por Brigadas");
+        jMIBomberosPorBrigadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBomberosPorBrigadasActionPerformed(evt);
+            }
+        });
         jMEstadisticas.add(jMIBomberosPorBrigadas);
 
         jMIBrigadasPorCuartel.setText("Brigadas por Cuartel");
@@ -363,6 +378,14 @@ public class Menu extends javax.swing.JFrame {
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jbModificarSiniestroActionPerformed
+
+    //CARGO BOMBEROS POR BRIGADA
+    private void jMIBomberosPorBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosPorBrigadasActionPerformed
+   
+        EstadisticasUIBomberosPorBrigadas ventana= new EstadisticasUIBomberosPorBrigadas();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMIBomberosPorBrigadasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
