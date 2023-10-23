@@ -79,8 +79,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jCBSiniestro = new javax.swing.JComboBox<>();
 
-        setClosable(true);
-        setTitle("Modificación de Siniestro");
+        setTitle("Alta siniestro");
         setPreferredSize(new java.awt.Dimension(730, 715));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -190,7 +189,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Modificar Siniestro");
+        jLabel3.setText("Modificar siniestro");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 350, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 650, 10));
 
