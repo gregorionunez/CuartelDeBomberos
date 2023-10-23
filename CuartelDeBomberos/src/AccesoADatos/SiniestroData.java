@@ -99,7 +99,7 @@ public class SiniestroData {
             ps.setInt(3, siniestro.getCoordX());
             ps.setInt(4, siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
-            
+
             if (siniestro.getFechaResolucion() != null) {
                 ps.setDate(6, java.sql.Date.valueOf(siniestro.getFechaResolucion()));
             } else {
@@ -222,6 +222,52 @@ public class SiniestroData {
             Conexion.cerrarConexion(con);
         }
         return listadoSiniestros;
+    }
+
+    public Siniestro siniestroPorID(int id) {
+        emergencia = null;
+        EmergenciaData emergData = new EmergenciaData();
+        Siniestro siniestro = new Siniestro();
+
+        String sql = "SELECT * FROM siniestro WHERE codigo = ?";
+
+        try {
+            con = Conexion.getConexion();
+
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                emergencia = emergData.buscarEmergencia(rs.getInt("tipo"));
+
+                LocalDate fecha_resol = null;
+
+                if (rs.getDate("fecha_resol") != null) {
+                    fecha_resol = rs.getDate("fecha_resol").toLocalDate();
+                }
+                
+                siniestro.setCodigo(id);
+                siniestro.setTipoEmergencia(emergencia);
+                siniestro.setFecha(rs.getDate("fecha_siniestro").toLocalDate());
+                siniestro.setCoordX(rs.getInt("cod_x"));
+                siniestro.setCoordY(rs.getInt("cod_y"));
+                siniestro.setDetalles(rs.getString("detalle"));
+                siniestro.setFechaResolucion(fecha_resol);
+                siniestro.setPuntuacion(rs.getInt("puntuacion"));
+                siniestro.setCodBrigada(rs.getInt("cod_brigada"));
+                siniestro.setEstado(rs.getBoolean("estado"));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Siniestro.", "Error", 0);
+        } finally {
+            Conexion.cerrarConexion(con);
+        }
+        return siniestro;
     }
 
 }

@@ -79,7 +79,8 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jCBSiniestro = new javax.swing.JComboBox<>();
 
-        setTitle("Alta siniestro");
+        setClosable(true);
+        setTitle("Modificación de Siniestro");
         setPreferredSize(new java.awt.Dimension(730, 715));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,17 +125,17 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, -1, -1));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, -1, -1));
 
         jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
-        jBCancelar.setText("Cancelar");
+        jBCancelar.setText("Salir");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 630, -1, -1));
+        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 630, -1, -1));
 
         jCBEmergencia.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBEmergencia.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +190,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Modificar siniestro");
+        jLabel3.setText("Modificar Siniestro");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 350, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 650, 10));
 
@@ -307,7 +308,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(
                 null,
-                "¿Desea cancelar la modificacion del siniestro?",
+                "¿Deseas Salir?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
         );
