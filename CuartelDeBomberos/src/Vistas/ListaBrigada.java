@@ -32,7 +32,12 @@ private DefaultTableModel modelo=new DefaultTableModel();
          ArrayList<Brigada> listaBrigada = new ArrayList();
          listaBrigada= brigadaData.listarBrigadas();
         for (Brigada brigada : listaBrigada) {
-          modelo.addRow(new Object[]{brigada.});
+          modelo.addRow(new Object[]{brigada.getCodigoBrigada(),brigada.getNombreBrigada(),brigada.getEspecialidad(),
+          brigada.isEstado(),brigada.getNumeroCuartel(),
+          
+          
+          
+          });
         }
         
     
@@ -172,7 +177,8 @@ private DefaultTableModel modelo=new DefaultTableModel();
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         Frame f = JOptionPane.getFrameForComponent(this); 
         AgregarBrigada ventaAgregar = new AgregarBrigada (f,true);
-        ventaAgregar.setVisible (true);
+        ventaAgregar.setVisible (
+                true);
         
       
         
