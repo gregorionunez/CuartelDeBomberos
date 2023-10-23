@@ -42,27 +42,26 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         this.idSiniestro = idSiniestro;
         cargarSiniestro();
     }
-    
-    public void cargarSiniestro(){
-        
-        if(idSiniestro != -1){
-            SiniestroData siniestroData = new SiniestroData();            
+
+    public void cargarSiniestro() {
+
+        if (idSiniestro != -1) {
+            SiniestroData siniestroData = new SiniestroData();
             Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
             BrigadaData brigadaData = new BrigadaData();
-            
-            
+
             jLFecha.setText(siniestro.getFecha().toString());
-            jLID.setText(siniestro.getCodigo()+"");
+            jLID.setText(siniestro.getCodigo() + "");
             jLEmergencia.setText(siniestro.getTipoEmergencia().getEmergencia());
-            jLX.setText(siniestro.getCoordX()+"");
-            jLY.setText(siniestro.getCoordY()+"");
-            
+            jLX.setText(siniestro.getCoordX() + "");
+            jLY.setText(siniestro.getCoordY() + "");
+
             Brigada brigada = brigadaData.brigadaPorId(siniestro.getCodBrigada());
             jLBrigada.setText(brigada.getNombreBrigada());
-            
+
             jLDetalle.setText(siniestro.getDetalles());
         }
-        
+
     }
 
     private CerrarSiniestroPuntuacion(JFrame jFrame, boolean b) {
@@ -288,7 +287,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          int calificacion = -1;
+        int calificacion = -1;
 
         LocalDate fecha_resol;
 
@@ -299,6 +298,11 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
             fecha_resol = jDCFecha_resol.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
 
+        if(fecha_resol.isAfter(LocalDate.now())){
+            JOptionPane.showMessageDialog(null, "La fecha colocada esta despues de la fecha de hoy.", "Error", 0);
+            return;
+        }
+        
         if (botones.getSelection() == null) {
             JOptionPane.showMessageDialog(null, "No se puede finalizar un siniestro sin calificación de éxito.", "Error", 0);
             return;
@@ -316,8 +320,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
                 JOptionPane.ERROR_MESSAGE
         );
 
-
-        if (respuesta == JOptionPane.YES_OPTION){
+        if (respuesta == JOptionPane.YES_OPTION) {
             SiniestroData siniestroData = new SiniestroData();
             Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
             siniestro.setPuntuacion(calificacion);

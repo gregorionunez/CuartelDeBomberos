@@ -10,9 +10,11 @@ import AccesoADatos.CuartelData;
 import AccesoADatos.EmergenciaData;
 import AccesoADatos.SiniestroData;
 import Entidades.Brigada;
+import Entidades.Coordenada;
 import Entidades.Cuartel;
 import Entidades.Emergencia;
 import Entidades.Siniestro;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
     CuartelData cuartelData = new CuartelData();
     EmergenciaData emergenciaData = new EmergenciaData();
     BrigadaData brigadaData = new BrigadaData();
+    DecimalFormat formato = new DecimalFormat("0.00");
 
     public AltaSiniestro() {
         initComponents();
@@ -115,17 +118,17 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, -1, -1));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, -1, -1));
 
         jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
-        jBCancelar.setText("Cancelar");
+        jBCancelar.setText("Salir");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 560, -1, -1));
+        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
 
         jCBEmergencia.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBEmergencia.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +297,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(
                 null,
-                "¿Desea cancelar el siniestro?",
+                "¿Deseas Salir?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
         );
@@ -361,7 +364,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        jLCuartel.setText(cuartel.getNombreCuartel());
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
+                        
+                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
                         break;
                     }
 
@@ -396,8 +403,12 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
-                        Cuartel value = entry.getValue();
-                        jLCuartel.setText(value.getNombreCuartel());
+                        cuartel = entry.getValue();
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
+                        
+                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
                         break;
                     }
 
@@ -440,7 +451,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        jLCuartel.setText(cuartel.getNombreCuartel());
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
+                        
+                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
                         break;
                     }
 
@@ -475,8 +490,12 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                     listarCuarteles = cuartelData.listarCuartelesCercanos(x, y);
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
-                        Cuartel value = entry.getValue();
-                        jLCuartel.setText(value.getNombreCuartel());
+                        cuartel = entry.getValue();
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
+                        
+                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
                         break;
                     }
 

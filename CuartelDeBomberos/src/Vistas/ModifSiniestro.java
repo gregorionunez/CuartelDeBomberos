@@ -124,17 +124,17 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, -1, -1));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 630, -1, -1));
 
         jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
-        jBCancelar.setText("Cancelar");
+        jBCancelar.setText("Salir");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 630, -1, -1));
+        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 630, -1, -1));
 
         jCBEmergencia.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBEmergencia.addActionListener(new java.awt.event.ActionListener() {
@@ -307,7 +307,7 @@ public class ModifSiniestro extends javax.swing.JInternalFrame {
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(
                 null,
-                "¿Desea cancelar la modificacion del siniestro?",
+                "¿Deseas Salir?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
         );
