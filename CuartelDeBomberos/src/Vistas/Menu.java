@@ -217,9 +217,19 @@ public class Menu extends javax.swing.JFrame {
         jMGestionDeSiniestros.setText("Gestión de Siniestros");
 
         jMIAltaSiniestro.setText("Alta");
+        jMIAltaSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIAltaSiniestroActionPerformed(evt);
+            }
+        });
         jMGestionDeSiniestros.add(jMIAltaSiniestro);
 
         jMIModificacionSiniestro.setText("Modificación");
+        jMIModificacionSiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIModificacionSiniestroActionPerformed(evt);
+            }
+        });
         jMGestionDeSiniestros.add(jMIModificacionSiniestro);
 
         jMICierreSiniestro.setText("Cierre");
@@ -310,7 +320,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMSalirMouseClicked
 
     private void jMICierreSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICierreSiniestroActionPerformed
-        // TODO add your handling code here:
+        CerrarSiniestro ventana = new CerrarSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMICierreSiniestroActionPerformed
 
     private void jbCerrarSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarSiniestroActionPerformed
@@ -347,11 +363,11 @@ public class Menu extends javax.swing.JFrame {
 
     //CARGO LA VISTA INFO BRIGADA
     private void jMIInformacionBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIInformacionBrigadasActionPerformed
-      
-        EstadisticasUIInfoBrigada ventana=new EstadisticasUIInfoBrigada();
+
+        EstadisticasUIInfoBrigada ventana = new EstadisticasUIInfoBrigada();
         escritorio.add(ventana);
         ventana.setVisible(true);
-        
+
         int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
@@ -359,11 +375,11 @@ public class Menu extends javax.swing.JFrame {
 
     //CARGO BRIGADAS POR CUARTEL
     private void jMIBrigadasPorCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadasPorCuartelActionPerformed
-     
-        EstadisticasUIBrigadasPorCuartel ventana= new EstadisticasUIBrigadasPorCuartel();
+
+        EstadisticasUIBrigadasPorCuartel ventana = new EstadisticasUIBrigadasPorCuartel();
         escritorio.add(ventana);
         ventana.setVisible(true);
-        
+
         int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
@@ -381,8 +397,8 @@ public class Menu extends javax.swing.JFrame {
 
     //CARGO BOMBEROS POR BRIGADA
     private void jMIBomberosPorBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBomberosPorBrigadasActionPerformed
-   
-        EstadisticasUIBomberosPorBrigadas ventana= new EstadisticasUIBomberosPorBrigadas();
+
+        EstadisticasUIBomberosPorBrigadas ventana = new EstadisticasUIBomberosPorBrigadas();
         escritorio.add(ventana);
         ventana.setVisible(true);
     }//GEN-LAST:event_jMIBomberosPorBrigadasActionPerformed
@@ -402,6 +418,26 @@ public class Menu extends javax.swing.JFrame {
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIInformacionDeSiniestrosActionPerformed
+
+    private void jMIAltaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAltaSiniestroActionPerformed
+        AltaSiniestro ventana = new AltaSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jMIAltaSiniestroActionPerformed
+
+    private void jMIModificacionSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIModificacionSiniestroActionPerformed
+        ModifSiniestro ventana = new ModifSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+    }//GEN-LAST:event_jMIModificacionSiniestroActionPerformed
 
     /**
      * @param args the command line arguments
