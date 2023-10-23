@@ -70,7 +70,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jCBBrigada = new javax.swing.JComboBox<>();
 
-        setTitle("Alta siniestro");
+        setClosable(true);
+        setTitle("Alta de Siniestro");
         setPreferredSize(new java.awt.Dimension(730, 645));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -180,8 +181,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Alta siniestro");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 260, -1));
+        jLabel3.setText("Alta de Siniestro");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 320, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 650, 10));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
