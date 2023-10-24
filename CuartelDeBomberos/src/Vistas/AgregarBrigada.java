@@ -154,7 +154,7 @@ public class AgregarBrigada extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void JTFNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNombreActionPerformed
@@ -172,7 +172,7 @@ public class AgregarBrigada extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxCuartelActionPerformed
 
     private void jBGuadarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuadarActionPerformed
-       BrigadaData  brigadaData = new BrigadaData();
+       
     }//GEN-LAST:event_jBGuadarActionPerformed
 
 
