@@ -214,7 +214,6 @@ public class HistoricoDeSiniestros extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No existen siniestros en la base de datos", "MENSAJE", 1);
         } else {
             for (Siniestro siniestro : listaSiniestros) {
-                System.out.println(jsFecha.getValue());
                 switch(jsFecha.getValue()){ //Seleccion de Fecha
                     case 1: //Hoy
                         if (siniestro.getFecha().equals(LocalDate.now()))
