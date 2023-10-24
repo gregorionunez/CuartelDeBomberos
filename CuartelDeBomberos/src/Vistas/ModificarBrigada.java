@@ -38,7 +38,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
 
    
     
-    public ModificarBrigada(java.awt.Frame parent, boolean modal) {
+    public ModificarBrigada(java.awt.Frame parent, boolean modal,int codBri) {
         super(parent, modal);
         initComponents();
     }
@@ -222,7 +222,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ModificarBrigada dialog = new ModificarBrigada(new javax.swing.JFrame(), true);
+                ModificarBrigada dialog = new ModificarBrigada(new javax.swing.JFrame(),new javax.swing.JFrame(), true );
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
