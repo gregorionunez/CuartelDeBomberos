@@ -59,7 +59,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jbSalir = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMGestionDeRecursos = new javax.swing.JMenu();
         jMIBomberos = new javax.swing.JMenuItem();
@@ -74,6 +73,7 @@ public class Menu extends javax.swing.JFrame {
         jMIBomberosPorBrigadas = new javax.swing.JMenuItem();
         jMIBrigadasPorCuartel = new javax.swing.JMenuItem();
         jMIInformacionDeSiniestros = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jMSalir = new javax.swing.JMenu();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -123,10 +123,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Salir");
-
         escritorio.setLayer(jbModificarSiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbCerrarSiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbAltaSiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -134,7 +130,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -143,6 +138,9 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioLayout.createSequentialGroup()
+                                .addGap(265, 265, 265)
                                 .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(escritorioLayout.createSequentialGroup()
                                 .addGap(256, 256, 256)
@@ -165,10 +163,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(238, 238, 238))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(142, 142, 142))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(313, 313, 313))))
+                        .addGap(142, 142, 142))))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +180,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jbAltaSiniestro, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                     .addComponent(jbModificarSiniestro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(100, 100, 100)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbCerrarSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,6 +279,14 @@ public class Menu extends javax.swing.JFrame {
         jMEstadisticas.add(jMIInformacionDeSiniestros);
 
         jMenuBar1.add(jMEstadisticas);
+
+        jMenu1.setText("Cola de Siniestros");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
 
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -448,14 +449,23 @@ public class Menu extends javax.swing.JFrame {
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIModificacionSiniestroActionPerformed
 
-    private void jMIBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadaActionPerformed
-         ListaBrigada ventana = new ListaBrigada();
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        ColaSiniestro ventana = new ColaSiniestro();
         escritorio.add(ventana);
         ventana.setVisible(true);
 
         int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
         int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
-        ventana.setLocation(x, y);
+        ventana.setLocation(x, y);    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMIBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBrigadaActionPerformed
+        ListaBrigada ventana = new ListaBrigada();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y); 
     }//GEN-LAST:event_jMIBrigadaActionPerformed
 
     /**
@@ -516,7 +526,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMEstadisticas;
     private javax.swing.JMenu jMGestionDeRecursos;
     private javax.swing.JMenu jMGestionDeSiniestros;
@@ -531,6 +540,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIInformacionDeSiniestros;
     private javax.swing.JMenuItem jMIModificacionSiniestro;
     private javax.swing.JMenu jMSalir;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbAltaSiniestro;
     private javax.swing.JButton jbCerrarSiniestro;
