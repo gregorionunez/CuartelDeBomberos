@@ -73,6 +73,23 @@ public class BrigadaData {
         Conexion.cerrarConexion(con);
     }
 
+    public void dispBrigada(int idBrigada, boolean libre) {
+        String sql = "UPDATE brigada SET libre=? WHERE cod_brigada=" + idBrigada;
+        try {
+            //creo una conexion con mi base de datos
+            con = Conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            // le asigno los valores 
+            ps.setBoolean(1, libre);
+            ps.executeUpdate(); // Ejecutar PreparedStatement
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el brigada ", "Error", 0);
+        }
+        //cierro mi conexion 
+        Conexion.cerrarConexion(con);
+    }
+
     // elimino brigada
     public void eliminarBrigada(int id) {
         //ESTA VARIBLE REPRESENTA MI SENTENCIA SQL
@@ -228,8 +245,8 @@ public class BrigadaData {
         }
         return bomberos;
     }
-    
-     //RETORNO UNA LISTA DE BRIGADAS
+
+    //RETORNO UNA LISTA DE BRIGADAS
     public ArrayList<Brigada> listarBrigadasSegunDisponibilidad(boolean estado) {
         //CREO MI LISTA DE BRIGADAS
         EmergenciaData emergenciaData = new EmergenciaData();
@@ -255,15 +272,13 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ", "Error", 0);
         }
         //CUANDO TERMINA TODO CIERRO MI CONEXION
         Conexion.cerrarConexion(con);
         return brigadas;
     }
-    
-    
-    
+
     public ArrayList<Brigada> brigadasPorEstadoYDisponibilidad(boolean estado, boolean disponibilidad) {
         //CREO MI LISTA DE BRIGADAS
         EmergenciaData emergenciaData = new EmergenciaData();
@@ -289,10 +304,10 @@ public class BrigadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada " ,  "Error", 0);
-        } finally {            
-        //CUANDO TERMINA TODO CIERRO MI CONEXION
-        Conexion.cerrarConexion(con);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Brigada ", "Error", 0);
+        } finally {
+            //CUANDO TERMINA TODO CIERRO MI CONEXION
+            Conexion.cerrarConexion(con);
         }
         return brigadas;
     }

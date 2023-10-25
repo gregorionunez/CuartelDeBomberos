@@ -12,6 +12,7 @@ import Entidades.Brigada;
 import Entidades.Siniestro;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,9 @@ import javax.swing.JOptionPane;
  * @author Gregorio
  */
 public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
+
+    SiniestroData siniestroData = new SiniestroData();
+    BrigadaData brigadaData = new BrigadaData();
 
     private int idSiniestro;
 
@@ -46,9 +50,8 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     public void cargarSiniestro() {
 
         if (idSiniestro != -1) {
-            SiniestroData siniestroData = new SiniestroData();
+
             Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
-            BrigadaData brigadaData = new BrigadaData();
 
             jLFecha.setText(siniestro.getFecha().toString());
             jLID.setText(siniestro.getCodigo() + "");
@@ -287,6 +290,9 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
+        Brigada brigada = brigadaData.brigadaPorId(siniestro.getCodBrigada());
+
         int calificacion = -1;
 
         LocalDate fecha_resol;
@@ -321,13 +327,38 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         );
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            SiniestroData siniestroData = new SiniestroData();
-            Siniestro siniestro = siniestroData.siniestroPorID(idSiniestro);
+            brigadaData.dispBrigada(siniestro.getCodBrigada(), true);
+
             siniestro.setPuntuacion(calificacion);
             siniestro.setFechaResolucion(fecha_resol);
             siniestro.setEstado(false);
 
             siniestroData.modificarSiniestro(siniestro);
+        }
+
+        ArrayList<Siniestro> listarSiniestros = new ArrayList<>();
+        listarSiniestros = siniestroData.listarSiniestro();
+
+        int respuestaSiniestroNuevo;
+
+        respuestaSiniestroNuevo = JOptionPane.showConfirmDialog(
+                null,
+                "La brigada '" + brigada.getNombreBrigada() + "' Tiene un nuevo siniestro en la cola ¿Deseas asignárselo?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE
+        );
+
+        if (respuestaSiniestroNuevo == JOptionPane.YES_OPTION) {
+        for (Siniestro listarSiniestro : listarSiniestros) {
+            if (listarSiniestro.isEstado()) {
+                if (listarSiniestro.getCodBrigada() == siniestro.getCodBrigada()) {
+                    brigadaData.dispBrigada(siniestro.getCodBrigada(), false);
+                    JOptionPane.showMessageDialog(null, "Siniestro asignado", "Información", 1);
+                    break;
+                }
+            }
+        }
         }
 
         this.dispose();

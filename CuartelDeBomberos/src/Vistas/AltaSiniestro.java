@@ -209,6 +209,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
         Brigada brigadaGuardar = new Brigada();
         brigadaGuardar = (Brigada) jCBBrigada.getSelectedItem();
+        BrigadaData brigadaData = new BrigadaData();
 
         if (jTFX.getText().isEmpty() || jTFY.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debes ingresar coordenadas correctas.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -238,6 +239,23 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
             return;
         }
 
+        int respuestaBrigadaDisp;
+
+        if (!brigadaGuardar.isLibre()) {
+            respuestaBrigadaDisp = JOptionPane.showConfirmDialog(
+                    null, "La brigada '" + brigadaGuardar.getNombreBrigada() + "' Está resolviendo un siniestro. ¿Desea colocarlo en la cola de espera?",
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE
+            );
+        } else {
+            respuestaBrigadaDisp = 0;
+        }
+
+        if (respuestaBrigadaDisp == JOptionPane.NO_OPTION) {
+            return;
+        }
+
         int respuesta;
 
         if (jTADetalle.getText().isEmpty()) {
@@ -263,6 +281,8 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
         }
 
         if (respuesta == JOptionPane.YES_OPTION) {
+            brigadaData.dispBrigada(brigadaGuardar.getCodigoBrigada(), false);
+            
             Siniestro siniestro = new Siniestro();
             siniestro.setTipoEmergencia((Emergencia) jCBEmergencia.getSelectedItem());
             siniestro.setFecha(LocalDate.now());
@@ -365,11 +385,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
-                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(), cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()), Integer.parseInt(jTFY.getText()));
                         String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
 
-                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
+                        jLCuartel.setText(cuartel.getNombreCuartel() + " - " + distancia + " Km");
                         break;
                     }
 
@@ -405,11 +425,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
-                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(), cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()), Integer.parseInt(jTFY.getText()));
                         String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
 
-                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
+                        jLCuartel.setText(cuartel.getNombreCuartel() + " - " + distancia + " Km");
                         break;
                     }
 
@@ -452,11 +472,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
-                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(), cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()), Integer.parseInt(jTFY.getText()));
                         String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
 
-                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
+                        jLCuartel.setText(cuartel.getNombreCuartel() + " - " + distancia + " Km");
                         break;
                     }
 
@@ -492,11 +512,11 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
 
                     for (Map.Entry<Integer, Cuartel> entry : listarCuarteles.entrySet()) {
                         cuartel = entry.getValue();
-                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(),cuartel.getCoordY());
-                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()),Integer.parseInt(jTFY.getText()));
+                        Coordenada cordenadas = new Coordenada(cuartel.getCoordX(), cuartel.getCoordY());
+                        Coordenada cordenadasSiniestro = new Coordenada(Integer.parseInt(jTFX.getText()), Integer.parseInt(jTFY.getText()));
                         String distancia = formato.format(cuartelData.calcularDistancia(cordenadas, cordenadasSiniestro));
 
-                        jLCuartel.setText(cuartel.getNombreCuartel()+" - "+distancia+" Km");
+                        jLCuartel.setText(cuartel.getNombreCuartel() + " - " + distancia + " Km");
                         break;
                     }
 
