@@ -6,7 +6,9 @@
 package Vistas.Bombero;
 
 import AccesoADatos.BomberoData;
+import AccesoADatos.BrigadaData;
 import Entidades.Bombero;
+import Entidades.Brigada;
 import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -185,16 +187,23 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
 
     private void jbAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAgregarMousePressed
         // TODO add your handling code here:
-        Frame f = JOptionPane.getFrameForComponent(this);
-        Alta ventana = new Alta(f, true);
-        ventana.setVisible(true);
-        this.setVisible(true);
-        //Centro el popup
-        int x = (this.getWidth() - ventana.getWidth()) / 2;
-        int y = (this.getHeight() - ventana.getHeight()) / 2;
-        ventana.setLocation(x, y);
-        limpiarTabla();
-        cargarTabla();
+        ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
+        BrigadaData brigadaData = new BrigadaData();
+        listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
+        if (listaBrigadas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero debe tener Brigadas cargadas", "Información", 1);
+        } else {
+            Frame f = JOptionPane.getFrameForComponent(this);
+            Alta ventana = new Alta(f, true);
+            ventana.setVisible(true);
+            this.setVisible(true);
+            //Centro el popup
+            int x = (this.getWidth() - ventana.getWidth()) / 2;
+            int y = (this.getHeight() - ventana.getHeight()) / 2;
+            ventana.setLocation(x, y);
+            limpiarTabla();
+            cargarTabla();
+        }
     }//GEN-LAST:event_jbAgregarMousePressed
 
     private void jTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMousePressed
@@ -204,7 +213,9 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         if (filaSeleccionada!=-1){ //Se selecciono una fila
             idBombero = (Integer)jTable.getValueAt(filaSeleccionada, 0);
             jbModificar.setEnabled(true); //Activar Boton Modificar
-            jbEliminar.setEnabled(true); //Activar Boton Eliminar
+            String estado = (String)jTable.getValueAt(filaSeleccionada, 8);
+            if (estado.equals("Activo"))
+                jbEliminar.setEnabled(true); //Activar Boton Eliminar
         }
     }//GEN-LAST:event_jTableMousePressed
 

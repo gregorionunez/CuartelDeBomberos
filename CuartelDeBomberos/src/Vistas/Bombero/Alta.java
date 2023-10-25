@@ -28,8 +28,10 @@ public class Alta extends javax.swing.JDialog {
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
-        cargarComboBoxBrigada();
-        this.IniciarControles();
+        if (cargarComboBoxBrigada())
+            this.IniciarControles();
+        else
+            JOptionPane.showMessageDialog(this, "Primero debe tener Brigadas cargadas", "Información",1);
     }
     
     private void IniciarControles() {
@@ -330,12 +332,17 @@ public class Alta extends javax.swing.JDialog {
         });
     }
     
-    private void cargarComboBoxBrigada(){
+    private boolean cargarComboBoxBrigada(){
         ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
         BrigadaData brigadaData = new BrigadaData();
         listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
-        for (Brigada brigada : listaBrigadas) {
-            jcbBrigada.addItem(brigada);
+        if (listaBrigadas.isEmpty())
+            return false;
+        else {
+            for (Brigada brigada : listaBrigadas) {
+                jcbBrigada.addItem(brigada);
+            }
+            return true;
         }
     }
 
