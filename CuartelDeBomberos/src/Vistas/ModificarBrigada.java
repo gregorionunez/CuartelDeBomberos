@@ -5,11 +5,14 @@
  */
 package Vistas;
 
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
 import AccesoADatos.EmergenciaData;
+import Entidades.Brigada;
 import Entidades.Cuartel;
 import Entidades.Emergencia;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,30 +20,50 @@ import java.util.ArrayList;
  */
 public class ModificarBrigada extends javax.swing.JDialog {
 
+    public int codBrigada;
+
     public void cargarComboboxEspecia() {
 
         EmergenciaData emergenciaData = new EmergenciaData();
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
         for (Emergencia eme : listaEmergencia) {
-            ComboBoxEspecialidad.addItem(eme.getEmergencia()
-            );
+            ComboBoxEspecialidad.addItem(eme);
+
         }
-        
+
         CuartelData cuartelData = new CuartelData();
         ArrayList<Cuartel> listaCuartel = new ArrayList<>();
         listaCuartel = cuartelData.listarCuarteles();
         for (Cuartel cuartel : listaCuartel) {
-            Cuartel.addItem(cuartel.getNombreCuartel());
+            Cuartel.addItem(cuartel);
         }
-                
+
     }
 
-   
-    
-    public ModificarBrigada(java.awt.Frame parent, boolean modal,int codBri) {
+    public void cargarBrigada() {
+
+        if (codBrigada != -1) {
+            BrigadaData brigadaData = new BrigadaData();
+            Brigada brigada = new Brigada();
+            brigada = brigadaData.brigadaPorId(codBrigada);
+            jTFNombre.setText(brigada.getNombreBrigada());
+            radioButonEstado.setSelected(brigada.isEstado());
+            ComboBoxEspecialidad.setSelectedItem(brigada.getEspecialidad());
+            // Cuartel.setSelectedItem(brigada);
+        }
+    }
+
+    public ModificarBrigada(java.awt.Frame parent, boolean modal, int codBri) {
         super(parent, modal);
         initComponents();
+        this.codBrigada = codBri;
+        cargarComboboxEspecia();
+        cargarBrigada();
+    }
+
+    public ModificarBrigada(java.awt.Frame parent, boolean modal) {
+
     }
 
     /**
@@ -60,7 +83,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
         ComboBoxEspecialidad = new javax.swing.JComboBox<>();
         Cuartel = new javax.swing.JComboBox<>();
         radioButonEstado = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,19 +107,19 @@ public class ModificarBrigada extends javax.swing.JDialog {
             }
         });
 
-        radioButonEstado.setText("jRadioButton1");
+        radioButonEstado.setLabel("");
         radioButonEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioButonEstadoActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-50.png"))); // NOI18N
-        jButton1.setLabel("guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-50.png"))); // NOI18N
+        Guardar.setLabel("guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
 
@@ -125,7 +148,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
                             .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jButton1))
+                        .addComponent(Guardar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
@@ -167,17 +190,47 @@ public class ModificarBrigada extends javax.swing.JDialog {
                     .addComponent(radioButonEstado))
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Guardar)
                     .addComponent(jButton2))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        if (jTFNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        BrigadaData brigadaData = new BrigadaData();
+        Cuartel cuartel = new Cuartel();
+      
+        Emergencia emergencia = new Emergencia();
+        cuartel = (Cuartel) Cuartel.getSelectedItem();
+        emergencia = (Emergencia) ComboBoxEspecialidad.getSelectedItem();
+        int respuesta;
+
+        respuesta = JOptionPane.showConfirmDialog(
+                null,
+                "¿Deseas agregar la brigada?\nNombre brigada: " + jTFNombre.getText() + "\nTipo de emergencia: " + ComboBoxEspecialidad.getSelectedItem().toString()
+                + "\nCuartel: " + cuartel.getNombreCuartel(),
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE
+        );
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Brigada brigada = new Brigada();
+            brigada.setCodigoBrigada(codBrigada);
+            brigada.setNombreBrigada(jTFNombre.getText());
+            brigada.setEspecialidad(emergencia);
+            brigada.setEstado(radioButonEstado.isSelected());
+            brigada.setLibre(true);
+            brigada.setNumeroCuartel(cuartel.getCodCuartel());
+            brigadaData.modificarBrigada(brigada);
+        }
+        this.dispose();
+    }//GEN-LAST:event_GuardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
@@ -222,7 +275,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ModificarBrigada dialog = new ModificarBrigada(new javax.swing.JFrame(),new javax.swing.JFrame(), true );
+                ModificarBrigada dialog = new ModificarBrigada(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -235,9 +288,9 @@ public class ModificarBrigada extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBoxEspecialidad;
-    private javax.swing.JComboBox<String> Cuartel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<Emergencia> ComboBoxEspecialidad;
+    private javax.swing.JComboBox<Cuartel> Cuartel;
+    private javax.swing.JButton Guardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

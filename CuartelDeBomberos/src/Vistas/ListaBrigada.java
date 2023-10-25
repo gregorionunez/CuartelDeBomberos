@@ -18,32 +18,40 @@ import java.util.ArrayList;
  * @author Natasha
  */
 public class ListaBrigada extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo=new DefaultTableModel();
+int idBrigada;
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int f, int c) { //SOBREESCRIBO EL METODO PARA QUE NO SE PUEDA EDITAR
+            return false;
+        }
+
+    };
+
     /**
      * Creates new form Brigada
      */
     public ListaBrigada() {
+
         initComponents();
         armarCabecera();
+        cargoTabla();
+        jBModificar.setEnabled(false);
+        jBEliminar.setEnabled(false);
     }
 // cargo info en la tabla 
-    public void cargoTabla(){
-         BrigadaData brigadaData = new BrigadaData();
-         ArrayList<Brigada> listaBrigada = new ArrayList();
-         listaBrigada= brigadaData.listarBrigadas();
+
+    public void cargoTabla() {
+        BrigadaData brigadaData = new BrigadaData();
+        ArrayList<Brigada> listaBrigada = new ArrayList();
+        listaBrigada = brigadaData.listarBrigadas();
         for (Brigada brigada : listaBrigada) {
-          modelo.addRow(new Object[]{brigada.getCodigoBrigada(),brigada.getNombreBrigada(),brigada.getEspecialidad(),
-          brigada.isEstado(),brigada.getNumeroCuartel(),
-          
-          
-          
-          });
+            modelo.addRow(new Object[]{brigada.getCodigoBrigada(), brigada.getNombreBrigada(), brigada.getEspecialidad(),
+                brigada.isEstado(), brigada.getNumeroCuartel(),});
         }
-        
-    
-                
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +91,11 @@ private DefaultTableModel modelo=new DefaultTableModel();
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaDeBrigada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaDeBrigadaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaDeBrigada);
 
         jBAgregar.setText("Agregar");
@@ -159,15 +172,35 @@ private DefaultTableModel modelo=new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-         Frame f = JOptionPane.getFrameForComponent(this); 
-        ModificarBrigada ventaAgregar = new ModificarBrigada(f,true);
-        ventaAgregar.setVisible (true);
-        
-                
+
+        int nroBrigada;
+        int filaSeleccionada = -1;
+        filaSeleccionada = jTablaDeBrigada.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            nroBrigada = (Integer) jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
+        } else {
+            nroBrigada = -1;
+        }
+
+        Frame f = JOptionPane.getFrameForComponent(this);
+        ModificarBrigada ventaAgregar = new ModificarBrigada(f, true, nroBrigada);
+        ventaAgregar.setVisible(true);
+        borrarFilas();
+        cargoTabla();
+
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
+      int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al Bombero seleccionado? ", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (respuesta == 0) {
+            //BORRO EL CUARTEL
+            BrigadaData brigadaData = new BrigadaData();
+            brigadaData.eliminarBrigada(idBrigada);
+            borrarFilas();            
+            cargoTabla();
+            jBModificar.setEnabled(false);
+            jBEliminar.setEnabled(false);
+        }  
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -175,14 +208,35 @@ private DefaultTableModel modelo=new DefaultTableModel();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        Frame f = JOptionPane.getFrameForComponent(this); 
-        AgregarBrigada ventaAgregar = new AgregarBrigada (f,true);
-        ventaAgregar.setVisible (
+        Frame f = JOptionPane.getFrameForComponent(this);
+        AgregarBrigada ventaAgregar = new AgregarBrigada(f, true);
+        ventaAgregar.setVisible(
                 true);
-        
-      
-        
+
+        borrarFilas();
+        cargoTabla();
+
+        jBEliminar.setEnabled(false);
+        jBModificar.setEnabled(false);
     }//GEN-LAST:event_jBAgregarActionPerformed
+    private void borrarFilas() {
+
+        int filas = jTablaDeBrigada.getRowCount() - 1;
+        for (int f = filas; f >= 0; f--) {
+            modelo.removeRow(f);
+
+        }
+    }
+    private void jTablaDeBrigadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaDeBrigadaMouseClicked
+        int filaSeleccionada = -1;
+        filaSeleccionada = jTablaDeBrigada.getSelectedRow();
+        if (filaSeleccionada != -1) {
+idBrigada = (Integer)jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
+            jBEliminar.setEnabled(true);
+            jBModificar.setEnabled(true);
+
+        }
+    }//GEN-LAST:event_jTablaDeBrigadaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -196,18 +250,14 @@ private DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaDeBrigada;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera (){
-    
-    modelo.addColumn("id");
-    modelo.addColumn("nombre");
-    modelo.addColumn("especialidad");
-    modelo.addColumn("estado");
-    modelo.addColumn("cuartel");
-    jTablaDeBrigada.setModel(modelo);
+private void armarCabecera() {
+
+        modelo.addColumn("id");
+        modelo.addColumn("nombre");
+        modelo.addColumn("especialidad");
+        modelo.addColumn("estado");
+        modelo.addColumn("cuartel");
+        jTablaDeBrigada.setModel(modelo);
+    }
+
 }
-
-
-}
-
-
-

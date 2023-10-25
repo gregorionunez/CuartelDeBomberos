@@ -5,11 +5,14 @@
  */
 package Vistas;
 
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
 import Entidades.Emergencia;
 import java.util.ArrayList;
 import AccesoADatos.EmergenciaData;
+import Entidades.Brigada;
 import Entidades.Cuartel;
+import javax.swing.JOptionPane;
 
 public class AgregarBrigada extends javax.swing.JDialog {
 
@@ -19,17 +22,16 @@ public class AgregarBrigada extends javax.swing.JDialog {
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
         for (Emergencia eme : listaEmergencia) {
-            ComboBoxEspecialidad.addItem(eme.getEmergencia()
-            );
+            ComboBoxEspecialidad.addItem(eme);
         }
-        
+
         CuartelData cuartelData = new CuartelData();
         ArrayList<Cuartel> listaCuartel = new ArrayList<>();
         listaCuartel = cuartelData.listarCuarteles();
         for (Cuartel cuartel : listaCuartel) {
-            jComboBoxCuartel.addItem(cuartel.getNombreCuartel());
+            jComboBoxCuartel.addItem(cuartel);
         }
-                
+
     }
 
     /**
@@ -172,19 +174,47 @@ public class AgregarBrigada extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxCuartelActionPerformed
 
     private void jBGuadarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuadarActionPerformed
-       
+        if (JTFNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        BrigadaData brigadaData = new BrigadaData();
+        Cuartel cuartel = new Cuartel();
+        Emergencia emergencia = new Emergencia();
+        cuartel = (Cuartel) jComboBoxCuartel.getSelectedItem();
+        emergencia = (Emergencia) ComboBoxEspecialidad.getSelectedItem();
+        int respuesta;
+
+        respuesta = JOptionPane.showConfirmDialog(
+                null,
+                "¿Deseas agregar la brigada?\nNombre brigada: " + JTFNombre.getText() + "\nTipo de emergencia: " + ComboBoxEspecialidad.getSelectedItem().toString()
+                + "\nCuartel: " + cuartel.getNombreCuartel(),
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE
+        );
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Brigada brigada = new Brigada();
+            brigada.setNombreBrigada(JTFNombre.getText());
+            brigada.setEspecialidad(emergencia);
+            brigada.setEstado(true);
+            brigada.setLibre(true);
+            brigada.setNumeroCuartel(cuartel.getCodCuartel());
+            brigadaData.agregarBrigada(brigada);
+        }
+        this.dispose();
     }//GEN-LAST:event_jBGuadarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBoxEspecialidad;
+    private javax.swing.JComboBox<Emergencia> ComboBoxEspecialidad;
     private javax.swing.JLabel JLCuarel;
     private javax.swing.JLabel JLEspecialidad;
     private javax.swing.JLabel JLNombre;
     private javax.swing.JTextField JTFNombre;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBGuadar;
-    private javax.swing.JComboBox<String> jComboBoxCuartel;
+    private javax.swing.JComboBox<Cuartel> jComboBoxCuartel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
