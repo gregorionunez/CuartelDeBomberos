@@ -74,6 +74,7 @@ public class Menu extends javax.swing.JFrame {
         jMIBomberosPorBrigadas = new javax.swing.JMenuItem();
         jMIBrigadasPorCuartel = new javax.swing.JMenuItem();
         jMIInformacionDeSiniestros = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jMSalir = new javax.swing.JMenu();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -278,6 +279,14 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMEstadisticas);
 
+        jMenu1.setText("Cola de Siniestros");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -439,6 +448,15 @@ public class Menu extends javax.swing.JFrame {
         ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIModificacionSiniestroActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        ColaSiniestro ventana = new ColaSiniestro();
+        escritorio.add(ventana);
+        ventana.setVisible(true);
+
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -512,6 +530,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIInformacionDeSiniestros;
     private javax.swing.JMenuItem jMIModificacionSiniestro;
     private javax.swing.JMenu jMSalir;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbAltaSiniestro;
     private javax.swing.JButton jbCerrarSiniestro;
