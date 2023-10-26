@@ -12,16 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/CerrarSiniestro.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/CerrarSiniestroPuntuacion.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/CuartelUI.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/AccesoADatos/SiniestroData.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Entidades/Siniestro.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/AccesoADatos/BrigadaData.java</file>
             <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Entidades/Brigada.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/AccesoADatos/EmergenciaData.java</file>
-            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/CuartelUIModificar.java</file>
+            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/AccesoADatos/BrigadaData.java</file>
+            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/Bombero/Alta.java</file>
             <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/AltaSiniestro.java</file>
+            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/ListaBrigada.java</file>
+            <file>file:/C:/Users/Gregorio/Documents/NetBeansProjects/CuartelDeBomberos/CuartelDeBomberos/src/Vistas/Bombero/ListaDeBomberos.java</file>
         </group>
     </open-files>
 </project-private>

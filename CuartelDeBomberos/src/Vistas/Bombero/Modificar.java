@@ -12,6 +12,7 @@ import Entidades.Brigada;
 import java.sql.Date;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -21,23 +22,23 @@ import javax.swing.JTextField;
  */
 public class Modificar extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Modificar
-     */
+    int idBombero = 0;
+
     public Modificar() {
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
     }
-    
+
     public Modificar(java.awt.Frame parent, boolean modal, int idBombero) {
         super(parent, modal);
+        this.idBombero = idBombero;
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
         this.IniciarControles(idBombero);
     }
-    
+
     private void IniciarControles(int idBombero) {
         //LIMPIO LOS TEXTBOX
         cargarComboBoxBrigada();
@@ -45,13 +46,12 @@ public class Modificar extends javax.swing.JDialog {
         Bombero bombero = new Bombero();
         BrigadaData brigadaData = new BrigadaData();
         bombero = bomberoData.getBomberoPorId(idBombero);
-        jtfId.setText(bombero.getId()+"");
-        jtfDni.setText(bombero.getDni()+"");
+        jtfId.setText(bombero.getId() + "");
+        jtfDni.setText(bombero.getDni() + "");
         jtfNombre.setText(bombero.getNombre());
         jtfApellido.setText(bombero.getApellido());
         jtfCelular.setText(bombero.getCelular());
         jtfGrupoSanguineo.setText(bombero.getGrupoSanguineo());
-        jcbBrigada.setSelectedIndex(bombero.getCodigoBrigada()-1);
         jcbBrigada.setEnabled(true);
         jrbEstado.setSelected(bombero.isEstado());
         //INICIO LOS BOTONES
@@ -289,15 +289,19 @@ public class Modificar extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfNombreKeyTyped
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
         Bombero bombero = new Bombero();
         BomberoData bomberoData = new BomberoData();
+        BrigadaData brigadaData = new BrigadaData();
+
+        Bombero bomberoa = bomberoData.getBomberoPorId(idBombero);
+
+        Brigada brigadaDespues = (Brigada) jcbBrigada.getSelectedItem();
         String fecha = ((JTextField) jdcFechaNacimiento.getDateEditor().getUiComponent()).getText();   //GUARDO LA FECHA EN FORMATO STRING
 
         //PRIMERO VERIFICO QUE TODO LOS DATOS SEAN INGRESADOS
         if (jtfDni.getText().isEmpty() || jtfNombre.getText().isEmpty() || jtfApellido.getText().isEmpty()
-            || jtfCelular.getText().isEmpty() || jtfGrupoSanguineo.getText().isEmpty() || fecha.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todo los datos deben completarse","Información",1);
+                || jtfCelular.getText().isEmpty() || jtfGrupoSanguineo.getText().isEmpty() || fecha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todo los datos deben completarse", "Información", 1);
         } else {
             //CARGO EL BOMBERO
             try {
@@ -307,13 +311,21 @@ public class Modificar extends javax.swing.JDialog {
                 bombero.setNombre(jtfNombre.getText());
                 bombero.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 bombero.setCelular(jtfCelular.getText());
-                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex()+1);
+                bombero.setCodigoBrigada(brigadaDespues.getCodigoBrigada());
                 bombero.setEstado(jrbEstado.isSelected());
                 bombero.setGrupoSanguineo(jtfGrupoSanguineo.getText());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información", 1);
             }
+
             bomberoData.modificarBombero(bombero);
+
+            int cantidadBombero1 = brigadaData.cantBomberos(bomberoa.getCodigoBrigada());
+            brigadaData.actualizarCantBomberos(bomberoa.getCodigoBrigada(), cantidadBombero1 - 1);
+
+            int cantidadBombero2 = brigadaData.cantBomberos(bombero.getCodigoBrigada());
+            brigadaData.actualizarCantBomberos(bombero.getCodigoBrigada(), cantidadBombero2 + 1);
+
             this.dispose();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -388,13 +400,36 @@ public class Modificar extends javax.swing.JDialog {
             }
         });
     }
-    
-    private void cargarComboBoxBrigada(){
+
+    private void cargarComboBoxBrigada() {
+        DefaultComboBoxModel<Brigada> model = (DefaultComboBoxModel<Brigada>) jcbBrigada.getModel();
+
+        jcbBrigada.removeAllItems();
         ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
         BrigadaData brigadaData = new BrigadaData();
-        listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
+        BomberoData bomberoData = new BomberoData();
+        Bombero bombero2 = new Bombero();
+        bombero2 = bomberoData.getBomberoPorId(idBombero);
+
+        Brigada brigadaa = new Brigada();
+        brigadaa = brigadaData.brigadaPorId(bombero2.getCodigoBrigada());
+
+        listaBrigadas = brigadaData.listarBrigadasSegunEstado(true);
         for (Brigada brigada : listaBrigadas) {
-            jcbBrigada.addItem(brigada);
+            if (brigada.getCodigoBrigada() == brigadaa.getCodigoBrigada()) {
+                jcbBrigada.addItem(brigada);
+            } else if (brigada.getCantBomberos() < 5) {
+                jcbBrigada.addItem(brigada);
+            }
+        }
+
+        for (int i = 0; i < model.getSize(); i++) {
+            Brigada item = model.getElementAt(i);
+
+            if (bombero2.getCodigoBrigada()== item.getCodigoBrigada()) {
+                jcbBrigada.setSelectedIndex(i);
+                break;
+            }
         }
     }
 

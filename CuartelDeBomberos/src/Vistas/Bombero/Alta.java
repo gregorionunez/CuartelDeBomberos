@@ -28,12 +28,13 @@ public class Alta extends javax.swing.JDialog {
         initComponents();
         jdcFechaNacimiento.setDateFormatString("dd/MM/yyyy"); //ASIGNO EL FORMATO DE LA FECHA
         jdcFechaNacimiento.getDateEditor().setEnabled(false);
-        if (cargarComboBoxBrigada())
+        if (cargarComboBoxBrigada()) {
             this.IniciarControles();
-        else
-            JOptionPane.showMessageDialog(this, "Primero debe tener Brigadas cargadas", "Información",1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Primero debe tener Brigadas cargadas", "Información", 1);
+        }
     }
-    
+
     private void IniciarControles() {
         //LIMPIO LOS TEXTBOX
         jtfDni.setText("");
@@ -217,12 +218,14 @@ public class Alta extends javax.swing.JDialog {
         // TODO add your handling code here:
         Bombero bombero = new Bombero();
         BomberoData bomberoData = new BomberoData();
+        BrigadaData brigadaData = new BrigadaData();
+        Brigada brigada = (Brigada) jcbBrigada.getSelectedItem();
         String fecha = ((JTextField) jdcFechaNacimiento.getDateEditor().getUiComponent()).getText();   //GUARDO LA FECHA EN FORMATO STRING
 
         //PRIMERO VERIFICO QUE TODO LOS DATOS SEAN INGRESADOS      
         if (jtfDni.getText().isEmpty() || jtfNombre.getText().isEmpty() || jtfApellido.getText().isEmpty()
                 || jtfCelular.getText().isEmpty() || jtfGrupoSanguineo.getText().isEmpty() || fecha.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todo los datos deben completarse","Información",1);
+            JOptionPane.showMessageDialog(this, "Todo los datos deben completarse", "Información", 1);
         } else {
             //CARGO EL BOMBERO
             try {
@@ -231,19 +234,20 @@ public class Alta extends javax.swing.JDialog {
                 bombero.setNombre(jtfNombre.getText());
                 bombero.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 bombero.setCelular(jtfCelular.getText());
-                bombero.setCodigoBrigada(jcbBrigada.getSelectedIndex()+1);
+                bombero.setCodigoBrigada(brigada.getCodigoBrigada());
                 bombero.setGrupoSanguineo(jtfGrupoSanguineo.getText());
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información",1);
+                JOptionPane.showMessageDialog(this, "Error de tipo de datos ", "Información", 1);
             }
 
             //SI INGRESO TODO LOS DATOS VERIFICO SI EL BOMBERO YA EXISTE
             if (!bomberoData.existeBomberoPorDni(bombero.getDni())) {
-                System.out.println(bombero);
+                int cantBomberos = brigadaData.cantBomberos(bombero.getCodigoBrigada());
                 bomberoData.agregarBombero(bombero);
+                brigadaData.actualizarCantBomberos(bombero.getCodigoBrigada(), cantBomberos + 1);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "El Bombero ya se encuentra en la Base de Datos","Información",1);
+                JOptionPane.showMessageDialog(this, "El Bombero ya se encuentra en la Base de Datos", "Información", 1);
             }
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -331,16 +335,19 @@ public class Alta extends javax.swing.JDialog {
             }
         });
     }
-    
-    private boolean cargarComboBoxBrigada(){
+
+    private boolean cargarComboBoxBrigada() {      
+        jcbBrigada.removeAllItems();
         ArrayList<Brigada> listaBrigadas = new ArrayList<Brigada>();
         BrigadaData brigadaData = new BrigadaData();
-        listaBrigadas = brigadaData.brigadasPorEstadoYDisponibilidad(true, true);
-        if (listaBrigadas.isEmpty())
+        listaBrigadas = brigadaData.listarBrigadasSegunEstado(true);
+        if (listaBrigadas.isEmpty()) {
             return false;
-        else {
+        } else {
             for (Brigada brigada : listaBrigadas) {
-                jcbBrigada.addItem(brigada);
+                if (brigada.getCantBomberos() < 5) {
+                    jcbBrigada.addItem(brigada);
+                }
             }
             return true;
         }

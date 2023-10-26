@@ -52,7 +52,7 @@ public class BrigadaData {
 
     // modificar brigada
     public void modificarBrigada(Brigada brigada) {
-        String sql = "UPDATE brigada SET nombre_br=?,especialidad=?,libre=?,nro_cuartel=?,estado=? WHERE cod_brigada="+brigada.getCodigoBrigada();
+        String sql = "UPDATE brigada SET nombre_br=?,especialidad=?,libre=?,nro_cuartel=?,estado=? WHERE cod_brigada=" + brigada.getCodigoBrigada();
         try {
             //creo una conexion con mi base de datos
             con = Conexion.getConexion();
@@ -85,6 +85,44 @@ public class BrigadaData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el brigada ", "Error", 0);
+        }
+        //cierro mi conexion 
+        Conexion.cerrarConexion(con);
+    }
+
+    public int cantBomberos(int idBrigada) {
+        int cantidadBomberos=-1;
+        String sql = "SELECT cant_bomberos FROM brigada WHERE cod_brigada=" + idBrigada;
+        try {
+            //creo una conexion con mi base de datos
+            con = Conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            // le asigno los valores
+            ResultSet rs = ps.executeQuery(); // Ejecutar PreparedStatement
+            if(rs.next()){
+                cantidadBomberos = rs.getInt("cant_bomberos");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error", "Error", 0);
+        }
+        //cierro mi conexion 
+        Conexion.cerrarConexion(con);
+        return cantidadBomberos;
+    }
+
+    public void actualizarCantBomberos(int idBrigada, int cant) {
+        String sql = "UPDATE brigada SET cant_bomberos=? WHERE cod_brigada=" + idBrigada;
+        try {
+            //creo una conexion con mi base de datos
+            con = Conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            // le asigno los valores 
+            ps.setInt(1, cant);
+            ps.executeUpdate(); // Ejecutar PreparedStatement
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error", "Error", 0);
         }
         //cierro mi conexion 
         Conexion.cerrarConexion(con);
@@ -134,6 +172,7 @@ public class BrigadaData {
                 brigada.setLibre(rs.getBoolean("libre"));
                 brigada.setNumeroCuartel(rs.getInt("nro_cuartel"));
                 brigada.setEstado(rs.getBoolean("estado"));
+                brigada.setCantBomberos(rs.getInt("cant_bomberos"));
                 //AGREGO LA BRIGADA A LA LISTA
                 brigadas.add(brigada);
             }

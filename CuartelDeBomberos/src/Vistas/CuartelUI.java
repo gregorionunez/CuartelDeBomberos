@@ -228,7 +228,7 @@ public class CuartelUI extends javax.swing.JInternalFrame {
         ventanaAgregar.setVisible(true);
         borrarFilas();
         cargoTabla();
-
+        iniciarComandos();
     }//GEN-LAST:event_jbtnAgregarActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
@@ -297,8 +297,7 @@ public class CuartelUI extends javax.swing.JInternalFrame {
         ventanaModificar.setVisible(true);
         borrarFilas();
         cargoTabla();
-
-
+        iniciarComandos();
     }//GEN-LAST:event_jbtnModificarActionPerformed
 
 

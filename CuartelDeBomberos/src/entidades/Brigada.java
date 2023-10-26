@@ -18,7 +18,7 @@ public class Brigada {
     private boolean estado;
     private int numeroCuartel;
     private boolean libre ;
-    private List<Bombero> bomberos;
+    private int cantBomberos;
 
     public Brigada(String nombreBrigada, Emergencia especialidad, boolean estado, boolean libre) {
         this.nombreBrigada = nombreBrigada;
@@ -41,7 +41,8 @@ public class Brigada {
         this.especialidad = especialidad;
         this.estado = estado;
         this.libre = libre;
-    }
+    }  
+    
 
     public Brigada() {
     }
@@ -93,18 +94,20 @@ public class Brigada {
     public void setLibre(boolean libre) {
         this.libre = libre;
     }
-
-    public List<Bombero> getBomberos() {
-        return bomberos;
-    }
-
-    public void setBomberos(List<Bombero> bomberos) {
-        this.bomberos = bomberos;
-    }
-
+    
     @Override
     public String toString() {
         return nombreBrigada+" - "+especialidad;
     }
+
+    public int getCantBomberos() {
+        return cantBomberos;
+    }
+
+    public void setCantBomberos(int cantBomberos) {
+        this.cantBomberos = cantBomberos;
+    }
+    
+    
    
 }
