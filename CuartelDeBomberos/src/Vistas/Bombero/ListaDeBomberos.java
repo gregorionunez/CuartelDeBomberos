@@ -21,13 +21,13 @@ import javax.swing.table.DefaultTableModel;
 public class ListaDeBomberos extends javax.swing.JInternalFrame {
 
     int idBombero; //Variable donde se guardara el id de bombero seleccionado
-            
-    private DefaultTableModel modeloTabla = new DefaultTableModel(){ // Creo un modelo de tabla
-        public boolean isCellEditable(int f, int c){
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel() { // Creo un modelo de tabla
+        public boolean isCellEditable(int f, int c) {
             return false; // Indica que todas las celdas de la tabla no son editables
         }
     };
-    
+
     /**
      * Creates new form ListaDeBomberos
      */
@@ -88,11 +88,6 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         jbAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbAgregarMousePressed(evt);
-            }
-        });
-        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarActionPerformed(evt);
             }
         });
 
@@ -162,18 +157,21 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbAgregarActionPerformed
-
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al Bombero seleccionado? ", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (respuesta == 0) {
-            //BORRO EL CUARTEL
+            
             BomberoData bomberoData = new BomberoData();
+            BrigadaData brigadaData = new BrigadaData();
+            Bombero bomberoa = bomberoData.getBomberoPorId(idBombero);
+            
             bomberoData.eliminarBombero(idBombero);
-            limpiarTabla();            
+            
+            int cantidadBombero1 = brigadaData.cantBomberos(bomberoa.getCodigoBrigada());
+            brigadaData.actualizarCantBomberos(bomberoa.getCodigoBrigada(), cantidadBombero1 - 1);
+
+            limpiarTabla();
             cargarTabla();
             jbModificar.setEnabled(false);
             jbEliminar.setEnabled(false);
@@ -203,6 +201,8 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
             ventana.setLocation(x, y);
             limpiarTabla();
             cargarTabla();
+            jbModificar.setEnabled(false);
+            jbEliminar.setEnabled(false);
         }
     }//GEN-LAST:event_jbAgregarMousePressed
 
@@ -210,12 +210,15 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int filaSeleccionada = -1;
         filaSeleccionada = jTable.getSelectedRow();
-        if (filaSeleccionada!=-1){ //Se selecciono una fila
-            idBombero = (Integer)jTable.getValueAt(filaSeleccionada, 0);
+        if (filaSeleccionada != -1) { //Se selecciono una fila
+            idBombero = (Integer) jTable.getValueAt(filaSeleccionada, 0);
             jbModificar.setEnabled(true); //Activar Boton Modificar
-            String estado = (String)jTable.getValueAt(filaSeleccionada, 8);
-            if (estado.equals("Activo"))
+            String estado = (String) jTable.getValueAt(filaSeleccionada, 8);
+            if (estado.equals("Activo")) {
                 jbEliminar.setEnabled(true); //Activar Boton Eliminar
+            } else {
+                jbEliminar.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_jTableMousePressed
 
@@ -231,9 +234,11 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         ventana.setLocation(x, y);
         limpiarTabla();
         cargarTabla();
+        jbModificar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }//GEN-LAST:event_jbModificarMousePressed
 
-    private void cabeceraDeTabla(){
+    private void cabeceraDeTabla() {
         //Nombre de columnas
         modeloTabla.addColumn("ID");
         modeloTabla.addColumn("DNI");
@@ -256,20 +261,20 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         jTable.getColumnModel().getColumn(7).setPreferredWidth(100);
         jTable.getColumnModel().getColumn(8).setPreferredWidth(40);
     }
-    
-    private void cargarDatosEnLaTabla(Bombero bombero){
-        modeloTabla.addRow(new Object[]{bombero.getId(), bombero.getDni(), bombero.getNombre(), bombero.getApellido(), bombero.getCelular(), bombero.getGrupoSanguineo(), bombero.getFechaNacimiento(), bombero.getCodigoBrigada(), (bombero.isEstado())? "Activo":"Inactivo"});
+
+    private void cargarDatosEnLaTabla(Bombero bombero) {
+        modeloTabla.addRow(new Object[]{bombero.getId(), bombero.getDni(), bombero.getNombre(), bombero.getApellido(), bombero.getCelular(), bombero.getGrupoSanguineo(), bombero.getFechaNacimiento(), bombero.getCodigoBrigada(), (bombero.isEstado()) ? "Activo" : "Inactivo"});
     }
-    
-    public void limpiarTabla(){
+
+    public void limpiarTabla() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        int filas = jTable.getRowCount()-1;
-        for (int i = filas; i >= 0; i--) {          
-            model.removeRow(model.getRowCount()-1);
+        int filas = jTable.getRowCount() - 1;
+        for (int i = filas; i >= 0; i--) {
+            model.removeRow(model.getRowCount() - 1);
         }
     }
-    
-    public void cargarTabla(){
+
+    public void cargarTabla() {
         ArrayList<Bombero> listaBomberos = new ArrayList<Bombero>();
         BomberoData bomberoData = new BomberoData();
         listaBomberos = bomberoData.listarTodosLosBomberos();

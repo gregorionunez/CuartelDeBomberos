@@ -45,6 +45,7 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         botones.add(jRB9);
         this.idSiniestro = idSiniestro;
         cargarSiniestro();
+        jDCFecha_resol.getDateEditor().setEnabled(false);
     }
 
     public void cargarSiniestro() {

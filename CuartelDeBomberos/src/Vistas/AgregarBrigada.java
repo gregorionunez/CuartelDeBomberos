@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 public class AgregarBrigada extends javax.swing.JDialog {
 
     public void cargarComboboxEspecia() {
-
+        ComboBoxEspecialidad.removeAllItems();
+        jComboBoxCuartel.removeAllItems();
+        
         EmergenciaData emergenciaData = new EmergenciaData();
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
@@ -29,7 +31,9 @@ public class AgregarBrigada extends javax.swing.JDialog {
         ArrayList<Cuartel> listaCuartel = new ArrayList<>();
         listaCuartel = cuartelData.listarCuarteles();
         for (Cuartel cuartel : listaCuartel) {
+            if(cuartel.isEstado()){
             jComboBoxCuartel.addItem(cuartel);
+            }
         }
 
     }
@@ -64,6 +68,8 @@ public class AgregarBrigada extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de Brigada");
+        setPreferredSize(new java.awt.Dimension(570, 332));
+        setResizable(false);
 
         JLNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         JLNombre.setText("Nombre");

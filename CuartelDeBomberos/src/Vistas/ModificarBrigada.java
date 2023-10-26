@@ -23,7 +23,8 @@ public class ModificarBrigada extends javax.swing.JDialog {
     public int codBrigada;
 
     public void cargarComboboxEspecia() {
-
+        ComboBoxEspecialidad.removeAllItems();
+        Cuartel.removeAllItems();
         EmergenciaData emergenciaData = new EmergenciaData();
         ArrayList<Emergencia> listaEmergencia = new ArrayList<>();
         listaEmergencia = emergenciaData.listarEmergencia();
@@ -31,7 +32,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
             ComboBoxEspecialidad.addItem(eme);
 
         }
-
+        
         CuartelData cuartelData = new CuartelData();
         ArrayList<Cuartel> listaCuartel = new ArrayList<>();
         listaCuartel = cuartelData.listarCuarteles();
@@ -89,6 +90,8 @@ public class ModificarBrigada extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar Brigada");
         setFont(new java.awt.Font("Agency FB", 1, 12)); // NOI18N
+        setPreferredSize(new java.awt.Dimension(600, 424));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nombre");

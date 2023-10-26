@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ListaBrigada extends javax.swing.JInternalFrame {
 
     int idBrigada;
-    
+
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) { //SOBREESCRIBO EL METODO PARA QUE NO SE PUEDA EDITAR
             return false;
@@ -55,8 +55,8 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private String cuartel(int id){
+
+    private String cuartel(int id) {
         CuartelData cuartelData = new CuartelData();
         return cuartelData.buscarCuartel(id).getNombreCuartel();
     }
@@ -199,6 +199,8 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
         ventanaModificar.setLocation(x, y);
         borrarFilas();
         cargoTabla();
+        jBModificar.setEnabled(false);
+        jBEliminar.setEnabled(false);
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -227,6 +229,8 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
         int x = (this.getWidth() - ventaAgregar.getWidth()) / 2;
         int y = (this.getHeight() - ventaAgregar.getHeight()) / 2;
         ventaAgregar.setLocation(x, y);
+        jBModificar.setEnabled(false);
+        jBEliminar.setEnabled(false);
     }//GEN-LAST:event_jBAgregarActionPerformed
     private void borrarFilas() {
         int filas = jTablaDeBrigada.getRowCount() - 1;
@@ -237,12 +241,14 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
     private void jTablaDeBrigadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaDeBrigadaMouseClicked
         int filaSeleccionada = -1;
         filaSeleccionada = jTablaDeBrigada.getSelectedRow();
-        if (filaSeleccionada != -1) {
+        if (filaSeleccionada != -1) {   
             idBrigada = (Integer) jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
             jBModificar.setEnabled(true);
-            String estado = (String) jTablaDeBrigada.getValueAt(filaSeleccionada, 3);            
+            String estado = (String) jTablaDeBrigada.getValueAt(filaSeleccionada, 3);
             if (estado.equals("Activa")) {
                 jBEliminar.setEnabled(true);
+            }else{
+                jBEliminar.setEnabled(false);
             }
         }
     }//GEN-LAST:event_jTablaDeBrigadaMouseClicked
