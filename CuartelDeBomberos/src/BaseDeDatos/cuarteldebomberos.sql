@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2023 a las 00:59:38
+-- Tiempo de generación: 27-10-2023 a las 01:54:27
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -51,7 +51,8 @@ CREATE TABLE `brigada` (
   `especialidad` int(11) NOT NULL,
   `libre` tinyint(1) NOT NULL,
   `nro_cuartel` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `estado` tinyint(1) NOT NULL,
+  `cant_bomberos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
