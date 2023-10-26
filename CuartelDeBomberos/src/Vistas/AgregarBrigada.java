@@ -62,12 +62,19 @@ public class AgregarBrigada extends javax.swing.JDialog {
         jComboBoxCuartel = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alta de Brigada");
+
+        JLNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         JLNombre.setText("Nombre");
 
+        JLEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         JLEspecialidad.setText("Especialidad");
 
+        JLCuarel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         JLCuarel.setText("Cuatel");
 
+        jBGuadar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBGuadar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-guardar-50.png"))); // NOI18N
         jBGuadar.setText("Guardar");
         jBGuadar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +83,7 @@ public class AgregarBrigada extends javax.swing.JDialog {
             }
         });
 
+        jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
         jBCancelar.setText("Cancelar");
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,26 +115,20 @@ public class AgregarBrigada extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLCuarel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JLEspecialidad)
-                            .addComponent(JLNombre)
-                            .addComponent(jLabel1))
-                        .addGap(122, 122, 122)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboBoxEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxCuartel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JTFNombre)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jBGuadar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                        .addComponent(jBCancelar)
-                        .addGap(33, 33, 33)))
-                .addGap(92, 92, 92))
+                    .addComponent(JLCuarel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLEspecialidad)
+                    .addComponent(JLNombre)
+                    .addComponent(jLabel1)
+                    .addComponent(jBGuadar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ComboBoxEspecialidad, 0, 235, Short.MAX_VALUE)
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JTFNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBoxCuartel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,14 +147,15 @@ public class AgregarBrigada extends javax.swing.JDialog {
                     .addComponent(jComboBoxCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCancelar)
-                    .addComponent(jBGuadar))
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBGuadar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed

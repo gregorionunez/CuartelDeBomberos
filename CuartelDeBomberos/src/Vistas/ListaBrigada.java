@@ -6,6 +6,7 @@
 package Vistas;
 
 import AccesoADatos.BrigadaData;
+import AccesoADatos.CuartelData;
 import Entidades.Brigada;
 import com.sun.javafx.collections.ArrayListenerHelper;
 import java.awt.Frame;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  * @author Natasha
  */
 public class ListaBrigada extends javax.swing.JInternalFrame {
-int idBrigada;
-    private DefaultTableModel modelo = new DefaultTableModel() {
 
-        @Override
+    int idBrigada;
+    
+    private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) { //SOBREESCRIBO EL METODO PARA QUE NO SE PUEDA EDITAR
             return false;
         }
@@ -32,9 +33,9 @@ int idBrigada;
      * Creates new form Brigada
      */
     public ListaBrigada() {
-
         initComponents();
         armarCabecera();
+        borrarFilas();
         cargoTabla();
         jBModificar.setEnabled(false);
         jBEliminar.setEnabled(false);
@@ -45,11 +46,19 @@ int idBrigada;
         BrigadaData brigadaData = new BrigadaData();
         ArrayList<Brigada> listaBrigada = new ArrayList();
         listaBrigada = brigadaData.listarBrigadas();
-        for (Brigada brigada : listaBrigada) {
-            modelo.addRow(new Object[]{brigada.getCodigoBrigada(), brigada.getNombreBrigada(), brigada.getEspecialidad(),
-                brigada.isEstado(), brigada.getNumeroCuartel(),});
+        if (listaBrigada.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No existen brigadas en la base de datos", "MENSAJE", 1);
+        } else {
+            for (Brigada brigada : listaBrigada) {
+                modelo.addRow(new Object[]{brigada.getCodigoBrigada(), brigada.getNombreBrigada(), brigada.getEspecialidad(),
+                    (brigada.isEstado()) ? "Activa" : "Inactiva", cuartel(brigada.getNumeroCuartel())});
+            }
         }
-
+    }
+    
+    private String cuartel(int id){
+        CuartelData cuartelData = new CuartelData();
+        return cuartelData.buscarCuartel(id).getNombreCuartel();
     }
 
     /**
@@ -62,7 +71,6 @@ int idBrigada;
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jLBrigada = new javax.swing.JLabel();
         JLListas = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaDeBrigada = new javax.swing.JTable();
@@ -73,11 +81,11 @@ int idBrigada;
 
         jMenu1.setText("jMenu1");
 
-        jLBrigada.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLBrigada.setText("Brigada");
+        setClosable(true);
+        setTitle("Brigadas");
 
-        JLListas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        JLListas.setText("LISTA DE BRIGADAS");
+        JLListas.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        JLListas.setText("Lista de Brigadas");
 
         jTablaDeBrigada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +106,8 @@ int idBrigada;
         });
         jScrollPane1.setViewportView(jTablaDeBrigada);
 
+        jBAgregar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-más-50.png"))); // NOI18N
         jBAgregar.setText("Agregar");
         jBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +115,8 @@ int idBrigada;
             }
         });
 
+        jBModificar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-editar-50.png"))); // NOI18N
         jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +124,8 @@ int idBrigada;
             }
         });
 
+        jBEliminar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-basura-501.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +133,8 @@ int idBrigada;
             }
         });
 
+        jBSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-salir-50.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,48 +147,41 @@ int idBrigada;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JLListas)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLListas)
-                            .addComponent(jLBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jBAgregar)
-                        .addGap(43, 43, 43)
-                        .addComponent(jBModificar)
-                        .addGap(50, 50, 50)
-                        .addComponent(jBEliminar)
-                        .addGap(39, 39, 39)
-                        .addComponent(jBSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jBSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLBrigada)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(JLListas)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAgregar)
-                    .addComponent(jBModificar)
-                    .addComponent(jBEliminar)
-                    .addComponent(jBSalir))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                        .addComponent(jBModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-
         int nroBrigada;
         int filaSeleccionada = -1;
         filaSeleccionada = jTablaDeBrigada.getSelectedRow();
@@ -183,24 +192,26 @@ int idBrigada;
         }
 
         Frame f = JOptionPane.getFrameForComponent(this);
-        ModificarBrigada ventaAgregar = new ModificarBrigada(f, true, nroBrigada);
-        ventaAgregar.setVisible(true);
+        ModificarBrigada ventanaModificar = new ModificarBrigada(f, true, nroBrigada);
+        ventanaModificar.setVisible(true);
+        int x = (this.getWidth() - ventanaModificar.getWidth()) / 2;
+        int y = (this.getHeight() - ventanaModificar.getHeight()) / 2;
+        ventanaModificar.setLocation(x, y);
         borrarFilas();
         cargoTabla();
-
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-      int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al Bombero seleccionado? ", "Confirmación", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la Brigada seleccionado? ", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (respuesta == 0) {
             //BORRO EL CUARTEL
             BrigadaData brigadaData = new BrigadaData();
             brigadaData.eliminarBrigada(idBrigada);
-            borrarFilas();            
+            borrarFilas();
             cargoTabla();
             jBModificar.setEnabled(false);
             jBEliminar.setEnabled(false);
-        }  
+        }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -210,31 +221,29 @@ int idBrigada;
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         Frame f = JOptionPane.getFrameForComponent(this);
         AgregarBrigada ventaAgregar = new AgregarBrigada(f, true);
-        ventaAgregar.setVisible(
-                true);
-
+        ventaAgregar.setVisible(true);
         borrarFilas();
         cargoTabla();
-
-        jBEliminar.setEnabled(false);
-        jBModificar.setEnabled(false);
+        int x = (this.getWidth() - ventaAgregar.getWidth()) / 2;
+        int y = (this.getHeight() - ventaAgregar.getHeight()) / 2;
+        ventaAgregar.setLocation(x, y);
     }//GEN-LAST:event_jBAgregarActionPerformed
     private void borrarFilas() {
-
         int filas = jTablaDeBrigada.getRowCount() - 1;
         for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
-
         }
     }
     private void jTablaDeBrigadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaDeBrigadaMouseClicked
         int filaSeleccionada = -1;
         filaSeleccionada = jTablaDeBrigada.getSelectedRow();
         if (filaSeleccionada != -1) {
-idBrigada = (Integer)jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
-            jBEliminar.setEnabled(true);
+            idBrigada = (Integer) jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
             jBModificar.setEnabled(true);
-
+            String estado = (String) jTablaDeBrigada.getValueAt(filaSeleccionada, 3);            
+            if (estado.equals("Activa")) {
+                jBEliminar.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_jTablaDeBrigadaMouseClicked
 
@@ -245,19 +254,24 @@ idBrigada = (Integer)jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JLabel jLBrigada;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaDeBrigada;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
 
-        modelo.addColumn("id");
-        modelo.addColumn("nombre");
-        modelo.addColumn("especialidad");
-        modelo.addColumn("estado");
-        modelo.addColumn("cuartel");
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Especialidad");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Cuartel");
         jTablaDeBrigada.setModel(modelo);
+        //Ancho de columnas
+        jTablaDeBrigada.getColumnModel().getColumn(0).setPreferredWidth(20);
+        jTablaDeBrigada.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTablaDeBrigada.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTablaDeBrigada.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jTablaDeBrigada.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
 }

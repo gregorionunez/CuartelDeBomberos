@@ -40,7 +40,7 @@ public class Cuartel {
 
     @Override
     public String toString() {
-        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombreCuartel=" + nombreCuartel + ", direccion=" + direccion + ", coordX=" + coordX + ", coordY=" + coordY + ", telefono=" + telefono + ", correo=" + correo + ", estado=" + estado + '}';
+        return "ID:" + codCuartel + " - " + nombreCuartel + ", direccion: " + direccion;
     }
 
     public int getCodCuartel() {
