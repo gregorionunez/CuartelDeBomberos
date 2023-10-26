@@ -52,7 +52,7 @@ public class BrigadaData {
 
     // modificar brigada
     public void modificarBrigada(Brigada brigada) {
-        String sql = "UPDATE brigada SET nombre_br=?,especialidad=?,libre=?,nro_cuartel=?,estado=? WHERE cod_brigada=brigada.getId";
+        String sql = "UPDATE brigada SET nombre_br=?,especialidad=?,libre=?,nro_cuartel=?,estado=? WHERE cod_brigada="+brigada.getCodigoBrigada();
         try {
             //creo una conexion con mi base de datos
             con = Conexion.getConexion();
