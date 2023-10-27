@@ -310,8 +310,8 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
             return;
         }
 
-        if (fecha_resol.isAfter(LocalDate.now())) {
-            JOptionPane.showMessageDialog(null, "La fecha colocada es posterior a la fecha de hoy.", "Error", 0);
+        if (fecha_resol.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(null, "La fecha colocada es anterior a la fecha de hoy.", "Error", 0);
             return;
         }
 
@@ -335,6 +335,8 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
             siniestro.setEstado(false);
 
             siniestroData.modificarSiniestro(siniestro);
+        }else{
+            return;
         }
 
         ArrayList<Siniestro> listarSiniestros = new ArrayList<>();
