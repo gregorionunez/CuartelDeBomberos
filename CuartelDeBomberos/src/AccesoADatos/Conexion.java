@@ -11,7 +11,7 @@ public class Conexion {
  
       // CREO TRES VARIABLES ESTATICAS QUE REPRESENTAN LA BASE DE DATO
     private static final String URL = "jdbc:mariadb://localhost/"; 
-    private static final String DB = "cuarteldebomberos"; //NOMBRE DE LA BASE DE DATOS
+    private static final String DB = "cuarteldebomberos67"; //NOMBRE DE LA BASE DE DATOS
     private static final String USUARIO = "root"; //NOMBRE DE USUARUIO
     private static final String PASSWORD = ""; // PALABRA CLAVE DE ACCESO A LA BASE DE DATOS
 
