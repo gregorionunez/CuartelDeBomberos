@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2023 a las 23:58:50
+-- Tiempo de generación: 28-10-2023 a las 00:36:37
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -151,9 +151,9 @@ CREATE TABLE `siniestro` (
 --
 
 INSERT INTO `siniestro` (`codigo`, `tipo`, `fecha_siniestro`, `cod_x`, `cod_y`, `detalle`, `fecha_resol`, `puntuacion`, `cod_brigada`, `estado`) VALUES
-(1, '1', '2023-10-27', 126, 126, 'Incendio en casa de pasillo', NULL, NULL, 2, 1),
-(2, '1', '2023-10-27', 955, 1295, 'Persona atrapada bajo arbol', NULL, NULL, 3, 1),
-(3, '2', '2023-10-27', 123, 123, 'Derrumbe en casa 3 heridos', NULL, NULL, 2, 1);
+(1, '1', '2023-10-31', 126, 126, 'Incendio en casa de pasillo', NULL, NULL, 2, 1),
+(2, '1', '2023-10-31', 955, 1295, 'Persona atrapada bajo arbol', NULL, NULL, 3, 1),
+(3, '2', '2023-11-01', 123, 123, 'Derrumbe en casa 3 heridos', NULL, NULL, 2, 1);
 
 --
 -- Índices para tablas volcadas
