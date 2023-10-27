@@ -340,26 +340,26 @@ public class CerrarSiniestroPuntuacion extends javax.swing.JDialog {
         ArrayList<Siniestro> listarSiniestros = new ArrayList<>();
         listarSiniestros = siniestroData.listarSiniestro();
 
-        int respuestaSiniestroNuevo;
-
-        respuestaSiniestroNuevo = JOptionPane.showConfirmDialog(
-                null,
-                "La brigada '" + brigada.getNombreBrigada() + "' Tiene un nuevo siniestro en la cola ¿Deseas asignárselo?",
-                "Confirmación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.ERROR_MESSAGE
-        );
-
-        if (respuestaSiniestroNuevo == JOptionPane.YES_OPTION) {
         for (Siniestro listarSiniestro : listarSiniestros) {
             if (listarSiniestro.isEstado()) {
                 if (listarSiniestro.getCodBrigada() == siniestro.getCodBrigada()) {
+                    int respuestaSiniestroNuevo;
+
+                    respuestaSiniestroNuevo = JOptionPane.showConfirmDialog(
+                            null,
+                            "La brigada '" + brigada.getNombreBrigada() + "' Tiene un nuevo siniestro en la cola ¿Deseas asignárselo?",
+                            "Confirmación",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.ERROR_MESSAGE
+                    );
+
+                    if (respuestaSiniestroNuevo == JOptionPane.YES_OPTION) {
                     brigadaData.dispBrigada(siniestro.getCodBrigada(), false);
                     JOptionPane.showMessageDialog(null, "Siniestro asignado", "Información", 1);
+                    }
                     break;
                 }
             }
-        }
         }
 
         this.dispose();
