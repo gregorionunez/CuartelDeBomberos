@@ -12,6 +12,7 @@ import Entidades.Brigada;
 import Entidades.Cuartel;
 import Entidades.Emergencia;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +33,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
             ComboBoxEspecialidad.addItem(eme);
 
         }
-        
+
         CuartelData cuartelData = new CuartelData();
         ArrayList<Cuartel> listaCuartel = new ArrayList<>();
         listaCuartel = cuartelData.listarCuarteles();
@@ -50,8 +51,26 @@ public class ModificarBrigada extends javax.swing.JDialog {
             brigada = brigadaData.brigadaPorId(codBrigada);
             jTFNombre.setText(brigada.getNombreBrigada());
             radioButonEstado.setSelected(brigada.isEstado());
-            ComboBoxEspecialidad.setSelectedItem(brigada.getEspecialidad());
-            // Cuartel.setSelectedItem(brigada);
+           
+            DefaultComboBoxModel<Emergencia> model = (DefaultComboBoxModel<Emergencia>) ComboBoxEspecialidad.getModel();
+            for (int i = 0; i < model.getSize(); i++) {
+                Emergencia item = model.getElementAt(i);
+
+                if (brigada.getEspecialidad().getId() == item.getId()) {
+                    ComboBoxEspecialidad.setSelectedIndex(i);
+                    break;
+                }
+            }
+             DefaultComboBoxModel<Cuartel> model2 = (DefaultComboBoxModel<Cuartel>) Cuartel.getModel();
+            for (int i = 0; i < model2.getSize(); i++) {
+                Cuartel item = model2.getElementAt(i);
+
+                if (brigada.getNumeroCuartel() == item.getCodCuartel()) {
+                    Cuartel.setSelectedIndex(i);
+                    break;
+                }
+            }
+
         }
     }
 
@@ -195,7 +214,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
         }
         BrigadaData brigadaData = new BrigadaData();
         Cuartel cuartel = new Cuartel();
-      
+
         Emergencia emergencia = new Emergencia();
         cuartel = (Cuartel) Cuartel.getSelectedItem();
         emergencia = (Emergencia) ComboBoxEspecialidad.getSelectedItem();
