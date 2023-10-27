@@ -96,6 +96,7 @@ public class EstadisticasUIBrigadasPorCuartel extends javax.swing.JInternalFrame
         jCboxCuarteles = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
+        setClosable(true);
         setTitle("Brigadas por Cuartel");
 
         jBtnSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
