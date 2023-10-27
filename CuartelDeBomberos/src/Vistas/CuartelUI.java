@@ -1,6 +1,8 @@
 package Vistas;
 
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
+import Entidades.Brigada;
 import Entidades.Cuartel;
 import java.awt.Color;
 import java.awt.Component;
@@ -273,7 +275,16 @@ public class CuartelUI extends javax.swing.JInternalFrame {
             if (respuesta == 0) {
                 //BORRO EL CUARTEL
                 CuartelData cuartelData = new CuartelData();
-                cuartelData.eliminarCuartel(nroCuartel);
+
+                //VERIFICO SI TIENE BRIGADAS
+                BrigadaData brigadaData = new BrigadaData();
+                ArrayList<Brigada> listaBrigadas = new ArrayList();
+                listaBrigadas=brigadaData.listarBrigadasPorCuartel(nroCuartel);
+                if (listaBrigadas.isEmpty()) {
+                    cuartelData.eliminarCuartel(nroCuartel);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Imposible borrar cuartel tiene " + listaBrigadas.size() + " brigadas asignadas");
+                }
                 borrarFilas();
                 cargoTabla();
                 iniciarComandos();

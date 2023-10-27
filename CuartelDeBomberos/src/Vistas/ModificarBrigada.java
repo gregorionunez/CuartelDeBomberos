@@ -51,7 +51,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
             brigada = brigadaData.brigadaPorId(codBrigada);
             jTFNombre.setText(brigada.getNombreBrigada());
             radioButonEstado.setSelected(brigada.isEstado());
-           
+
             DefaultComboBoxModel<Emergencia> model = (DefaultComboBoxModel<Emergencia>) ComboBoxEspecialidad.getModel();
             for (int i = 0; i < model.getSize(); i++) {
                 Emergencia item = model.getElementAt(i);
@@ -61,7 +61,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
                     break;
                 }
             }
-             DefaultComboBoxModel<Cuartel> model2 = (DefaultComboBoxModel<Cuartel>) Cuartel.getModel();
+            DefaultComboBoxModel<Cuartel> model2 = (DefaultComboBoxModel<Cuartel>) Cuartel.getModel();
             for (int i = 0; i < model2.getSize(); i++) {
                 Cuartel item = model2.getElementAt(i);
 
@@ -222,7 +222,7 @@ public class ModificarBrigada extends javax.swing.JDialog {
 
         respuesta = JOptionPane.showConfirmDialog(
                 null,
-                "¿Deseas agregar la brigada?\nNombre brigada: " + jTFNombre.getText() + "\nTipo de emergencia: " + ComboBoxEspecialidad.getSelectedItem().toString()
+                "¿Deseas modificar la brigada?\nNombre brigada: " + jTFNombre.getText() + "\nTipo de emergencia: " + ComboBoxEspecialidad.getSelectedItem().toString()
                 + "\nCuartel: " + cuartel.getNombreCuartel(),
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION,
@@ -236,7 +236,15 @@ public class ModificarBrigada extends javax.swing.JDialog {
             brigada.setEstado(radioButonEstado.isSelected());
             brigada.setLibre(true);
             brigada.setNumeroCuartel(cuartel.getCodCuartel());
-            brigadaData.modificarBrigada(brigada);
+
+            int cantBombe = brigadaData.cantBomberos(codBrigada);
+            if (cantBombe == 0) {
+                brigadaData.modificarBrigada(brigada);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Imposible borrar brigada tiene " + cantBombe + " bomberos asignados");
+            }
+
         }
         this.dispose();
     }//GEN-LAST:event_GuardarActionPerformed

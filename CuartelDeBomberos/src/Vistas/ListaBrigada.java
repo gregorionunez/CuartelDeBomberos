@@ -208,9 +208,14 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
         if (respuesta == 0) {
             //BORRO EL CUARTEL
             BrigadaData brigadaData = new BrigadaData();
-            brigadaData.eliminarBrigada(idBrigada);
-            borrarFilas();
-            cargoTabla();
+            int cantBombe = brigadaData.cantBomberos(idBrigada);
+            if ( cantBombe== 0) {
+                brigadaData.eliminarBrigada(idBrigada);
+                borrarFilas();
+                cargoTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Imposible borrar brigada tiene "+cantBombe+" bomberos asignados");
+            }
             jBModificar.setEnabled(false);
             jBEliminar.setEnabled(false);
         }
@@ -241,13 +246,13 @@ public class ListaBrigada extends javax.swing.JInternalFrame {
     private void jTablaDeBrigadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaDeBrigadaMouseClicked
         int filaSeleccionada = -1;
         filaSeleccionada = jTablaDeBrigada.getSelectedRow();
-        if (filaSeleccionada != -1) {   
+        if (filaSeleccionada != -1) {
             idBrigada = (Integer) jTablaDeBrigada.getValueAt(filaSeleccionada, 0);
             jBModificar.setEnabled(true);
             String estado = (String) jTablaDeBrigada.getValueAt(filaSeleccionada, 3);
             if (estado.equals("Activa")) {
                 jBEliminar.setEnabled(true);
-            }else{
+            } else {
                 jBEliminar.setEnabled(false);
             }
         }

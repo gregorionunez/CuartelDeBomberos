@@ -5,8 +5,11 @@
  */
 package Vistas;
 
+import AccesoADatos.BrigadaData;
 import AccesoADatos.CuartelData;
+import Entidades.Brigada;
 import Entidades.Cuartel;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
@@ -23,21 +26,21 @@ public class CuartelUIModificar extends javax.swing.JDialog {
     /**
      * Creates new form CuartelUIModificar
      */
-    public CuartelUIModificar(java.awt.Frame parent, boolean modal,int idCuartel) {
+    public CuartelUIModificar(java.awt.Frame parent, boolean modal, int idCuartel) {
         super(parent, modal);
         initComponents();
-        this.idCuartel=idCuartel;
+        this.idCuartel = idCuartel;
         cargarCuartel();
     }
 
     private CuartelUIModificar(JFrame jFrame, boolean b) {
-        
+
     }
 
-    public void setIdCuartel(int idCuartel){
-        this.idCuartel=idCuartel;
+    public void setIdCuartel(int idCuartel) {
+        this.idCuartel = idCuartel;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -329,10 +332,20 @@ public class CuartelUIModificar extends javax.swing.JDialog {
                 && (jTextEmail.getText().length() > 0) && (jTextCoordX.getText().length() > 0) && (jTextCoordY.getText().length() > 0)) {
 
             if (validarEmail(jTextEmail.getText())) {
-                Cuartel cuartel = new Cuartel(Integer.valueOf(jTextCodigo.getText()),jTextNombre.getText(), jTextDireccion.getText(), Integer.valueOf(jTextCoordX.getText()),
+                Cuartel cuartel = new Cuartel(Integer.valueOf(jTextCodigo.getText()), jTextNombre.getText(), jTextDireccion.getText(), Integer.valueOf(jTextCoordX.getText()),
                         Integer.valueOf(jTextCoordY.getText()), jTextTelefono.getText(), jTextEmail.getText(), jRadioBtnEstado.isSelected());
                 CuartelData cuartelData = new CuartelData();
-                cuartelData.modificarCuartel(cuartel);//AGREGO EL CUARTEL
+
+                //VERIFICO SI TIENE BRIGADAS
+                BrigadaData brigadaData = new BrigadaData();
+                ArrayList<Brigada> listaBrigadas = new ArrayList();
+                listaBrigadas = brigadaData.listarBrigadasPorCuartel(cuartel.getCodCuartel());
+                if (listaBrigadas.isEmpty()) {
+                    cuartelData.modificarCuartel(cuartel);//AGREGO EL CUARTEL
+                } else {
+                    JOptionPane.showMessageDialog(this, "Imposible borrar cuartel tiene " + listaBrigadas.size() + " brigadas asignadas");
+                }
+
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "El formato del email no es valido");
@@ -344,7 +357,7 @@ public class CuartelUIModificar extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jTextNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyTyped
-      if (jTextCodigo.getText().length() >= 20) {
+        if (jTextCodigo.getText().length() >= 20) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextNombreKeyTyped
