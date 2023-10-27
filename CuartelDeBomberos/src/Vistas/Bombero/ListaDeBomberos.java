@@ -247,7 +247,7 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Celular");
         modeloTabla.addColumn("Grupo Sanguineo");
         modeloTabla.addColumn("Fecha de Nacimiento");
-        modeloTabla.addColumn("Código de Brigada");
+        modeloTabla.addColumn("Brigada");
         modeloTabla.addColumn("Estado");
         jTable.setModel(modeloTabla);
         //Ancho de columnas
@@ -263,9 +263,14 @@ public class ListaDeBomberos extends javax.swing.JInternalFrame {
     }
 
     private void cargarDatosEnLaTabla(Bombero bombero) {
-        modeloTabla.addRow(new Object[]{bombero.getId(), bombero.getDni(), bombero.getNombre(), bombero.getApellido(), bombero.getCelular(), bombero.getGrupoSanguineo(), bombero.getFechaNacimiento(), bombero.getCodigoBrigada(), (bombero.isEstado()) ? "Activo" : "Inactivo"});
+        modeloTabla.addRow(new Object[]{bombero.getId(), bombero.getDni(), bombero.getNombre(), bombero.getApellido(), bombero.getCelular(), bombero.getGrupoSanguineo(), bombero.getFechaNacimiento(), brigada(bombero.getCodigoBrigada()), (bombero.isEstado()) ? "Activo" : "Inactivo"});
     }
 
+    public Brigada brigada(int codigo) {
+        BrigadaData brigadaData = new BrigadaData();
+        return brigadaData.brigadaPorId(codigo);
+    }
+    
     public void limpiarTabla() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         int filas = jTable.getRowCount() - 1;

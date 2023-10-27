@@ -412,6 +412,9 @@ public class Menu extends javax.swing.JFrame {
         EstadisticasUIBomberosPorBrigadas ventana = new EstadisticasUIBomberosPorBrigadas();
         escritorio.add(ventana);
         ventana.setVisible(true);
+        int x = (escritorio.getWidth() - ventana.getWidth()) / 2;
+        int y = (escritorio.getHeight() - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
     }//GEN-LAST:event_jMIBomberosPorBrigadasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed

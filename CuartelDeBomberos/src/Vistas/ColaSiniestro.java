@@ -139,7 +139,8 @@ public class ColaSiniestro extends javax.swing.JInternalFrame {
         jBAsignarSiniestro = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setTitle("Cerrar Siniestro");
+        setClosable(true);
+        setTitle("Cola de Siniestros");
         setPreferredSize(new java.awt.Dimension(1200, 635));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

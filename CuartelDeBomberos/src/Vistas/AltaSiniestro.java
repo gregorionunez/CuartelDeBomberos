@@ -129,7 +129,7 @@ public class AltaSiniestro extends javax.swing.JInternalFrame {
                 jBCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
+        getContentPane().add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, -1, -1));
 
         jCBEmergencia.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jCBEmergencia.addActionListener(new java.awt.event.ActionListener() {
