@@ -129,6 +129,7 @@ public class CerrarSiniestro extends javax.swing.JInternalFrame {
         jBCerrarSiniestro = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Cerrar Siniestro");
         setPreferredSize(new java.awt.Dimension(1200, 635));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
